@@ -156,9 +156,9 @@ namespace Text_RPG_Team
             if(levelexp >= levelup[0])
             {
                 level += 1;
-                attack += 0.5f;
-                defence += 1;
                 levelexp = 0;
+                Attack += level / 2;
+                Defence += level;
                 int sum = levelup[0] + levelup[1];
                 levelup[0] = levelup[1];
                 levelup[1] = sum;
