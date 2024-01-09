@@ -60,7 +60,7 @@ namespace Text_RPG_Team
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
             Console.WriteLine("1.전사 2.마법사 3.도적");
-            Console.Write(">>");
+            Console.WriteLine();
             int chooseJob = IsValidInput(3, 1);
             switch(chooseJob)
             {
@@ -69,26 +69,24 @@ namespace Text_RPG_Team
                     character.Health = 200;
                     character.Attack = 5;
                     character.Defence = 10;
-                    setJob = "전사";
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
                     character.Attack = 10;
                     character.Defence = 5;
-                    setJob = "마법사";
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
                     character.Attack = 8;
                     character.Defence = 8;
-                    setJob = "도적";
                     break;
             }
-            Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
+            Console.Clear();
+            Console.WriteLine($"당신의 직업은 {character.GetJob} 입니다. 확정하시겠습니까?");
             Console.WriteLine("1. 예 2.아니오");
-            Console.Write(">>");
+            Console.WriteLine();
             int choose = IsValidInput(2, 1);
             switch (choose)
             {
@@ -189,7 +187,7 @@ namespace Text_RPG_Team
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();
             Console.WriteLine("LV : " + character.Level.ToString("00"));
-            Console.WriteLine($"{character.Name} ( {character.Job} )");
+            Console.WriteLine($"{character.Name} ( {character.GetJob} )");
             Console.WriteLine($"공격력 : {character.Attack}");
             Console.WriteLine($"방어력 : {character.Defence}");
             Console.WriteLine($"체  력 : {character.Health}");
