@@ -152,6 +152,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"Gold : {Gold}G");
             Console.WriteLine("");
             Console.WriteLine("0. 나가기");
+
         }
     }
 }
