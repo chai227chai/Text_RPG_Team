@@ -22,6 +22,7 @@ namespace Text_RPG_Team
         float attack;
         int defence;
         int health;
+        int maxhealth;
         int gold;
         int speed;
         int levelexp;
@@ -92,6 +93,13 @@ namespace Text_RPG_Team
         {
             get { return health; }
             set { health = value; }
+        }
+
+        //캐릭터 최대 체력
+        public int MaxHealth
+        {
+            get { return maxhealth; }
+            set { maxhealth = value; }
         }
 
         //캐릭터 공격력
