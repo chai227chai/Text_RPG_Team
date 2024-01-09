@@ -8,7 +8,9 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
+        Dungeon dungeon = new Dungeon();
         ICharacter character = new Player();
+
 
         public GameManager()
         {
@@ -66,13 +68,24 @@ namespace Text_RPG_Team
                 case 1:
                     break;
                 case 2:
+                    EnterDungeon();
                     break;
             }
         }
 
-            //---------------------------------------------------------------------------------------------------------------
-            //입력이 올바른지 확인하는 함수
-            public int IsValidInput(int max, int min)
+
+        //---------------------------------------------------------------------------------------------------------------
+        private void EnterDungeon()
+        {
+            dungeon.GoDungeon(player);
+
+            MainTown();
+        }
+
+
+        //---------------------------------------------------------------------------------------------------------------
+        //입력이 올바른지 확인하는 함수
+        public int IsValidInput(int max, int min)
         {
             int keyInput;
             bool result;
