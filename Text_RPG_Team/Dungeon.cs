@@ -229,8 +229,13 @@ namespace Text_RPG_Team
             {
                 if (!mon.IsDead)
                 {
-                    int damage = Damage_check(mon.Attack);
+                    int damage = Damage_check(mon.Attack) - player.Defence;
                     
+                    if(damage < 0)
+                    {
+                        damage = 0;
+                    }
+
                     Attack(mon, player, damage);
                     Thread.Sleep(200);
                 }
