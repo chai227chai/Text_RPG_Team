@@ -8,6 +8,9 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
+        Player player = new Player();
+        Dungeon dungeon = new Dungeon();
+
         public GameManager()
         {
             MainTown();
@@ -37,8 +40,17 @@ namespace Text_RPG_Team
                 case 1:
                     break;
                 case 2:
+                    EnterDungeon();
                     break;
             }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        private void EnterDungeon()
+        {
+            dungeon.GoDungeon(player);
+
+            MainTown();
         }
 
 

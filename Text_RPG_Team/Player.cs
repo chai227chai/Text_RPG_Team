@@ -130,6 +130,7 @@ namespace Text_RPG_Team
             health = health - (damage - defense);
             if (health <= 0)
             {
+                health = 0;
                 isdead = true;
             }
         }
