@@ -56,9 +56,9 @@ namespace Text_RPG_Team
         }
         public void SetJob() //직업선택후 직업에 따른스탯변경
         {
-            string setJob = "초보자";
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
+            Console.WriteLine();
             Console.WriteLine("1.전사 2.마법사 3.도적");
             Console.WriteLine();
             int chooseJob = IsValidInput(3, 1);
@@ -88,6 +88,7 @@ namespace Text_RPG_Team
             }
             Console.Clear();
             Console.WriteLine($"당신의 직업은 {character.GetJob} 입니다. 확정하시겠습니까?");
+            Console.WriteLine();
             Console.WriteLine("1. 예 2.아니오");
             Console.WriteLine();
             int choose = IsValidInput(2, 1);
@@ -103,7 +104,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private void MainTown()
+        public void MainTown()
         {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
@@ -129,7 +130,6 @@ namespace Text_RPG_Team
                     break;
                 case 3:
                     ViewPortion();
-                    IsValidInput(1, 0);
                     break;
             }
         }
