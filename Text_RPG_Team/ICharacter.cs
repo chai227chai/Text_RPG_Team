@@ -14,8 +14,6 @@ namespace Text_RPG_Team
         int Attack { get; set; }
         int Defense {  get; set; }
         bool IsDead { get; }
-        int Speed { get; set; }
-        JOB Job { get; set; }
 
         void TakeDamage(int damage);
     }

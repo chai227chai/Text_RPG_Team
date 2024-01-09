@@ -64,6 +64,21 @@ namespace Text_RPG_Team
             set { health = value; }
         }
 
+        public string getHP
+        {
+            get
+            {
+                if(health > 0)
+                {
+                    return health.ToString();
+                }
+                else
+                {
+                    return "dead";
+                }
+            }
+        }
+
         //몬스터 공격력
         public int Attack
         {
@@ -106,6 +121,7 @@ namespace Text_RPG_Team
             health -= damage;
             if (health <= 0)
             {
+                health = 0;
                 isdead = true;
             }
         }

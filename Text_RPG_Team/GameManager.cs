@@ -9,7 +9,9 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
-        ICharacter character = new Player();
+        Player character = new Player();
+        Dungeon dungeon = new Dungeon();
+
         public GameManager()
         {
             FirstScreen();
@@ -110,15 +112,45 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
+                    ViewState();
                     break;
                 case 2:
+                    EnterDungeon();
                     break;
             }
         }
 
-            //---------------------------------------------------------------------------------------------------------------
-            //입력이 올바른지 확인하는 함수
-            public int IsValidInput(int max, int min)
+        //---------------------------------------------------------------------------------------------------------------
+        private void ViewState()
+        {
+            character.ViewState();
+
+            Console.WriteLine();
+
+            int act = IsValidInput(0, 0);
+
+            switch (act)
+            {
+                case 0:
+                    MainTown();
+                    break; ;
+            }
+        }
+
+
+
+        //---------------------------------------------------------------------------------------------------------------
+        private void EnterDungeon()
+        {
+            dungeon.GoDungeon(character);
+
+            MainTown();
+        }
+
+
+        //---------------------------------------------------------------------------------------------------------------
+        //입력이 올바른지 확인하는 함수
+        public int IsValidInput(int max, int min)
         {
             int keyInput;
             bool result;
