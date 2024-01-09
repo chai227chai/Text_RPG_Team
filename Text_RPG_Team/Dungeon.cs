@@ -17,6 +17,7 @@ namespace Text_RPG_Team
         List<ICharacter>? battle_monster;
 
         int player_health;
+        int stage_exp;
 
         public void GoDungeon(Player player)
         {
@@ -28,13 +29,16 @@ namespace Text_RPG_Team
             player_health = player.Health;
 
             int number = random.Next(1, 5);
+            int exp = 0;
 
             for(int i = 0; i < number; i++)
             {
                 int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
                 battle_monster.Add(newMonster);
+                exp += newMonster.Drop_Exp;
             }
+            stage_exp = exp;
 
             Battle_phase();
         }
@@ -104,6 +108,8 @@ namespace Text_RPG_Team
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
+
+                player.LevelUp(stage_exp);
 
                 Console.WriteLine();
                 Console.WriteLine("0. 다음");

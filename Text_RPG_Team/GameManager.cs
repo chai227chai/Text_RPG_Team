@@ -69,21 +69,21 @@ namespace Text_RPG_Team
                     character.Health = 200;
                     character.Attack = 5;
                     character.Defence = 10;
-                    setJob = "전사";
+                    setJob = character.GetJob;
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
                     character.Attack = 10;
                     character.Defence = 5;
-                    setJob = "마법사";
+                    setJob = character.GetJob;
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
                     character.Attack = 8;
                     character.Defence = 8;
-                    setJob = "도적";
+                    setJob = character.GetJob;
                     break;
             }
             Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,8 @@ namespace Text_RPG_Team
             name = "Chad";
             job = Job;
             level = 1;
-            attack = Attack + (level / 2);
-            defence = Defence + level;
+            attack = Attack;
+            defence = Defence;
             health = Health;
             gold = 1500;
             levelexp = 0;
@@ -97,14 +98,22 @@ namespace Text_RPG_Team
         //캐릭터 공격력
         public int Attack
         {
-            get { return attack; }
+            get
+            {
+                int now_attack = this.attack + ((level - 1) / 2);
+                return now_attack; 
+            }
             set { attack = value; }
         }
 
         //캐릭터 방어력
         public int Defence
         {
-            get { return defence; }
+            get 
+            {
+                int now_defence = this.defence + (level - 1);
+                return now_defence; 
+            }
             set { defence = value; }
         }
 
@@ -142,8 +151,9 @@ namespace Text_RPG_Team
         }
 
         //레벨 업
-        void LevelUp(int exp)
+        public void LevelUp(int exp)
         {
+            int prev_level = level;
             levelexp += exp;
             if(levelexp >= levelup[0])
             {
@@ -152,6 +162,12 @@ namespace Text_RPG_Team
                 int sum = levelup[0] + levelup[1];
                 levelup[0] = levelup[1];
                 levelup[1] = sum;
+
+                Console.WriteLine();
+                Console.WriteLine("Level UP");
+
+                Console.WriteLine($"Lv.{Level} {Name}");
+                Console.WriteLine($"Lv {prev_level} -> {Level}");
             }
         }
     }
