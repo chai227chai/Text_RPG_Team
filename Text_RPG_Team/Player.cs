@@ -146,7 +146,7 @@ namespace Text_RPG_Team
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine("");
             Console.WriteLine("LV : " + level.ToString("00"));
-            Console.WriteLine($"{name} ( {Job} )");
+            Console.WriteLine($"{name} ( {GetJob} )");
             Console.WriteLine($"공격력 : {attack}");
             Console.WriteLine($"방어력 : {defence}");
             Console.WriteLine($"체  력 : {health}");

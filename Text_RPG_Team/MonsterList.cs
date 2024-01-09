@@ -17,9 +17,9 @@ namespace Text_RPG_Team
         }
 
         //몬스터 추가하기
-        public void AddMonster(string name, int level, int health, int attack, int defence)
+        public void AddMonster(string name, int level, int health, int attack)
         {
-            Monster monster = new Monster(name, level, health, attack, defence);
+            Monster monster = new Monster(name, level, health, attack);
             monsterList.Add(monster);
         }
 
