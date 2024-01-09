@@ -11,7 +11,7 @@ namespace Text_RPG_Team
         string Name { get; set; }
         int Level { get; set; }
         int Health { get; set; }
-        float Attack { get; set; }
+        int Attack { get; set; }
         bool IsDead { get; }
 
         void TakeDamage(int damage);

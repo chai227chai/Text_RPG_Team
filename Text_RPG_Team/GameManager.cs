@@ -68,21 +68,21 @@ namespace Text_RPG_Team
                     character.Job = JOB.WARRIOR;
                     character.Health = 200;
                     character.Attack = 5;
-                    character.Defense = 10;
+                    character.Defence = 10;
                     setJob = "전사";
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
                     character.Attack = 10;
-                    character.Defense = 5;
+                    character.Defence = 5;
                     setJob = "마법사";
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
                     character.Attack = 8;
-                    character.Defense = 8;
+                    character.Defence = 8;
                     setJob = "도적";
                     break;
             }
@@ -235,6 +235,32 @@ namespace Text_RPG_Team
             int currentLength = GetPrintableLength(str);
             int padding = (totalLength - currentLength) / 2;
             return str.PadLeft(str.Length + padding);
+        }
+
+        private string PadRightForMixedText(string str, int totalLength)
+        {
+            int currentLength = GetPrintableLength(str);
+            int padding = (totalLength - currentLength) / 2;
+            return str.PadRight(str.Length + padding);
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //출력 정렬하는 함수
+        private int GetPrintableLength(string str)
+        {
+            int length = 0;
+            foreach (char c in str)
+            {
+                if (char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
+                {
+                    length += 2;
+                }
+                else
+                {
+                    length += 1;
+                }
+            }
+            return length;
         }
     }
 }
