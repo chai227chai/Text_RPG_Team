@@ -15,7 +15,6 @@ namespace Text_RPG_Team
             FirstScreen();
             character.Name = SetCharacter();
             MainTown();
-
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -71,9 +70,9 @@ namespace Text_RPG_Team
             }
         }
 
-            //---------------------------------------------------------------------------------------------------------------
-            //입력이 올바른지 확인하는 함수
-            public int IsValidInput(int max, int min)
+        //---------------------------------------------------------------------------------------------------------------
+        //입력이 올바른지 확인하는 함수
+        public int IsValidInput(int max, int min)
         {
             int keyInput;
             bool result;
@@ -87,6 +86,7 @@ namespace Text_RPG_Team
                 }
                 else
                 {
+                    Console.WriteLine("잘못된 입력입니다.");
                     Console.WriteLine("다시 입력해 주세요.");
                 }
                 Console.Write(">>");

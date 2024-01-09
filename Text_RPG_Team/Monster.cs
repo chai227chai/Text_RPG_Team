@@ -12,7 +12,7 @@ namespace Text_RPG_Team
 
         int level;
         int health;
-        int attack;
+        float attack;
         int drop_exp;// 몬스터가 제공하는 경험치
 
         bool isdead;
@@ -23,7 +23,7 @@ namespace Text_RPG_Team
             this.level = level;
             this.health = health;
             this.attack = attack;
-            this.drop_exp = this.level * 10;//경험치 = 몬스터의 레벨 * 10
+            this.drop_exp = this.level * 5;//경험치 = 몬스터의 레벨 * 5
             isdead = false;
         }
 
@@ -62,7 +62,7 @@ namespace Text_RPG_Team
         }
 
         //몬스터 공격력
-        public int Attack
+        public float Attack
         {
             get { return attack; }
             set { attack = value; }

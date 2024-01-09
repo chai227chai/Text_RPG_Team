@@ -18,11 +18,13 @@ namespace Text_RPG_Team
         JOB job;
 
         int level;
-        int attack;
+        float attack;
         int defence;
         int health;
         int gold;
         int speed;
+        int levelexp;
+        int[] levelup = new int[2];
 
         bool isdead;
 
@@ -35,7 +37,9 @@ namespace Text_RPG_Team
             defence = 5;
             health = 100;
             gold = 1500;
-
+            levelexp = 0;
+            levelup[0] = 10;
+            levelup[1] = 25;    
             isdead = false;
         }
 
@@ -90,7 +94,7 @@ namespace Text_RPG_Team
         }
 
         //캐릭터 공격력
-        public int Attack
+        public float Attack
         {
             get { return attack; }
             set { attack = value; }
@@ -132,6 +136,22 @@ namespace Text_RPG_Team
             if (health <= 0)
             {
                 isdead = true;
+            }
+        }
+
+        //레벨 업
+        void LevelUp(int exp)
+        {
+            levelexp += exp;
+            if(levelexp >= levelup[0])
+            {
+                level += 1;
+                attack += 0.5f;
+                defence += 1;
+                levelexp = 0;
+                int sum = levelup[0] + levelup[1];
+                levelup[0] = levelup[1];
+                levelup[1] = sum;
             }
         }
 
