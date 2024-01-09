@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Text_RPG_Team
 {
     internal class GameManager
     {
+        TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
+        Portion portion = new Portion(3);
 
 
         public GameManager()
@@ -17,12 +23,11 @@ namespace Text_RPG_Team
             FirstScreen();
             character.Name = SetCharacter();
             MainTown();
-
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //게임 시작 초기 화면 함수
-        void FirstScreen()
+        private void FirstScreen()
         {
             Console.WriteLine("=============================================================================================");
             Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
@@ -34,12 +39,12 @@ namespace Text_RPG_Team
             Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
             Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
             Console.WriteLine("=============================================================================================");
-            Console.WriteLine(PadLeftForMixedText("Press Any Key to Play", 93));
+            Console.WriteLine(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
             Console.WriteLine("=============================================================================================");
             Console.ReadKey();
         }
 
-        public string SetCharacter()
+        private string SetCharacter()
         {
             Console.Clear();
             Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
@@ -58,22 +63,26 @@ namespace Text_RPG_Team
 
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 전투시작");
+            Console.WriteLine("3. 회복 아이템");
 
             Console.WriteLine();
 
-            int act = IsValidInput(2, 1);
+            int act = IsValidInput(3, 1);
 
             switch (act)
             {
                 case 1:
-                    character.ViewState();
+                    ViewPlayer();
                     break;
                 case 2:
                     EnterDungeon();
                     break;
+                case 3:
+                    ViewPortion();
+                    IsValidInput(1, 0);
+                    break;
             }
         }
-
 
         //---------------------------------------------------------------------------------------------------------------
         private void EnterDungeon()
@@ -100,6 +109,7 @@ namespace Text_RPG_Team
                 }
                 else
                 {
+                    Console.WriteLine("잘못된 입력입니다.");
                     Console.WriteLine("다시 입력해 주세요.");
                 }
                 Console.Write(">>");
@@ -122,36 +132,52 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        //출력 정렬하는 함수
-        private int GetPrintableLength(string str)
+        //선택하는 화면으로 이동하는 함수
+        private void ViewPlayer()
         {
-            int length = 0;
-            foreach (char c in str)
+            Console.Clear();
+            Console.WriteLine("■상태보기■");
+            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+            Console.WriteLine();
+            Console.WriteLine("LV : " + character.Level.ToString("00"));
+            Console.WriteLine($"{character.Name} ( {character.Job} )");
+            Console.WriteLine($"공격력 : {character.Attack}");
+            Console.WriteLine($"방어력 : {character.Defence}");
+            Console.WriteLine($"체  력 : {character.Health}");
+            Console.WriteLine($"Gold : {character.Gold}G");
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            int act = IsValidInput(0, 0);
+
+            switch (act)
             {
-                if (char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
-                {
-                    length += 2;
-                }
-                else
-                {
-                    length += 1;
-                }
+                case 0:
+                    MainTown();
+                    break;
             }
-            return length;
         }
 
-        private string PadLeftForMixedText(string str, int totalLength)
+        private void ViewPortion()
         {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
-            return str.PadLeft(str.Length + padding);
-        }
+            Console.Clear();
+            Console.WriteLine("■회복■");
+            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {portion.myportion})");
+            Console.WriteLine();
+            Console.WriteLine("1. 사용하기");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            int act = IsValidInput(1, 0);
 
-        private string PadRightForMixedText(string str, int totalLength)
-        {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
-            return str.PadRight(str.Length + padding);
+            switch (act)
+            {
+                case 0:
+                    MainTown();
+                    break;
+                case 1:
+                    portion.UsePortion(character);
+                    break;
+            }
         }
     }
 }
