@@ -235,8 +235,13 @@ namespace Text_RPG_Team
             {
                 if (!mon.IsDead)
                 {
-                    float damage = Damage_check(mon.Attack);
+                    int damage = Damage_check(mon.Attack) - player.Defence;
                     
+                    if(damage < 0)
+                    {
+                        damage = 0;
+                    }
+
                     Attack(mon, player, damage);
                     Thread.Sleep(200);
                 }
@@ -279,7 +284,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private float Damage_check(float attack)
+        private float Damage_check(int attack)
         {
             float damage_range = (float)Math.Ceiling((float)attack * 0.1) ;
             float damage = random.Next((int)(attack - damage_range)/10, (int)(attack + damage_range + 1));

@@ -62,7 +62,7 @@ namespace Text_RPG_Team
             Console.WriteLine("1.전사 2.마법사 3.도적");
             Console.WriteLine();
             int chooseJob = IsValidInput(3, 1);
-            switch(chooseJob)
+            switch (chooseJob)
             {
                 case 1:
                     character.Job = JOB.WARRIOR;

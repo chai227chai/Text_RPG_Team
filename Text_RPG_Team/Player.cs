@@ -19,7 +19,7 @@ namespace Text_RPG_Team
         JOB job;
 
         int level;
-        float attack;
+        int attack;
         int defence;
         int health;
         int maxhealth;
@@ -35,8 +35,8 @@ namespace Text_RPG_Team
             name = "Chad";
             job = Job;
             level = 1;
-            attack = Attack;
-            defence = Defence;
+            attack = Attack + (level / 2);
+            defence = Defence + level;
             health = Health;
             gold = 1500;
             levelexp = 0;
@@ -103,7 +103,7 @@ namespace Text_RPG_Team
         }
 
         //캐릭터 공격력
-        public float Attack
+        public int Attack
         {
             get { return attack; }
             set { attack = value; }
@@ -156,8 +156,6 @@ namespace Text_RPG_Team
             if(levelexp >= levelup[0])
             {
                 level += 1;
-                attack += 0.5f;
-                defence += 1;
                 levelexp = 0;
                 int sum = levelup[0] + levelup[1];
                 levelup[0] = levelup[1];
