@@ -13,7 +13,7 @@ namespace Text_RPG_Team
         int Health { get; set; }
         int Attack { get; set; }
         bool IsDead { get; }
-        int speed { get; set; }
+        int Speed { get; set; }
 
         void TakeDamage(int damage);
     }

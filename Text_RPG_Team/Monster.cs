@@ -14,6 +14,7 @@ namespace Text_RPG_Team
         int health;
         int attack;
         int drop_exp;// 몬스터가 제공하는 경험치
+        int speed;
 
         bool isdead;
 
@@ -73,6 +74,12 @@ namespace Text_RPG_Team
         {
             get { return isdead; }
             set { isdead = false; }
+        }
+
+        public int Speed
+        {
+            get { return speed; }
+            set { speed = value; }
         }
 
         //몬스터가 제공하는 경험치
