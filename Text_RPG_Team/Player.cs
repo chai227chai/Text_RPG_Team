@@ -19,11 +19,13 @@ namespace Text_RPG_Team
         JOB job;
 
         int level;
-        int attack;
+        float attack;
         int defence;
         int health;
         int gold;
         int speed;
+        int levelexp;
+        int[] levelup = new int[2];
 
         bool isdead;
 
@@ -36,7 +38,9 @@ namespace Text_RPG_Team
             defence = Defense;
             health = Health;
             gold = 1500;
-
+            levelexp = 0;
+            levelup[0] = 10;
+            levelup[1] = 25;    
             isdead = false;
         }
 
@@ -91,14 +95,14 @@ namespace Text_RPG_Team
         }
 
         //캐릭터 공격력
-        public int Attack
+        public float Attack
         {
             get { return attack; }
             set { attack = value; }
         }
 
         //캐릭터 방어력
-        public int Defense
+        public int Defence
         {
             get { return defence; }
             set { defence = value; }
@@ -137,23 +141,20 @@ namespace Text_RPG_Team
             }
         }
 
-        //----------------------------------------------------------------------------------------------
-        //상태보기
-        public void ViewState()
+        //레벨 업
+        void LevelUp(int exp)
         {
-            Console.Clear();
-            Console.WriteLine("■상태보기■");
-            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
-            Console.WriteLine("");
-            Console.WriteLine("LV : " + level.ToString("00"));
-            Console.WriteLine($"{name} ( {GetJob} )");
-            Console.WriteLine($"공격력 : {attack}");
-            Console.WriteLine($"방어력 : {defence}");
-            Console.WriteLine($"체  력 : {health}");
-            Console.WriteLine($"Gold : {Gold}G");
-            Console.WriteLine("");
-            Console.WriteLine("0. 나가기");
-
+            levelexp += exp;
+            if(levelexp >= levelup[0])
+            {
+                level += 1;
+                attack += 0.5f;
+                defence += 1;
+                levelexp = 0;
+                int sum = levelup[0] + levelup[1];
+                levelup[0] = levelup[1];
+                levelup[1] = sum;
+            }
         }
     }
 }
