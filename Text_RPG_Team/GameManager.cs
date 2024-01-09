@@ -78,7 +78,7 @@ namespace Text_RPG_Team
         //---------------------------------------------------------------------------------------------------------------
         private void EnterDungeon()
         {
-            dungeon.GoDungeon(player);
+            dungeon.GoDungeon(character);
 
             MainTown();
         }
