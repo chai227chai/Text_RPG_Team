@@ -23,7 +23,7 @@ namespace Text_RPG_Team
             this.level = level;
             this.health = health;
             this.attack = attack;
-            this.drop_exp = this.level * 5;//경험치 = 몬스터의 레벨 * 5
+            this.drop_exp = this.level;//경험치 = 몬스터의 레벨 1당 1의 경험치
             isdead = false;
         }
 

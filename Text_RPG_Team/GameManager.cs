@@ -69,21 +69,21 @@ namespace Text_RPG_Team
                     character.Health = 200;
                     character.Attack = 5;
                     character.Defence = 10;
-                    setJob = "전사";
+                    setJob = character.GetJob;
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
                     character.Attack = 10;
                     character.Defence = 5;
-                    setJob = "마법사";
+                    setJob = character.GetJob;
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
                     character.Attack = 8;
                     character.Defence = 8;
-                    setJob = "도적";
+                    setJob = character.GetJob;
                     break;
             }
             Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
@@ -111,7 +111,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
 
             Console.WriteLine("1. 상태보기");
-            Console.WriteLine("2. 전투시작");
+            Console.WriteLine($"2. 전투시작  (현재 층 수 : {dungeon.Now_Stage}층)");
             Console.WriteLine("3. 회복 아이템");
 
             Console.WriteLine();
@@ -189,7 +189,7 @@ namespace Text_RPG_Team
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();
             Console.WriteLine("LV : " + character.Level.ToString("00"));
-            Console.WriteLine($"{character.Name} ( {character.Job} )");
+            Console.WriteLine($"{character.Name} ( {character.GetJob} )");
             Console.WriteLine($"공격력 : {character.Attack}");
             Console.WriteLine($"방어력 : {character.Defence}");
             Console.WriteLine($"체  력 : {character.Health}");
@@ -207,6 +207,7 @@ namespace Text_RPG_Team
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------
         private void ViewPortion()
         {
             Console.Clear();

@@ -17,24 +17,39 @@ namespace Text_RPG_Team
         List<ICharacter>? battle_monster;
 
         int player_health;
+        int stage_exp;
+        int stage;
+
+        public Dungeon()
+        {
+            stage = 1;
+        }
+
+        public int Now_Stage
+        {
+            get { return stage; }
+        }
 
         public void GoDungeon(Player player)
         {
             this.player = player;
-            this.monsterList = new MonsterList();
+            this.monsterList = new MonsterList(stage);
 
             this.battle_monster = new List<ICharacter>();
 
             player_health = player.Health;
 
-            int number = random.Next(1, 5);
+            int number = random.Next(1, stage + 2);
+            int exp = 0;
 
             for(int i = 0; i < number; i++)
             {
                 int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
                 battle_monster.Add(newMonster);
+                exp += newMonster.Drop_Exp;
             }
+            stage_exp = exp;
 
             Battle_phase();
         }
@@ -48,8 +63,6 @@ namespace Text_RPG_Team
                 death_cnt= 0;
 
                 PlayerTurn();
-
-                PlayerAttackTurn();
 
                 foreach (Monster mon in battle_monster)
                 {
@@ -105,6 +118,12 @@ namespace Text_RPG_Team
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
 
+                player.LevelUp(stage_exp);
+
+                Console.WriteLine();
+                Console.WriteLine("다음 층으로 올라갑니다.");
+                stage++;
+
                 Console.WriteLine();
                 Console.WriteLine("0. 다음");
 
@@ -132,7 +151,12 @@ namespace Text_RPG_Team
             int index = 1;
             foreach (Monster mon in battle_monster)
             {
+                if (mon.IsDead)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
                 Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.ResetColor();
                 index++;
             }
 
@@ -150,6 +174,7 @@ namespace Text_RPG_Team
 
             if(act == 1)
             {
+                PlayerAttackTurn();
                 return;
             }
         }
@@ -163,7 +188,12 @@ namespace Text_RPG_Team
             int index = 1;
             foreach (Monster mon in battle_monster)
             {
+                if (mon.IsDead)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
                 Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.ResetColor();
                 index++;
             }
 
@@ -180,6 +210,7 @@ namespace Text_RPG_Team
             Console.WriteLine("대상을 선택해 주세요.");
 
             bool loop = true;
+            bool isAttack = false;
             while (loop)
             {
                 int act = IsValidInput(index - 1, 0);
@@ -195,6 +226,7 @@ namespace Text_RPG_Team
                         int damage = Damage_check(player.Attack);
                         Console.Clear();
                         Attack(player, battle_monster[act - 1], damage);
+                        isAttack = true;
                         break;
                     }
                     else
@@ -205,13 +237,21 @@ namespace Text_RPG_Team
                 }
             }
 
-            Console.WriteLine();
-            Console.WriteLine("0. 다음");
-
-            int act2 = IsValidInput(0, 0);
-
-            if (act2 == 0)
+            if (isAttack)
             {
+                Console.WriteLine();
+                Console.WriteLine("0. 다음");
+
+                int act2 = IsValidInput(0, 0);
+
+                if (act2 == 0)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                PlayerTurn();
                 return;
             }
 
