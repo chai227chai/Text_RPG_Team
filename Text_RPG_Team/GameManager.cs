@@ -8,7 +8,7 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
-        ICharacter character = new Player();
+        Player character = new Player();
 
         public GameManager()
         {
@@ -63,6 +63,7 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
+                    character.ViewState();
                     break;
                 case 2:
                     break;
