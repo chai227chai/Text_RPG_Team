@@ -9,12 +9,15 @@ namespace Text_RPG_Team
     internal class GameManager
     {
         Player character = new Player();
+        Dungeon dungeon = new Dungeon();
+
 
         public GameManager()
         {
             FirstScreen();
             character.Name = SetCharacter();
             MainTown();
+
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -66,13 +69,24 @@ namespace Text_RPG_Team
                     character.ViewState();
                     break;
                 case 2:
+                    EnterDungeon();
                     break;
             }
         }
 
-            //---------------------------------------------------------------------------------------------------------------
-            //입력이 올바른지 확인하는 함수
-            public int IsValidInput(int max, int min)
+
+        //---------------------------------------------------------------------------------------------------------------
+        private void EnterDungeon()
+        {
+            dungeon.GoDungeon(player);
+
+            MainTown();
+        }
+
+
+        //---------------------------------------------------------------------------------------------------------------
+        //입력이 올바른지 확인하는 함수
+        public int IsValidInput(int max, int min)
         {
             int keyInput;
             bool result;
