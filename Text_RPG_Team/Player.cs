@@ -19,7 +19,7 @@ namespace Text_RPG_Team
         JOB job;
 
         int level;
-        float attack;
+        int attack;
         int defence;
         int health;
         int maxhealth;
@@ -103,7 +103,7 @@ namespace Text_RPG_Team
         }
 
         //캐릭터 공격력
-        public float Attack
+        public int Attack
         {
             get { return attack; }
             set { attack = value; }
@@ -141,7 +141,7 @@ namespace Text_RPG_Team
         //피격 받음
         public void TakeDamage(float damage)
         {
-            health = health - (int)(damage - defence);
+            health = health - (damage);
             if (health <= 0)
             {
                 health = 0;
