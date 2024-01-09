@@ -13,7 +13,7 @@ namespace Text_RPG_Team
         int level;
         int health;
         int attack;
-        int drop_exp;
+        int drop_exp;// 몬스터가 제공하는 경험치
 
         bool isdead;
 
@@ -23,7 +23,7 @@ namespace Text_RPG_Team
             this.level = level;
             this.health = health;
             this.attack = attack;
-            this.drop_exp = this.level * 10;
+            this.drop_exp = this.level * 10;//경험치 = 몬스터의 레벨 * 10
             isdead = false;
         }
 
@@ -39,38 +39,52 @@ namespace Text_RPG_Team
 
         //----------------------------------------------------------------------------------------------
         //변수 반환 함수
+
+        //몬스터 이름
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        //몬스터 레벨
         public int Level
         {
             get { return level; }
             set { level = value; }
         }
 
+        //몬스터 체력
         public int Health
         {
             get { return health; }
             set { health = value; }
         }
 
+        //몬스터 공격력
         public int Attack
         {
             get { return attack; }
             set { attack = value; }
         }
 
+        //몬스터 사망 여부
         public bool IsDead
         {
             get { return isdead; }
             set { isdead = false; }
         }
 
+        //몬스터가 제공하는 경험치
+        public int Drop_Exp
+        {
+            get { return drop_exp; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
+
+        //몬스터 피격 시
         public void TakeDamage(int damage)
         {
             health -= damage;

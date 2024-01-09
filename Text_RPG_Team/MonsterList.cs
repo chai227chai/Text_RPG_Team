@@ -10,12 +10,18 @@ namespace Text_RPG_Team
     {
         private List<Monster> monsterList = new List<Monster>();
 
-        public void addMonster(string name, int level, int health, int attack)
+        //몬스터 추가하기
+        public void AddMonster(string name, int level, int health, int attack)
         {
             Monster monster = new Monster(name, level, health, attack);
             monsterList.Add(monster);
         }
 
+        //여기에 몬스터를 추가하시면 됩니다.
+        public void Initialize()
+        {
+
+        }
 
         //리스트 참조
         public List<Monster> getMonsterList

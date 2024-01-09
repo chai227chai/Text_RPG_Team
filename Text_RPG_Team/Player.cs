@@ -21,6 +21,7 @@ namespace Text_RPG_Team
         int defense;
         int health;
         int gold;
+        int speed;
 
         bool isdead;
 
@@ -39,13 +40,23 @@ namespace Text_RPG_Team
 
         //----------------------------------------------------------------------------------------------
         //변수 반환 함수
+
+        //캐릭터 이름
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        public string Job
+        //캐릭터 직업
+        public JOB Job
+        {
+            get { return this.job; }
+            set {  this.job = value; }
+        }
+
+        //캐릭터 직업 출력
+        public string GetJob
         {
             get 
             { 
@@ -63,43 +74,57 @@ namespace Text_RPG_Team
             }
         }
 
+        //캐릭터 레벨
         public int Level
         {
             get { return level; }
             set { level = value; }
         }
 
+        //캐릭터 체력
         public int Health
         {
             get { return health; }
             set { health = value; }
         }
 
+        //캐릭터 공격력
         public int Attack
         {
             get { return attack; }
             set { attack = value; }
         }
 
+        //캐릭터 방어력
         public int Defense
         {
             get { return defense; }
             set { defense = value; }
         }
 
+        //보유 골드
         public int Gold
         {
             get { return gold; }
             set { gold = value; }
         }
 
+        //캐릭터 사망 여부
         public bool IsDead
         {
             get { return isdead; }
         }
 
+        public int Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
+
+        //피격 받음
         public void TakeDamage(int damage)
         {
             health = health - (damage - defense);

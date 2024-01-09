@@ -11,6 +11,7 @@ namespace Text_RPG_Team
         public GameManager()
         {
             MainTown();
+
         }
 
 
