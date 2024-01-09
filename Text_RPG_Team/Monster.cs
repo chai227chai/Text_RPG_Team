@@ -13,17 +13,19 @@ namespace Text_RPG_Team
         int level;
         int health;
         int attack;
+        int defence;
         int drop_exp;// 몬스터가 제공하는 경험치
         int speed;
 
         bool isdead;
 
-        public Monster(string name, int level, int health, int attack) 
+        public Monster(string name, int level, int health, int attack, int defence) 
         {
             this.name = name;
             this.level = level;
             this.health = health;
             this.attack = attack;
+            this.defence = defence;
             this.drop_exp = this.level * 10;//경험치 = 몬스터의 레벨 * 10
             isdead = false;
         }
@@ -68,6 +70,12 @@ namespace Text_RPG_Team
             get { return attack; }
             set { attack = value; }
         }
+        //몬스터 방어력
+        public int Defense
+        {
+            get { return defence; }
+            set { defence = value; }
+        }
 
         //몬스터 사망 여부
         public bool IsDead
@@ -75,12 +83,13 @@ namespace Text_RPG_Team
             get { return isdead; }
             set { isdead = false; }
         }
-
+        //몬스터 스피드
         public int Speed
         {
             get { return speed; }
             set { speed = value; }
         }
+        public JOB Job{get; set;} //몬스터 직업
 
         //몬스터가 제공하는 경험치
         public int Drop_Exp
