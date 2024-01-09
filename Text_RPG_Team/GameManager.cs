@@ -8,8 +8,8 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
+        Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        ICharacter character = new Player();
 
 
         public GameManager()
@@ -66,6 +66,7 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
+                    character.ViewState();
                     break;
                 case 2:
                     EnterDungeon();
