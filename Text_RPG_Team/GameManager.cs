@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +12,11 @@ namespace Text_RPG_Team
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
 
-
         public GameManager()
         {
             FirstScreen();
             character.Name = SetCharacter();
+            SetJob();
             MainTown();
 
         }
@@ -47,7 +48,52 @@ namespace Text_RPG_Team
             Console.Write(">>");
             return Console.ReadLine();
         }
+        public void SetJob() //직업선택후 직업에 따른스탯변경
+        {
+            string setJob = "초보자";
+            Console.Clear();
+            Console.WriteLine("캐릭터의 직업을 선택해 주세요");
+            Console.WriteLine("1.전사 2.마법사 3.도적");
+            Console.Write(">>");
+            int chooseJob = IsValidInput(3, 1);
+            switch(chooseJob)
+            {
+                case 1:
+                    character.Job = JOB.WARRIOR;
+                    character.Health = 200;
+                    character.Attack = 5;
+                    character.Defense = 10;
+                    setJob = "전사";
+                    break;
+                case 2:
+                    character.Job = JOB.WIZARD;
+                    character.Health = 100;
+                    character.Attack = 10;
+                    character.Defense = 5;
+                    setJob = "마법사";
+                    break;
+                case 3:
+                    character.Job = JOB.ROGUE;
+                    character.Health = 150;
+                    character.Attack = 8;
+                    character.Defense = 8;
+                    setJob = "도적";
+                    break;
+            }
+            Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
+            Console.WriteLine("1. 예 2.아니오");
+            Console.Write(">>");
+            int choose = IsValidInput(2, 1);
+            switch (choose)
+            {
+                case 1:
+                    break;
+                case 2:
+                    SetJob();
+                    break;
+            }
 
+        }
         private void MainTown()
         {
             Console.Clear();
