@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace Text_RPG_Team
 
         int level;
         int attack;
-        int defense;
+        int defence;
         int health;
         int gold;
         int speed;
@@ -31,7 +32,7 @@ namespace Text_RPG_Team
             job = JOB.WARRIOR;
             level = 1;
             attack = 10;
-            defense = 5;
+            defence = 5;
             health = 100;
             gold = 1500;
 
@@ -98,8 +99,8 @@ namespace Text_RPG_Team
         //캐릭터 방어력
         public int Defense
         {
-            get { return defense; }
-            set { defense = value; }
+            get { return defence; }
+            set { defence = value; }
         }
 
         //보유 골드
@@ -127,11 +128,29 @@ namespace Text_RPG_Team
         //피격 받음
         public void TakeDamage(int damage)
         {
-            health = health - (damage - defense);
+            health = health - (damage - defence);
             if (health <= 0)
             {
                 isdead = true;
             }
+        }
+
+        //----------------------------------------------------------------------------------------------
+        //상태보기
+        public void ViewState()
+        {
+            Console.Clear();
+            Console.WriteLine("■상태보기■");
+            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+            Console.WriteLine("");
+            Console.WriteLine("LV : " + level.ToString("00"));
+            Console.WriteLine($"{name} ( {Job} )");
+            Console.WriteLine($"공격력 : {attack}");
+            Console.WriteLine($"방어력 : {defence}");
+            Console.WriteLine($"체  력 : {health}");
+            Console.WriteLine($"Gold : {Gold}G");
+            Console.WriteLine("");
+            Console.WriteLine("0. 나가기");
         }
     }
 }
