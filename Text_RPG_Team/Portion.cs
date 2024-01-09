@@ -33,9 +33,9 @@ namespace Text_RPG_Team
             }
             else
             {
-                if (player.Health > 70)
+                if (player.MaxHealth - player.Health < 30)
                 {
-                    player.Health = 100;
+                    player.Health = player.MaxHealth;
                 }
                 else player.Health += 30;
 
