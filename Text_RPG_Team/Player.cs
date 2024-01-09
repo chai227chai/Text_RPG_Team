@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+
     public enum JOB
     {
         WARRIOR, WIZARD, ROGUE
@@ -31,11 +32,11 @@ namespace Text_RPG_Team
         public Player()
         {
             name = "Chad";
-            job = JOB.WARRIOR;
+            job = Job;
             level = 1;
-            attack = 10;
-            defence = 5;
-            health = 100;
+            attack = Attack;
+            defence = Defense;
+            health = Health;
             gold = 1500;
             levelexp = 0;
             levelup[0] = 10;
@@ -63,8 +64,8 @@ namespace Text_RPG_Team
         //캐릭터 직업 출력
         public string GetJob
         {
-            get 
-            { 
+            get
+            {
                 switch (this.job)
                 {
                     case JOB.WARRIOR:
@@ -75,7 +76,7 @@ namespace Text_RPG_Team
                         return "도적";
                     default:
                         return "초보자";
-                } 
+                }
             }
         }
 
@@ -119,7 +120,7 @@ namespace Text_RPG_Team
         {
             get { return isdead; }
         }
-
+        //캐릭터 스피드
         public int Speed
         {
             get { return speed; }
