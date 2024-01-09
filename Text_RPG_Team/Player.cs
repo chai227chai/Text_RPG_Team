@@ -35,8 +35,8 @@ namespace Text_RPG_Team
             name = "Chad";
             job = Job;
             level = 1;
-            attack = Attack + (level / 2);
-            defence = Defence + level;
+            attack = Attack;
+            defence = Defence;
             health = Health;
             gold = 1500;
             levelexp = 0;
@@ -157,6 +157,8 @@ namespace Text_RPG_Team
             {
                 level += 1;
                 levelexp = 0;
+                Attack += level / 2;
+                Defence += level;
                 int sum = levelup[0] + levelup[1];
                 levelup[0] = levelup[1];
                 levelup[1] = sum;
