@@ -14,6 +14,6 @@ namespace Text_RPG_Team
         float Attack { get; set; }
         bool IsDead { get; }
 
-        void TakeDamage(int damage);
+        void TakeDamage(float damage);
     }
 }

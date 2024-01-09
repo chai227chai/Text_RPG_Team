@@ -35,7 +35,7 @@ namespace Text_RPG_Team
             job = Job;
             level = 1;
             attack = Attack;
-            defence = Defense;
+            defence = Defence;
             health = Health;
             gold = 1500;
             levelexp = 0;
@@ -131,9 +131,9 @@ namespace Text_RPG_Team
         //변수 조작 함수
 
         //피격 받음
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
-            health = health - (damage - defence);
+            health = health - (int)(damage - defence);
             if (health <= 0)
             {
                 health = 0;
@@ -142,7 +142,7 @@ namespace Text_RPG_Team
         }
 
         //레벨 업
-        void LevelUp(int exp)
+        public void LevelUp(int exp)
         {
             levelexp += exp;
             if(levelexp >= levelup[0])

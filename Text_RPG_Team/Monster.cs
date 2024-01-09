@@ -100,9 +100,9 @@ namespace Text_RPG_Team
         //변수 조작 함수
 
         //몬스터 피격 시
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
-            health -= damage;
+            health -= (int)damage;
             if (health <= 0)
             {
                 health = 0;

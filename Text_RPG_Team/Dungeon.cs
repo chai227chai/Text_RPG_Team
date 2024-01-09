@@ -17,6 +17,7 @@ namespace Text_RPG_Team
         List<ICharacter>? battle_monster;
 
         int player_health;
+        int drop_exp = 0;
 
         public void GoDungeon(Player player)
         {
@@ -33,6 +34,7 @@ namespace Text_RPG_Team
             {
                 int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
+                drop_exp += newMonster.Drop_Exp;
                 battle_monster.Add(newMonster);
             }
 
@@ -79,6 +81,8 @@ namespace Text_RPG_Team
 
             if (player.IsDead)
             {
+                drop_exp = 0;
+
                 Console.WriteLine("You Lose");
                 Console.WriteLine();
 
@@ -97,11 +101,13 @@ namespace Text_RPG_Team
             }
             else
             {
+                player.LevelUp(drop_exp);
+                drop_exp = 0;
+
                 Console.WriteLine("Victory");
                 Console.WriteLine();
 
                 Console.WriteLine($"던전에서 몬스터 {battle_monster.Count}마리를 잡았습니다.");
-
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
 
@@ -192,7 +198,7 @@ namespace Text_RPG_Team
                 {
                     if (!battle_monster[act - 1].IsDead)
                     {
-                        int damage = Damage_check(player.Attack);
+                        float damage = Damage_check(player.Attack);
                         Console.Clear();
                         Attack(player, battle_monster[act - 1], damage);
                         break;
@@ -229,7 +235,7 @@ namespace Text_RPG_Team
             {
                 if (!mon.IsDead)
                 {
-                    int damage = Damage_check(mon.Attack);
+                    float damage = Damage_check(mon.Attack);
                     
                     Attack(mon, player, damage);
                     Thread.Sleep(200);
@@ -250,7 +256,7 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
 
-        private void Attack(ICharacter attacker, ICharacter victim, int damage)
+        private void Attack(ICharacter attacker, ICharacter victim, float damage)
         {
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
@@ -273,10 +279,10 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private int Damage_check(int attack)
+        private float Damage_check(float attack)
         {
-            int damage_range = (int)Math.Ceiling((float)attack * 0.1) ;
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            float damage_range = (float)Math.Ceiling((float)attack * 0.1) ;
+            float damage = random.Next((int)(attack - damage_range)/10, (int)(attack + damage_range + 1));
 
             return damage;
         }
