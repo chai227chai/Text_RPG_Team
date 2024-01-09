@@ -40,6 +40,7 @@ namespace Text_RPG_Team
             Console.ReadKey();
         }
 
+        //---------------------------------------------------------------------------------------------------------------
         public string SetCharacter()
         {
             Console.Clear();
@@ -94,6 +95,8 @@ namespace Text_RPG_Team
             }
 
         }
+
+        //---------------------------------------------------------------------------------------------------------------
         private void MainTown()
         {
             Console.Clear();
@@ -204,6 +207,7 @@ namespace Text_RPG_Team
             return length;
         }
 
+        //---------------------------------------------------------------------------------------------------------------
         private string PadLeftForMixedText(string str, int totalLength)
         {
             int currentLength = GetPrintableLength(str);
