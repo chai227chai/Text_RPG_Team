@@ -66,13 +66,31 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
-                    character.ViewState();
+                    ViewState();
                     break;
                 case 2:
                     EnterDungeon();
                     break;
             }
         }
+
+        //---------------------------------------------------------------------------------------------------------------
+        private void ViewState()
+        {
+            character.ViewState();
+
+            Console.WriteLine();
+
+            int act = IsValidInput(0, 0);
+
+            switch (act)
+            {
+                case 0:
+                    MainTown();
+                    break; ;
+            }
+        }
+
 
 
         //---------------------------------------------------------------------------------------------------------------
