@@ -60,7 +60,7 @@ namespace Text_RPG_Team
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
             Console.WriteLine("1.전사 2.마법사 3.도적");
-            Console.Write(">>");
+            Console.Write("");
             int chooseJob = IsValidInput(3, 1);
             switch(chooseJob)
             {
@@ -86,9 +86,10 @@ namespace Text_RPG_Team
                     setJob = character.GetJob;
                     break;
             }
+            Console.Clear();
             Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
             Console.WriteLine("1. 예 2.아니오");
-            Console.Write(">>");
+            Console.Write("");
             int choose = IsValidInput(2, 1);
             switch (choose)
             {
@@ -228,40 +229,6 @@ namespace Text_RPG_Team
                     portion.UsePortion(character);
                     break;
             }
-        }
-      
-        //---------------------------------------------------------------------------------------------------------------
-        private string PadLeftForMixedText(string str, int totalLength)
-        {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
-            return str.PadLeft(str.Length + padding);
-        }
-
-        private string PadRightForMixedText(string str, int totalLength)
-        {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
-            return str.PadRight(str.Length + padding);
-        }
-
-        //---------------------------------------------------------------------------------------------------------------
-        //출력 정렬하는 함수
-        private int GetPrintableLength(string str)
-        {
-            int length = 0;
-            foreach (char c in str)
-            {
-                if (char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
-                {
-                    length += 2;
-                }
-                else
-                {
-                    length += 1;
-                }
-            }
-            return length;
         }
     }
 }
