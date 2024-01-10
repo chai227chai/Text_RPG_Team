@@ -28,6 +28,8 @@ namespace Text_RPG_Team
         int levelexp;
         int[] levelup = new int[2];
 
+        CHAR_TAG tag;
+
         bool isdead;
 
         public Player()
@@ -41,7 +43,8 @@ namespace Text_RPG_Team
             gold = 1500;
             levelexp = 0;
             levelup[0] = 10;
-            levelup[1] = 25;    
+            levelup[1] = 25;
+            tag = CHAR_TAG.PLAYER;
             isdead = false;
         }
 
@@ -129,6 +132,13 @@ namespace Text_RPG_Team
         {
             get { return isdead; }
         }
+
+        //캐릭터 태그
+        public CHAR_TAG Tag
+        {
+            get { return tag; }
+        }
+
         //캐릭터 스피드
         public int Speed
         {

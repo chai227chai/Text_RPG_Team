@@ -15,6 +15,7 @@ namespace Text_RPG_Team
         MonsterList? monsterList;
 
         List<ICharacter>? battle_monster;
+        ICharacter[]? allCharacter;
 
         int player_health;
         int stage_exp;
@@ -40,10 +41,12 @@ namespace Text_RPG_Team
 
             player_health = player.Health;
 
-            int number = random.Next(1, stage + 2);
+            int number = random.Next(stage, stage + 2);
             int exp = 0;
 
-            for(int i = 0; i < number; i++)
+            allCharacter = new ICharacter[number];
+
+            for (int i = 0; i < number; i++)
             {
                 int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
@@ -52,9 +55,42 @@ namespace Text_RPG_Team
             }
             stage_exp = exp;
 
-            Battle_phase();
+            Start_phase();
         }
 
+        //---------------------------------------------------------------------------------------------------------------
+        private void Start_phase()
+        {
+            Console.Clear();
+            Console.WriteLine("Battle!!");
+            Console.WriteLine();
+
+            Console.WriteLine($"{stage}층에 입장합니다.");
+            Console.WriteLine();
+            Thread.Sleep(500);
+            
+            Console.WriteLine("몬스터들이 당신의 앞을 막아섭니다.");
+            Console.WriteLine();
+            foreach (Monster mon in battle_monster)
+            {
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name} ");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("0. 다음");
+
+            int act = IsValidInput(0, 0);
+
+            if (act == 0)
+            {
+                Battle_phase();
+                return;
+            }
+
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
         private void Battle_phase()
         {
             int death_cnt = 0;
@@ -98,6 +134,10 @@ namespace Text_RPG_Team
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
+
+                Console.WriteLine();
+                Console.WriteLine("당신은 던전에서 도망쳤습니다.");
+                stage = 1;
 
                 Console.WriteLine();
                 Console.WriteLine("0. 다음");
@@ -156,7 +196,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}  ATK {mon.Attack}");
                 Console.ResetColor();
                 index++;
             }
@@ -173,14 +213,35 @@ namespace Text_RPG_Team
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             int act = IsValidInput(1, 1);
 
+            int target;
             if(act == 1)
             {
-                PlayerAttackTurn();
-                return;
+                target = PlayerAttackTurn();
+
+                if(target == 0)
+                {
+                    PlayerTurn();
+                    return;
+                }
+                else
+                {
+                    Console.Clear();
+                    Attack(player, battle_monster[target - 1]);
+                }
+                Console.WriteLine();
+                Console.WriteLine("0. 다음");
+
+                int act2 = IsValidInput(0, 0);
+
+                if (act2 == 0)
+                {
+                    return;
+                }
+
             }
         }
 
-        private void PlayerAttackTurn()
+        private int PlayerAttackTurn()
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -212,9 +273,10 @@ namespace Text_RPG_Team
 
             bool loop = true;
             bool isAttack = false;
+            int act = 0;
             while (loop)
             {
-                int act = IsValidInput(index - 1, 0);
+                act = IsValidInput(index - 1, 0);
 
                 if (act == 0)
                 {
@@ -224,10 +286,8 @@ namespace Text_RPG_Team
                 {
                     if (!battle_monster[act - 1].IsDead)
                     {
-                        
-                        int damage = Damage_check(player.Attack);
-                        Console.Clear();
-                        Attack(player, battle_monster[act - 1], damage);
+                        //Console.Clear();
+                        //Attack(player, battle_monster[act - 1]);
                         isAttack = true;
                         break;
                     }
@@ -239,23 +299,23 @@ namespace Text_RPG_Team
                 }
             }
 
-            if (isAttack)
-            {
-                Console.WriteLine();
-                Console.WriteLine("0. 다음");
+            //if (isAttack)
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("0. 다음");
 
-                int act2 = IsValidInput(0, 0);
+            //    int act2 = IsValidInput(0, 0);
 
-                if (act2 == 0)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                PlayerTurn();
-                return;
-            }
+            //    if (act2 == 0)
+            //    {
+            //        return act;
+            //    }
+            //}
+            //else
+            //{
+            //    PlayerTurn();
+            //}
+            return act;
 
         }
 
@@ -271,14 +331,7 @@ namespace Text_RPG_Team
             {
                 if (!mon.IsDead)
                 {
-                    int damage = Damage_check(mon.Attack) - player.Defence;
-                    
-                    if(damage < 0)
-                    {
-                        damage = 0;
-                    }
-
-                    Attack(mon, player, damage);
+                    Attack(mon, player);
                     Thread.Sleep(200);
                 }
             }
@@ -297,12 +350,19 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
 
-        private void Attack(ICharacter attacker, ICharacter victim, int damage)
+        private void Attack(ICharacter attacker, ICharacter victim)
         {
             int miss = random.Next(1, 10);
             int critical = random.Next(1, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
+
+            int damage = Damage_check(attacker.Attack) - victim.Defence;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
             if (miss <= 1)
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
@@ -343,7 +403,7 @@ namespace Text_RPG_Team
         private int Damage_check(int attack)
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1) ;
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            int damage = random.Next(attack - damage_range, attack + damage_range + 1) ;
             return damage;
         }
 
