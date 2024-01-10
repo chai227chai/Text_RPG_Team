@@ -74,26 +74,32 @@ namespace Text_RPG_Team
                 case 1:
                     character.Job = JOB.WARRIOR;
                     character.Health = 200;
+                    character.Mp = 50;
                     character.Attack = 5;
                     character.Defence = 10;
                     character.Speed = 3;
                     setJob = character.GetJob;
+                    UseSkill(setJob);
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
+                    character.Mp = 200;
                     character.Attack = 10;
                     character.Defence = 5;
                     character.Speed = 2;
                     setJob = character.GetJob;
+                    UseSkill(setJob);
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
+                    character.Mp = 100;
                     character.Attack = 8;
                     character.Defence = 8;
                     character.Speed = 5;
                     setJob = character.GetJob;
+                    UseSkill(setJob);
                     break;
             }
             Console.Clear();
@@ -214,6 +220,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"공격력 : {character.Attack}");
             Console.WriteLine($"방어력 : {character.Defence}");
             Console.WriteLine($"체  력 : {character.Health}");
+            Console.WriteLine($"마  나 : {character.Mp}");
             Console.WriteLine($"Gold : {character.Gold}G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -371,6 +378,27 @@ namespace Text_RPG_Team
                 }
             }
         }
+      
+        //스킬 부여 함수
+        static void UseSkill(string setJob)
+        {
+            Skill._skills = new Skill[10];
 
+            if (setJob == "전사")
+            {
+                Skill.AddSkill(new Skill("파워 스트라이크", "한 명의 적에게 강한 데미지를 가합니다.", 5, 3, 1));
+                Skill.AddSkill(new Skill("슬래시 블러스트", "모든 적에게 데미지를 가합니다.", 10, 2, 2));
+            }
+            else if (setJob == "마법사")
+            {
+                Skill.AddSkill(new Skill("에너지 볼트", "한 명의 적에게 데미지를 입힙니다.", 20, 2, 1));
+                Skill.AddSkill(new Skill("메테오 스트라이크", "모든 적에게 강력한 데미지를 입힙니다.", 100, 5, 2));
+            }
+            else if (setJob == "도적")
+            {
+                Skill.AddSkill(new Skill("부식", "한 명의 적에게 데미지를 줍니다.", 10, 2, 1));
+                Skill.AddSkill(new Skill("암살", "한 명의 적에게 치명적인 데미지를 줍니다.", 100, 10, 1));
+            }
+        }
     }
 }
