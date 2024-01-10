@@ -76,6 +76,7 @@ namespace Text_RPG_Team
                     character.Health = 200;
                     character.Attack = 5;
                     character.Defence = 10;
+                    character.Speed = 3;
                     setJob = character.GetJob;
                     break;
                 case 2:
@@ -83,6 +84,7 @@ namespace Text_RPG_Team
                     character.Health = 100;
                     character.Attack = 10;
                     character.Defence = 5;
+                    character.Speed = 2;
                     setJob = character.GetJob;
                     break;
                 case 3:
@@ -90,6 +92,7 @@ namespace Text_RPG_Team
                     character.Health = 150;
                     character.Attack = 8;
                     character.Defence = 8;
+                    character.Speed = 5;
                     setJob = character.GetJob;
                     break;
             }
