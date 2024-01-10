@@ -300,7 +300,7 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
         //5. 상점
-        public void ViewStore()
+        private void ViewStore()
         {
             Console.Clear();
             Console.WriteLine("■상점■");
@@ -346,18 +346,22 @@ namespace Text_RPG_Team
 
             if (act == 0)
             {
+                ViewStore();
                 return;
             }
             else
-            {//해야할 것 1. 구매한 거 재구매 못하게 만들기, 2. 돈 부족하면 못사게하기
-                int number = act;
-                Item solditem = itemlist.GetItem(number);
-                solditem.SetSale();
-
-                inventory.addInventroy(solditem);
-
-                character.Gold -= solditem.Price;
-                StoreBuy();
+            {
+                Item solditem = store.BuyItem(act, itemlist, character.Gold);
+                if(solditem != null)
+                {
+                    character.Gold -= solditem.Price;
+                    inventory.addInventroy(solditem);
+                    StoreBuy();
+                }
+                else
+                {
+                    ViewStore();
+                }
             }
         }
     }
