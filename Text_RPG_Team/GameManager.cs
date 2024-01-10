@@ -17,6 +17,8 @@ namespace Text_RPG_Team
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
         Portion portion = new Portion(3);
+        Store store = new Store();
+        ItemList itemlist = new ItemList();
 
         public GameManager()
         {
@@ -87,6 +89,7 @@ namespace Text_RPG_Team
                     setJob = character.GetJob;
                     break;
             }
+            Console.Clear();
             Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
             Console.WriteLine();
             Console.WriteLine("1. 예 2.아니오");
@@ -115,10 +118,11 @@ namespace Text_RPG_Team
             Console.WriteLine("1. 상태보기");
             Console.WriteLine($"2. 전투시작  (현재 층 수 : {dungeon.Now_Stage}층)");
             Console.WriteLine("3. 회복 아이템");
+            Console.WriteLine("4. 상점");
 
             Console.WriteLine();
 
-            int act = IsValidInput(3, 1);
+            int act = IsValidInput(4, 1);
 
             switch (act)
             {
@@ -130,6 +134,9 @@ namespace Text_RPG_Team
                     break;
                 case 3:
                     ViewPortion();
+                    break;
+                 case 4:
+                    store.ViewStore();
                     break;
             }
         }

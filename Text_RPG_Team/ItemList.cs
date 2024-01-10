@@ -46,5 +46,25 @@ namespace Text_RPG_Team
         {
             get{ return itemList; }
         }
+
+        public void PrintItemList(bool checknumber = false)
+        {
+            if (checknumber)
+            {
+                int i = 1;
+                foreach (Item item in itemList)
+                {
+                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.Price} | {item.Detail}");
+                    i++;
+                }
+            }
+            else
+            {
+                foreach (Item item in itemList)
+                {
+                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.Price} | {item.Detail}");
+                }
+            }
+        }
     }
 }
