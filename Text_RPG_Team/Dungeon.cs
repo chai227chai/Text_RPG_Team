@@ -211,8 +211,35 @@ namespace Text_RPG_Team
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
             Console.WriteLine($"HP {player.Health}");
             Console.WriteLine($"MP {player.Mp}");
+            Console.WriteLine();
+            index = 1;
+            for (int i = 0; i < Skill.SkillCnt; i++)
+            {
+                Console.Write(index);
+                Console.WriteLine(". " + Skill._skills[i].Name + " - MP " + Skill._skills[i].MP);
+                Console.WriteLine("   " + Skill._skills[i].Description);
+                index++;
+            }
+            Console.WriteLine("0. 취소");
+            Console.WriteLine();
 
+            Console.WriteLine("원하시는 행동을 입력해 주세요.");
+            int act = IsValidInput(index - 1, 0);
 
+            if (act == 1)
+            {
+                
+                return;
+            }
+            else if (act == 2)
+            {
+                
+                return;
+            }
+            else if (act == 0)
+            {
+                PlayerTurn();
+            }
         }
 
         private void PlayerAttackTurn()

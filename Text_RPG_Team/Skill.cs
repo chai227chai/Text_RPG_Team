@@ -16,7 +16,7 @@ namespace Text_RPG_Team
 
         public static int SkillCnt = 0;
 
-        static Skill[] _skills;
+        public static Skill[] _skills;
 
         public Skill(string name, string description, int mp, int coefficient, int range)
         {
@@ -27,7 +27,7 @@ namespace Text_RPG_Team
             Range = range;
         }
 
-        static void AddSkill(Skill skill)
+        public static void AddSkill(Skill skill)
         {
             if (SkillCnt == 10)
             {
@@ -36,12 +36,6 @@ namespace Text_RPG_Team
 
             _skills[SkillCnt] = skill;
             SkillCnt++;
-        }
-
-        static void UseSkill()
-        {
-            AddSkill(new Skill("파워 스트라이크", "한 명의 적에게 강한 데미지를 가합니다.", 5, 3, 1));
-            AddSkill(new Skill("슬래시 블러스트", "모든 적에게 데미지를 가합니다.", 10, 2, 2));
         }
     }
 }
