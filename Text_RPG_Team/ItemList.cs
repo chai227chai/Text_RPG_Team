@@ -11,6 +11,14 @@ namespace Text_RPG_Team
     {
         private List<Item> itemList;
 
+        public int itemnumber
+        {
+            get
+            {
+                return itemList.Count;
+            }
+        }
+
         public ItemList()
         {
             this.itemList = new List<Item>();
@@ -45,6 +53,32 @@ namespace Text_RPG_Team
         public List<Item> GetItemList
         {
             get{ return itemList; }
+        }
+
+
+        //아이템 리스트 보여주기
+        public void PrintItemList(List<Item> itemlist, bool checknumber = false, bool checkgold = false)
+        {
+            for (int i = 0; i < itemlist.Count; i++)
+            {
+                Console.Write("- ");
+                if (checknumber)
+                {
+                    int n = i + 1;
+                    Console.Write($"{n}. ");
+                }
+                Console.Write($"{itemlist[i].NowEquip}{itemlist[i].Name}");
+                Console.Write(" | ");
+                if (itemlist[i].Type == ItemType.WEAPON) Console.Write($"공격력 + {itemlist[i].GetSpec}");
+                if (itemlist[i].Type == ItemType.ARMOR) Console.Write($"방어력 + {itemlist[i].GetSpec}");
+                Console.Write(" | ");
+                if (checkgold)
+                {
+                    Console.Write($"{itemlist[i].SalePrice}");
+                    Console.Write(" | ");
+                }
+                Console.WriteLine(itemlist[i].Detail);
+            }
         }
     }
 }
