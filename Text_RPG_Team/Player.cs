@@ -23,9 +23,11 @@ namespace Text_RPG_Team
 
         int level;
         int attack;
-        bool plusattack;
+        int plusattack;
+        bool checkattack;
         int defence;
-        bool plusdefaence;
+        int plusdefence;
+        bool checkdefence;
         int health;
         int mp;
         int gold;
@@ -43,9 +45,11 @@ namespace Text_RPG_Team
             job = Job;
             level = 1;
             attack = Attack;
-            plusattack = false;
+            plusattack = 0;
+            checkattack = false;
             defence = Defence;
-            plusdefaence = false;
+            plusdefence = 0;
+            checkdefence = false;
             health = Health;
             mp = Mp;
             speed = Speed;
@@ -125,6 +129,19 @@ namespace Text_RPG_Team
             set { attack = value; }
         }
 
+        //캐릭터 추가 공격력
+        public int PlusAttack
+        {
+            get { return plusattack; }
+            set { plusattack = value; }
+        }
+
+        public bool CheckAttack
+        {
+            get { return checkattack; }
+            set { checkattack = value; }
+        }
+
         //캐릭터 방어력
         public int Defence
         {
@@ -134,6 +151,19 @@ namespace Text_RPG_Team
                 return now_defence; 
             }
             set { defence = value; }
+        }
+
+        //캐릭터 추가 방어력
+        public int PlusDefence
+        {
+            get { return plusdefence; }
+            set { plusdefence = value; }
+        }
+
+        public bool CheckDefence
+        {
+            get { return checkdefence; }
+            set { checkdefence = value; }
         }
 
         //보유 골드

@@ -217,8 +217,18 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("LV : " + character.Level.ToString("00"));
             Console.WriteLine($"{character.Name} ( {character.GetJob} )");
-            Console.WriteLine($"공격력 : {character.Attack}");
-            Console.WriteLine($"방어력 : {character.Defence}");
+            Console.Write($"공격력 : {character.Attack}");
+            if (character.CheckAttack)
+            {
+                Console.WriteLine($" (+{character.PlusAttack})");
+            }
+            else Console.WriteLine();
+            Console.Write($"방어력 : {character.Defence}");
+            if (character.CheckDefence)
+            {
+                Console.WriteLine($" (+{character.PlusDefence})");
+            }
+            else Console.WriteLine();
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
             Console.WriteLine($"Gold : {character.Gold}G");
@@ -302,12 +312,10 @@ namespace Text_RPG_Team
                 ViewInventory();
                 return;
             }
-            else//장착은 됨! 장착된거 상태에 들어감. 착용된거 제거는 되는데 안까임. 중첩되서 더해짐
+            else
             {
                 Item selectitem = inventory.GetItem(act);
-                inventory.AddEquipedTem(selectitem.Type, selectitem);
-                character.Attack += inventory.ExAttack();
-                character.Defence += inventory.ExDefend();
+                inventory.SetPlayerSpec(selectitem.Type, selectitem, character);
                 InventoryManager();
             }
         }

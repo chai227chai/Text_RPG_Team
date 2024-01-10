@@ -28,31 +28,78 @@ namespace Text_RPG_Team
         }
 
 
-        //인벤토리에 있는 아이템 장착
-        public void AddEquipedTem(ItemType type, Item item)
+        //인벤토리에 있는 아이템 장착 확인
+        private bool AddEquipedTem(ItemType type, Item item)
         {
-            int spec = 0;
             if (equipedTem.ContainsKey(type) && equipedTem[type] != item) //장착된게 있고, 현재 장착하고 있는 것과 다르면!
             {
                 equipedTem[type].SetEquip(); //원래 끼고 있던 아이템 장착 해제
-                spec = CalculSpec(item, equipedTem[type]);
-
-                equipedTem.Remove(type); //없앰
-
-                equipedTem.Add(type, item); //선택한거 추가
                 item.SetEquip(); //장착
+                return true;
             }
             else if (equipedTem.ContainsKey(type) && equipedTem[type] == item) //장착이 되어있고, 현재 장착한 것과 같으면!
             {
-                spec = CalculSpec(item, equipedTem[type]);
                 item.SetEquip(); //장착 해제
-                equipedTem.Remove(type); //없앰
+                return false;
             }
             else //장착된게 없으면!
             {
-                spec = CalculSpec(item);
-                equipedTem.Add(type, item); 
                 item.SetEquip();
+                return true;
+            }
+            
+        }
+
+        //스탯 반영
+        public void SetPlayerSpec(ItemType type, Item item, Player player)
+        {
+            bool check = AddEquipedTem(type, item);
+            int spec = 0;
+            if (type == ItemType.WEAPON)
+            {
+                if (check)
+                {
+                    if (equipedTem.ContainsKey(type))
+                    {
+                        spec = equipedTem[type].GetSpec;
+                        equipedTem.Remove(type); //없앰
+                    }
+                    equipedTem.Add(type, item); //선택한거 추가
+                    player.PlusAttack = item.GetSpec;
+                    player.CheckAttack = true;
+                }
+                else
+                {
+                    spec = equipedTem[type].GetSpec;
+                    equipedTem.Remove(type); //없앰
+                    player.PlusAttack = 0;
+                    player.CheckAttack = false;
+                }
+                player.Attack -= spec;
+                player.Attack += player.PlusAttack;
+            }
+            else
+            {
+                if (check)
+                {
+                    if (equipedTem.ContainsKey(type))
+                    {
+                        spec = equipedTem[type].GetSpec;
+                        equipedTem.Remove(type); //없앰
+                    }
+                    equipedTem.Add(type, item); //선택한거 추가
+                    player.PlusDefence = item.GetSpec;
+                    player.CheckDefence = true;
+                }
+                else
+                {
+                    spec = equipedTem[type].GetSpec;
+                    equipedTem.Remove(type); //없앰
+                    player.PlusDefence = 0;
+                    player.CheckDefence = false;
+                }
+                player.Defence -= spec;
+                player.Defence += player.PlusDefence;
             }
         }
 
@@ -67,27 +114,6 @@ namespace Text_RPG_Team
         {
             inventoryList.RemoveAt(n - 1);
         }
-
-        //스펙 계산, item1은 착용할 것 item2는 착용하고 있는 것
-        private int CalculSpec(Item item1, Item? item2 = null)
-        {
-            if (item2 == null)
-            {
-                return item1.GetSpec;
-            }
-            else
-            {
-                return item1.GetSpec - item2.GetSpec;
-            }
-        }
-
-        //player한테 스펙 계산한거 넘겨주기
-        public void SetSpec(ItemType type, int spec)
-        {
-
-        }
-
-
 
         //장착한 아이템의 공격력 가져오기
         public int ExAttack()
