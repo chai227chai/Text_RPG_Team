@@ -21,7 +21,9 @@ namespace Text_RPG_Team
 
         int level;
         int attack;
+        bool plusattack;
         int defence;
+        bool plusdefaence;
         int health;
         int gold;
         int speed;
@@ -36,7 +38,9 @@ namespace Text_RPG_Team
             job = Job;
             level = 1;
             attack = Attack;
+            plusattack = false;
             defence = Defence;
+            plusdefaence = false;
             health = Health;
             gold = 1500;
             levelexp = 0;
