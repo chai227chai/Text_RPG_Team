@@ -14,7 +14,7 @@ namespace Text_RPG_Team
         Player? player;
         MonsterList? monsterList;
 
-        List<ICharacter>? battle_monster;
+        List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
         int player_health;
@@ -38,12 +38,12 @@ namespace Text_RPG_Team
             this.player = player;
             this.monsterList = new MonsterList(stage);
 
-            this.battle_monster = new List<ICharacter>();
+            this.battle_monster = new List<Monster>();
 
             player_health = player.Health;
 
             int number = 1;
-            if(stage >= 1 && stage < 4)
+            if(stage >= 1 && stage <= 4)
             {
                 number = random.Next(stage, stage + 1);
             }
@@ -54,6 +54,10 @@ namespace Text_RPG_Team
             else if(stage == 10)
             {
                 number = 1;
+            }
+            else if(stage > 10)
+            {
+                number = random.Next(stage, stage + 1);
             }
 
             int exp = 0;
@@ -71,6 +75,8 @@ namespace Text_RPG_Team
                 exp += newMonster.Drop_Exp;
             }
             stage_exp = exp;
+
+            CheckName(battle_monster);
 
             Start_phase();
         }
@@ -112,12 +118,15 @@ namespace Text_RPG_Team
         private void Battle_phase()
         {
             int death_cnt = 0;
-            int turn = 1;
+            int turn = 0;
 
             while (!player.IsDead && death_cnt < battle_monster.Count)
             {
                 //죽은 몬스터 수
                 death_cnt = 0;
+
+                //턴 수 증가
+                turn++;
 
                 //턴 시작 시 마다 스피드 별로 정렬
                 allCharacter = allCharacter.OrderByDescending(x => x.SetSpeed()).ToArray();
@@ -163,12 +172,7 @@ namespace Text_RPG_Team
                         death_cnt++;
                     }
                 }
-                if (death_cnt >= battle_monster.Count)
-                {
-                    break;
-                }
 
-                turn++;
             }
 
             Result();
@@ -536,6 +540,26 @@ namespace Text_RPG_Team
             }
 
             return false;
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //중복 이름 체크
+        private void CheckName(List<Monster> monsterList)
+        {
+            var list = monsterList.GroupBy(x => x.Name).Where(g => g.Count() > 0).Select(x => x.Key).ToList();
+
+            foreach(string m in list)
+            {
+                int ascii = 65;
+                for(int i = 0; i < monsterList.Count; i++)
+                {
+                    if (monsterList[i].Name == m)
+                    {
+                        monsterList[i].Name += "_" + (char)ascii;
+                        ascii++;
+                    }
+                }
+            }
         }
     }
 }

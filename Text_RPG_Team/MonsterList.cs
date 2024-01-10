@@ -53,6 +53,12 @@ namespace Text_RPG_Team
             {
                 AddMonster("공허의 전령", 20, 40, 15, 5, 2);
             }
+            if(dungeon_stage > 10)
+            {
+                AddMonster("늑대", 7, 25, 12, 1, 3);
+                AddMonster("칼날부리", 7, 20, 15, 1, 4);
+                AddMonster("독두꺼비", 10, 35, 12, 3, 2);
+            }
         }
 
         public Monster getMonster(int n)
