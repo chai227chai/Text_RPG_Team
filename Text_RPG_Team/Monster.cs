@@ -3,27 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Text_RPG_Team
 {
     internal class Monster : ICharacter
     {
+        private Random random = new Random();
+
         string name;
 
         int level;
         int health;
         int attack;
+        int defence;
+        int speed;
         int drop_exp;// 몬스터가 제공하는 경험치
+
+        CHAR_TAG tag;
 
         bool isdead;
 
-        public Monster(string name, int level, int health, int attack) 
+        public Monster(string name, int level, int health, int attack, int defence, int speed) 
         {
             this.name = name;
             this.level = level;
             this.health = health;
             this.attack = attack;
+            this.speed = speed;
+            this.defence = defence;
             this.drop_exp = this.level;//경험치 = 몬스터의 레벨 1당 1의 경험치
+            tag = CHAR_TAG.MONSTER;
             isdead = false;
         }
 
@@ -33,7 +43,10 @@ namespace Text_RPG_Team
             this.level = dupplicate.level;
             this.health = dupplicate.health;
             this.attack = dupplicate.attack;
+            this.defence = dupplicate.defence;
+            this.speed = dupplicate.speed;
             this.drop_exp = dupplicate.drop_exp;
+            tag = dupplicate.tag;
             isdead = dupplicate.isdead;
         }
 
@@ -83,6 +96,20 @@ namespace Text_RPG_Team
             set { attack = value; }
         }
 
+        // 몬스터 방어력
+        public int Defence
+        {
+            get{ return defence; }
+            set { defence = value; }
+        }
+
+        //몬스터 스피드 (오차값 20% 소수값 올림)
+        public int Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
+
         //몬스터 사망 여부
         public bool IsDead
         {
@@ -94,6 +121,12 @@ namespace Text_RPG_Team
         public int Drop_Exp
         {
             get { return drop_exp; }
+        }
+
+        //캐릭터 태그
+        public CHAR_TAG Tag
+        {
+            get { return tag; }
         }
 
         //----------------------------------------------------------------------------------------------
@@ -108,6 +141,14 @@ namespace Text_RPG_Team
                 health = 0;
                 isdead = true;
             }
+        }
+
+        //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
+        public int SetSpeed()
+        {
+            int span = (int)Math.Ceiling((float)speed * 0.2f);
+            int ran_speed = random.Next(speed - span, speed + span + 1);
+            return ran_speed;
         }
     }
 }

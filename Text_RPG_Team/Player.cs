@@ -16,6 +16,8 @@ namespace Text_RPG_Team
 
     internal class Player : ICharacter
     {
+        private Random random = new Random();
+
         string name;
         JOB job;
 
@@ -25,10 +27,13 @@ namespace Text_RPG_Team
         int defence;
         bool plusdefaence;
         int health;
+        int mp;
         int gold;
         int speed;
         int levelexp;
         int[] levelup = new int[2];
+
+        CHAR_TAG tag;
 
         bool isdead;
 
@@ -42,10 +47,13 @@ namespace Text_RPG_Team
             defence = Defence;
             plusdefaence = false;
             health = Health;
+            mp = Mp;
+            speed = Speed;
             gold = 1500;
             levelexp = 0;
             levelup[0] = 10;
-            levelup[1] = 25;    
+            levelup[1] = 25;
+            tag = CHAR_TAG.PLAYER;
             isdead = false;
         }
 
@@ -98,6 +106,13 @@ namespace Text_RPG_Team
             get { return health; }
             set { health = value; }
         }
+        
+        //캐릭터 마나
+        public int Mp
+        {
+            get { return mp; }
+            set { mp = value; }
+        }
 
         //캐릭터 공격력
         public int Attack
@@ -133,6 +148,13 @@ namespace Text_RPG_Team
         {
             get { return isdead; }
         }
+
+        //캐릭터 태그
+        public CHAR_TAG Tag
+        {
+            get { return tag; }
+        }
+
         //캐릭터 스피드
         public int Speed
         {
@@ -174,6 +196,14 @@ namespace Text_RPG_Team
                 Console.WriteLine($"Lv.{Level} {Name}");
                 
             }
+        }
+
+        //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
+        public int SetSpeed()
+        {
+            int span = (int)Math.Ceiling((float)speed * 0.2f);
+            int ran_speed = random.Next(speed - span, speed + span + 1);
+            return ran_speed;
         }
     }
 }
