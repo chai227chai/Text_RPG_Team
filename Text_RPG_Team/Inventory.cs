@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,45 +27,26 @@ namespace Text_RPG_Team
             inventoryList.Add(Inventory_item);
         }
 
-        //인벤토리 확인
-        public void ViewInventory()
-        {
-            Console.Clear();
-            Console.WriteLine("■인벤토리■");
-            Console.WriteLine("");
-            Console.WriteLine();
-            Console.WriteLine("");
-            Console.WriteLine("[아이템 목록]");
-            PrintItemList();
-            Console.WriteLine();
-            Console.WriteLine("1. 아이템 구매");
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine();
-        }
-
-
-
-
 
         //인벤토리에 있는 아이템 장착
         public void AddEquipedTem(ItemType type, Item item)
         {
-            if (equipedTem.ContainsKey(type) && equipedTem[type] != item)
+            if (equipedTem.ContainsKey(type) && equipedTem[type] != item) //장착된게 있고, 현재 장착하고 있는 것과 다르면!
             {
-                equipedTem[type].SetEquip();
-                equipedTem.Remove(type);
+                equipedTem[type].SetEquip(); //원래 끼고 있던 아이템 장착 해제
+                equipedTem.Remove(type); //없앰
 
-                equipedTem.Add(type, item);
-                item.SetEquip();
+                equipedTem.Add(type, item); //선택한거 추가
+                item.SetEquip(); //장착
             }
-            else if (equipedTem.ContainsKey(type) && equipedTem[type] == item)
+            else if (equipedTem.ContainsKey(type) && equipedTem[type] == item) //장착이 되어있고, 현재 장착한 것과 같으면!
             {
-                item.SetEquip();
-                equipedTem.Remove(type);
+                item.SetEquip(); //장착 해제
+                equipedTem.Remove(type); //없앰
             }
-            else
+            else //장착된게 없으면!
             {
-                equipedTem.Add(type, item);
+                equipedTem.Add(type, item); 
                 item.SetEquip();
             }
         }
@@ -109,26 +91,6 @@ namespace Text_RPG_Team
         public List<Item> GetInventoryList
         {
             get { return inventoryList; }
-        }
-
-        public void PrintItemList(bool checknumber = false)
-        {
-            if (checknumber)
-            {
-                int i = 1;
-                foreach (Item item in inventoryList)
-                {
-                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
-                    i++;
-                }
-            }
-            else
-            {
-                foreach (Item item in inventoryList)
-                {
-                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
-                }
-            }
         }
     }
 }
