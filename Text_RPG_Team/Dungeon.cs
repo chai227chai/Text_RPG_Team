@@ -108,6 +108,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        //전투 페이즈
         private void Battle_phase()
         {
             int death_cnt = 0;
@@ -115,6 +116,7 @@ namespace Text_RPG_Team
 
             while (!player.IsDead && death_cnt < battle_monster.Count)
             {
+                //죽은 몬스터 수
                 death_cnt = 0;
 
                 //턴 시작 시 마다 스피드 별로 정렬
@@ -128,6 +130,7 @@ namespace Text_RPG_Team
                 Console.WriteLine();
                 Thread.Sleep(500);
 
+                //모든 캐릭 한번 씩 돌아가며 행동
                 foreach (ICharacter character in allCharacter)
                 {
                     //캐릭이 플레이어일 때
@@ -152,6 +155,7 @@ namespace Text_RPG_Team
                     }
                 }
 
+                //죽은 몬스터 수 체크해서 던전 클리어 확인
                 foreach(Monster mon in battle_monster)
                 {
                     if (mon.IsDead)
@@ -171,7 +175,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-
+        //던전 탐험 결과
         private void Result()
         {
             Console.Clear();
@@ -229,7 +233,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-
+        //플레이어 행동 턴
         private void PlayerTurn()
         {
             Console.Clear();
@@ -275,6 +279,7 @@ namespace Text_RPG_Team
                 }
                 else
                 {
+                    //대상을 선택했다면, 공격
                     Console.Clear();
                     Attack(player, battle_monster[target - 1]);
                 }
