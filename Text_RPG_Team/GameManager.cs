@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
@@ -17,6 +18,9 @@ namespace Text_RPG_Team
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
         Portion portion = new Portion(3);
+        ItemList itemlist = new ItemList();
+        Store store = new Store();
+        Inventory inventory = new Inventory();
 
         public GameManager()
         {
@@ -59,8 +63,11 @@ namespace Text_RPG_Team
             string setJob = "초보자";
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
+            Console.WriteLine();
             Console.WriteLine("1.전사 2.마법사 3.도적");
-            Console.Write("");
+
+            Console.WriteLine();
+          
             int chooseJob = IsValidInput(3, 1);
             switch(chooseJob)
             {
@@ -88,8 +95,10 @@ namespace Text_RPG_Team
             }
             Console.Clear();
             Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
+            Console.WriteLine();
             Console.WriteLine("1. 예 2.아니오");
-            Console.Write("");
+            Console.WriteLine();
+
             int choose = IsValidInput(2, 1);
             switch (choose)
             {
@@ -103,7 +112,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private void MainTown()
+        public void MainTown()
         {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
@@ -114,10 +123,12 @@ namespace Text_RPG_Team
             Console.WriteLine("1. 상태보기");
             Console.WriteLine($"2. 전투시작  (현재 층 수 : {dungeon.Now_Stage}층)");
             Console.WriteLine("3. 회복 아이템");
+            Console.WriteLine("4. 인벤토리");
+            Console.WriteLine("5. 상점");
 
             Console.WriteLine();
 
-            int act = IsValidInput(3, 1);
+            int act = IsValidInput(5, 1);
 
             switch (act)
             {
@@ -129,7 +140,12 @@ namespace Text_RPG_Team
                     break;
                 case 3:
                     ViewPortion();
-                    IsValidInput(1, 0);
+                    break;
+                case 4:
+                    ViewInventory();
+                    break;
+                case 5:
+                    ViewStore();
                     break;
             }
         }
@@ -183,6 +199,7 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
         //선택하는 화면으로 이동하는 함수
+        //1. 상태보기
         private void ViewPlayer()
         {
             Console.Clear();
@@ -203,12 +220,12 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 0:
-                    MainTown();
                     break;
             }
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        //3. 회복 아이템
         private void ViewPortion()
         {
             Console.Clear();
@@ -223,12 +240,134 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 0:
-                    MainTown();
                     break;
                 case 1:
                     portion.UsePortion(character);
                     break;
             }
         }
+      
+        //---------------------------------------------------------------------------------------------------------------
+        //4. 인벤토리
+        private void ViewInventory()
+        {
+            Console.Clear();
+            Console.WriteLine("■인벤토리■");
+            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            itemlist.PrintItemList(inventory.GetInventoryList);
+            Console.WriteLine();
+            Console.WriteLine("1. 장착관리");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            int act = IsValidInput(1, 0);
+
+            switch (act)
+            {
+                case 0:
+                    break;
+                case 1:
+                    InventoryManager();
+                    break;
+            }
+        }
+
+        private void InventoryManager()
+        {
+            Console.Clear();
+            Console.WriteLine("■인벤토리 - 장착 관리■");
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            itemlist.PrintItemList(inventory.GetInventoryList, true);
+            Console.WriteLine("");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("");
+            int act = IsValidInput(inventory.GetInventoryList.Count, 0);
+
+            if (act == 0)
+            {
+                ViewInventory();
+                return;
+            }
+            else//장착은 됨! 장착된거 상태에 들어감. 착용된거 제거는 되는데 안까임. 중첩되서 더해짐
+            {
+                Item selectitem = inventory.GetItem(act);
+                inventory.AddEquipedTem(selectitem.Type, selectitem);
+                character.Attack += inventory.ExAttack();
+                character.Defence += inventory.ExDefend();
+                InventoryManager();
+            }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //5. 상점
+        private void ViewStore()
+        {
+            Console.Clear();
+            Console.WriteLine("■상점■");
+            Console.WriteLine("필요한 아이템을 얻거나 가지고 있는 아이템을 팔 수 있는 상점입니다.");
+            Console.WriteLine();
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine($"{character.Gold}G");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            itemlist.PrintItemList(itemlist.GetItemList, false ,true);
+            Console.WriteLine();
+            Console.WriteLine("1. 아이템 구매");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            int act = IsValidInput(1, 0);
+
+            switch (act)
+            {
+                case 0:
+                    break;
+                case 1:
+                    StoreBuy();
+                    break;
+            }
+        }
+
+        //구매
+        private void StoreBuy()
+        {
+            Console.Clear();
+            Console.WriteLine("■상점 - 아이템 구매■");
+            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+            Console.WriteLine("");
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine($"{character.Gold}G");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            itemlist.PrintItemList(itemlist.GetItemList, true, true);
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            int act = IsValidInput(itemlist.itemnumber, 0);
+
+            if (act == 0)
+            {
+                ViewStore();
+                return;
+            }
+            else
+            {
+                Item solditem = store.BuyItem(act, itemlist, character.Gold);
+                if(solditem != null)
+                {
+                    character.Gold -= solditem.Price;
+                    inventory.addInventroy(solditem);
+                    StoreBuy();
+                }
+                else
+                {
+                    ViewStore();
+                }
+            }
+        }
+
     }
 }

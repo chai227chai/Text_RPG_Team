@@ -166,8 +166,9 @@ namespace Text_RPG_Team
                 Console.WriteLine();
                 Console.WriteLine("Level UP");
                 Console.WriteLine();
-                Console.WriteLine($"Lv.{prev_level} -> Lv.{Level}");
+                Console.WriteLine($"Lv. {prev_level} -> Lv. {Level}");
                 Console.WriteLine($"Lv.{Level} {Name}");
+                
             }
         }
     }

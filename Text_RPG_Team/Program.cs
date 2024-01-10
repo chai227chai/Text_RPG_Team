@@ -7,6 +7,10 @@ namespace Text_RPG_Team
         static void Main(string[] args)
         {
             GameManager gameManager = new GameManager();
+            while (true)
+            {
+                gameManager.MainTown();
+            }
         }
     }
 }

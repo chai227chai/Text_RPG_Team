@@ -139,6 +139,7 @@ namespace Text_RPG_Team
         public bool IsEquip
         {
             get { return isEquiped; }
+            set { isEquiped = value; }
         }
 
         //아이템 장착 여부 출력
