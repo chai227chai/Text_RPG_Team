@@ -26,6 +26,26 @@ namespace Text_RPG_Team
             inventoryList.Add(Inventory_item);
         }
 
+        //인벤토리 확인
+        public void ViewInventory()
+        {
+            Console.Clear();
+            Console.WriteLine("■인벤토리■");
+            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            PrintItemList();
+            Console.WriteLine();
+            Console.WriteLine("1. 아이템 구매");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+        }
+
+
+
+
+
         //인벤토리에 있는 아이템 장착
         public void AddEquipedTem(ItemType type, Item item)
         {
@@ -89,6 +109,26 @@ namespace Text_RPG_Team
         public List<Item> GetInventoryList
         {
             get { return inventoryList; }
+        }
+
+        public void PrintItemList(bool checknumber = false)
+        {
+            if (checknumber)
+            {
+                int i = 1;
+                foreach (Item item in inventoryList)
+                {
+                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
+                    i++;
+                }
+            }
+            else
+            {
+                foreach (Item item in inventoryList)
+                {
+                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
+                }
+            }
         }
     }
 }

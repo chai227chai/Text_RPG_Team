@@ -18,7 +18,7 @@ namespace Text_RPG_Team
         Dungeon dungeon = new Dungeon();
         Portion portion = new Portion(3);
         Store store = new Store();
-        ItemList itemlist = new ItemList();
+        Inventory inventory = new Inventory();
 
         public GameManager()
         {
@@ -107,7 +107,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private void MainTown()
+        public void MainTown()
         {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
@@ -118,11 +118,12 @@ namespace Text_RPG_Team
             Console.WriteLine("1. 상태보기");
             Console.WriteLine($"2. 전투시작  (현재 층 수 : {dungeon.Now_Stage}층)");
             Console.WriteLine("3. 회복 아이템");
-            Console.WriteLine("4. 상점");
+            Console.WriteLine("4. 인벤토리");
+            Console.WriteLine("5. 상점");
 
             Console.WriteLine();
 
-            int act = IsValidInput(4, 1);
+            int act = IsValidInput(5, 1);
 
             switch (act)
             {
@@ -135,9 +136,20 @@ namespace Text_RPG_Team
                 case 3:
                     ViewPortion();
                     break;
-                 case 4:
+                case 4:
+                    inventory.ViewInventory();
+                    break;
+                case 5:
                     store.getPlayer(character);
                     store.ViewStore();
+                    if(store.InventoryItem != null)
+                    {
+                        foreach (Item item in store.InventoryItem)
+                        {
+                            inventory.addInventroy(item);
+                        }
+                        store.InventoryItem = null;
+                    }
                     break;
             }
         }

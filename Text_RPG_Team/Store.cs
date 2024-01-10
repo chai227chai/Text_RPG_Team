@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,16 @@ namespace Text_RPG_Team
     {
         ItemList itemlist = new ItemList();
         Player character;
-
         public void getPlayer(Player player)
         {
-            character = new Player();
+            character = player;
+        }
+
+        List<Item> inventoryitem = new List<Item>();
+        public List<Item> InventoryItem
+        {
+            get { return inventoryitem; }
+            set { inventoryitem = value; }
         }
 
         //ViewStore()
@@ -61,8 +68,25 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-        }
+            int act = IsValidInput(itemlist.itemnumber, 0);
 
+            if (act == 0)
+            {
+                return;
+            }
+            else
+            {
+                int number = act;
+                Item solditem = itemlist.GetItem(number);
+                solditem.SetSale();
+
+                inventoryitem.Add(solditem);
+
+                character.Gold -= solditem.Price;
+                StoreBuy();
+            }
+        }
+        
 
 
 

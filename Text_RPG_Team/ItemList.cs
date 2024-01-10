@@ -11,6 +11,14 @@ namespace Text_RPG_Team
     {
         private List<Item> itemList;
 
+        public int itemnumber
+        {
+            get
+            {
+                return itemList.Count;
+            }
+        }
+
         public ItemList()
         {
             this.itemList = new List<Item>();
@@ -47,6 +55,8 @@ namespace Text_RPG_Team
             get{ return itemList; }
         }
 
+
+        //아이템 리스트 보여주기
         public void PrintItemList(bool checknumber = false)
         {
             if (checknumber)
@@ -54,7 +64,7 @@ namespace Text_RPG_Team
                 int i = 1;
                 foreach (Item item in itemList)
                 {
-                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.Price} | {item.Detail}");
+                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
                     i++;
                 }
             }
@@ -62,7 +72,7 @@ namespace Text_RPG_Team
             {
                 foreach (Item item in itemList)
                 {
-                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.Price} | {item.Detail}");
+                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
                 }
             }
         }
