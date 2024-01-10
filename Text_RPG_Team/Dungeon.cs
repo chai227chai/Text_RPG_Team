@@ -307,6 +307,7 @@ namespace Text_RPG_Team
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
                 damage = 0;
+                return;
             }
             else
             {
