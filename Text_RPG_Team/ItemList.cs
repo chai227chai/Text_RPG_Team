@@ -57,12 +57,12 @@ namespace Text_RPG_Team
 
 
         //아이템 리스트 보여주기
-        public void PrintItemList(bool checknumber = false)
+        public void PrintItemList(List<Item> itemlist, bool checknumber = false)
         {
             if (checknumber)
             {
                 int i = 1;
-                foreach (Item item in itemList)
+                foreach (Item item in itemlist)
                 {
                     Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
                     i++;
@@ -70,7 +70,7 @@ namespace Text_RPG_Team
             }
             else
             {
-                foreach (Item item in itemList)
+                foreach (Item item in itemlist)
                 {
                     Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
                 }
