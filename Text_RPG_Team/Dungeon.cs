@@ -20,6 +20,7 @@ namespace Text_RPG_Team
         int stage_exp;
         int stage;
 
+
         public Dungeon()
         {
             stage = 1;
@@ -223,6 +224,7 @@ namespace Text_RPG_Team
                 {
                     if (!battle_monster[act - 1].IsDead)
                     {
+                        
                         int damage = Damage_check(player.Attack);
                         Console.Clear();
                         Attack(player, battle_monster[act - 1], damage);
@@ -297,9 +299,29 @@ namespace Text_RPG_Team
 
         private void Attack(ICharacter attacker, ICharacter victim, int damage)
         {
+            int miss = random.Next(1, 10);
+            int critical = random.Next(1, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
-            Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
+            if (miss <= 1)
+            {
+                Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
+                damage = 0;
+                return;
+            }
+            else
+            {
+                if (critical <= 15)
+                {
+                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
+                }
+                else
+                {
+                    Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
+                }
+            }
+            
             Console.WriteLine();
 
             int health = victim.Health;
@@ -322,7 +344,6 @@ namespace Text_RPG_Team
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1) ;
             int damage = random.Next(attack - damage_range, attack + damage_range + 1);
-
             return damage;
         }
 
