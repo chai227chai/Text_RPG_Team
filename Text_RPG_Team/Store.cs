@@ -11,6 +11,12 @@ namespace Text_RPG_Team
     internal class Store
     {
         ItemList itemlist = new ItemList();
+        Player character;
+
+        public void getPlayer(Player player)
+        {
+            character = new Player();
+        }
 
         //ViewStore()
         public void ViewStore()
@@ -20,7 +26,7 @@ namespace Text_RPG_Team
             Console.WriteLine("필요한 아이템을 얻거나 가지고 있는 아이템을 팔 수 있는 상점입니다.");
             Console.WriteLine();
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"G");//character.Gold
+            Console.WriteLine($"{character.Gold}G");//character.Gold
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList();
@@ -48,7 +54,7 @@ namespace Text_RPG_Team
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("");
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"G");
+            Console.WriteLine($"{character.Gold}G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList(true);

@@ -136,6 +136,7 @@ namespace Text_RPG_Team
                     ViewPortion();
                     break;
                  case 4:
+                    store.getPlayer(character);
                     store.ViewStore();
                     break;
             }
