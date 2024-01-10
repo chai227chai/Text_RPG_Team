@@ -134,6 +134,7 @@ namespace Text_RPG_Team
                     if(character.Tag == CHAR_TAG.PLAYER && !character.IsDead)
                     {
                         Console.Clear();
+                        Console.WriteLine();
                         Console.WriteLine("당신의 차례입니다.");
                         Console.WriteLine();
                         Thread.Sleep(500);
