@@ -65,7 +65,9 @@ namespace Text_RPG_Team
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
             Console.WriteLine();
             Console.WriteLine("1.전사 2.마법사 3.도적");
+
             Console.WriteLine();
+          
             int chooseJob = IsValidInput(3, 1);
             switch(chooseJob)
             {
@@ -96,6 +98,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("1. 예 2.아니오");
             Console.WriteLine();
+
             int choose = IsValidInput(2, 1);
             switch (choose)
             {
@@ -243,7 +246,7 @@ namespace Text_RPG_Team
                     break;
             }
         }
-
+      
         //---------------------------------------------------------------------------------------------------------------
         //4. 인벤토리
         private void ViewInventory()
@@ -365,5 +368,6 @@ namespace Text_RPG_Team
                 }
             }
         }
+
     }
 }
