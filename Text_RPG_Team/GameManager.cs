@@ -289,12 +289,13 @@ namespace Text_RPG_Team
                 ViewInventory();
                 return;
             }
-            else//장착은 됨! 장착된거 상태에 들어감. [E]표시 없음. 착용된거 제거 안됨. 중첩되서 더해짐
+            else//장착은 됨! 장착된거 상태에 들어감. 착용된거 제거는 되는데 안까임. 중첩되서 더해짐
             {
                 Item selectitem = inventory.GetItem(act);
                 inventory.AddEquipedTem(selectitem.Type, selectitem);
                 character.Attack += inventory.ExAttack();
                 character.Defence += inventory.ExDefend();
+                InventoryManager();
             }
         }
 
@@ -310,7 +311,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Gold}G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(itemlist.GetItemList);
+            itemlist.PrintItemList(itemlist.GetItemList, false ,true);
             Console.WriteLine();
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("0. 나가기");
@@ -338,7 +339,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Gold}G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(itemlist.GetItemList, true);
+            itemlist.PrintItemList(itemlist.GetItemList, true, true);
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();

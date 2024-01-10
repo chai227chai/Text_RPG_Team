@@ -57,23 +57,27 @@ namespace Text_RPG_Team
 
 
         //아이템 리스트 보여주기
-        public void PrintItemList(List<Item> itemlist, bool checknumber = false)
+        public void PrintItemList(List<Item> itemlist, bool checknumber = false, bool checkgold = false)
         {
-            if (checknumber)
+            for (int i = 0; i < itemlist.Count; i++)
             {
-                int i = 1;
-                foreach (Item item in itemlist)
+                Console.Write("- ");
+                if (checknumber)
                 {
-                    Console.WriteLine($"{i}. {item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
-                    i++;
+                    int n = i + 1;
+                    Console.Write($"{n}. ");
                 }
-            }
-            else
-            {
-                foreach (Item item in itemlist)
+                Console.Write($"{itemlist[i].NowEquip}{itemlist[i].Name}");
+                Console.Write(" | ");
+                if (itemlist[i].Type == ItemType.WEAPON) Console.Write($"공격력 + {itemlist[i].GetSpec}");
+                if (itemlist[i].Type == ItemType.ARMOR) Console.Write($"방어력 + {itemlist[i].GetSpec}");
+                Console.Write(" | ");
+                if (checkgold)
                 {
-                    Console.WriteLine($"{item.Name} | {item.GetSpec} | {item.SalePrice} | {item.Detail}");
+                    Console.Write($"{itemlist[i].SalePrice}");
+                    Console.Write(" | ");
                 }
+                Console.WriteLine(itemlist[i].Detail);
             }
         }
     }
