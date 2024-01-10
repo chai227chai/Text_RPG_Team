@@ -166,18 +166,53 @@ namespace Text_RPG_Team
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
             Console.WriteLine($"HP {player.Health}");
+            Console.WriteLine($"MP {player.Mp}");
 
             Console.WriteLine();
             Console.WriteLine("1. 공격");
+            Console.WriteLine("2. 스킬");
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            int act = IsValidInput(1, 1);
+            int act = IsValidInput(2, 1);
 
             if(act == 1)
             {
                 PlayerAttackTurn();
                 return;
             }
+            else if (act == 2)
+            {
+                PlayerSkillTurn();
+                return;
+            }
+        }
+
+        private void PlayerSkillTurn()
+        {
+            Console.Clear();
+            Console.WriteLine("Battle!!");
+            Console.WriteLine();
+
+            int index = 1;
+            foreach (Monster mon in battle_monster)
+            {
+                if (mon.IsDead)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
+                Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.ResetColor();
+                index++;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("[내 정보]");
+            Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
+            Console.WriteLine($"HP {player.Health}");
+            Console.WriteLine($"MP {player.Mp}");
+
+
         }
 
         private void PlayerAttackTurn()

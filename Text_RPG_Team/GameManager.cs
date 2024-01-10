@@ -67,6 +67,7 @@ namespace Text_RPG_Team
                 case 1:
                     character.Job = JOB.WARRIOR;
                     character.Health = 200;
+                    character.Mp = 50;
                     character.Attack = 5;
                     character.Defence = 10;
                     setJob = character.GetJob;
@@ -74,6 +75,7 @@ namespace Text_RPG_Team
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.Health = 100;
+                    character.Mp = 200;
                     character.Attack = 10;
                     character.Defence = 5;
                     setJob = character.GetJob;
@@ -81,6 +83,7 @@ namespace Text_RPG_Team
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.Health = 150;
+                    character.Mp = 100;
                     character.Attack = 8;
                     character.Defence = 8;
                     setJob = character.GetJob;
@@ -193,6 +196,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"공격력 : {character.Attack}");
             Console.WriteLine($"방어력 : {character.Defence}");
             Console.WriteLine($"체  력 : {character.Health}");
+            Console.WriteLine($"마  나 : {character.Mp}");
             Console.WriteLine($"Gold : {character.Gold}G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");

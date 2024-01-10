@@ -23,6 +23,7 @@ namespace Text_RPG_Team
         int attack;
         int defence;
         int health;
+        int mp;
         int gold;
         int speed;
         int levelexp;
@@ -38,6 +39,7 @@ namespace Text_RPG_Team
             attack = Attack;
             defence = Defence;
             health = Health;
+            mp = Mp;
             gold = 1500;
             levelexp = 0;
             levelup[0] = 10;
@@ -93,6 +95,13 @@ namespace Text_RPG_Team
         {
             get { return health; }
             set { health = value; }
+        }
+        
+        //캐릭터 마나
+        public int Mp
+        {
+            get { return mp; }
+            set { mp = value; }
         }
 
         //캐릭터 공격력
