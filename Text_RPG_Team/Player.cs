@@ -16,6 +16,8 @@ namespace Text_RPG_Team
 
     internal class Player : ICharacter
     {
+        private Random random = new Random();
+
         string name;
         JOB job;
 
@@ -40,6 +42,7 @@ namespace Text_RPG_Team
             attack = Attack;
             defence = Defence;
             health = Health;
+            speed = Speed;
             gold = 1500;
             levelexp = 0;
             levelup[0] = 10;
@@ -179,6 +182,14 @@ namespace Text_RPG_Team
                 Console.WriteLine($"Lv.{Level} {Name}");
                 Console.WriteLine($"Lv {prev_level} -> {Level}");
             }
+        }
+
+        //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
+        public int SetSpeed()
+        {
+            int span = (int)Math.Ceiling((float)speed * 0.2f);
+            int ran_speed = random.Next(speed - span, speed + span + 1);
+            return ran_speed;
         }
     }
 }
