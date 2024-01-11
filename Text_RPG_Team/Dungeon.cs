@@ -323,6 +323,7 @@ namespace Text_RPG_Team
                 {
                     //다시 되돌아 옴
                     PlayerTurn();
+                    return;
                 }
                 else
                 {
@@ -411,12 +412,13 @@ namespace Text_RPG_Team
         }
 
         //------------------------------------------------------------------------------------------------------
-        //스킬 선택
+        //스킬 사용
         private void UseSkill(int act)
         {
             if(act == 0)
             {
-                PlayerSkillTurn();
+                PlayerTurn();
+                return;
             }
 
             //단일 타겟 스킬인 경우
@@ -431,6 +433,7 @@ namespace Text_RPG_Team
                 {
                     //다시 되돌아 옴
                     PlayerSkillTurn();
+                    return;
                 }
                 else
                 {
@@ -440,28 +443,24 @@ namespace Text_RPG_Team
                     player.Mp -= player.getSkillList[act - 1].MP;
                 }
 
-                Console.WriteLine();
-                Console.WriteLine(">> 다음");
-                Console.ReadKey();
+
             }
             //무작위 타겟 스킬인 경우
             else if (player.getSkillList[act - 1].Range > 1)
             {
                 SkillAttackRandom(player, player.getSkillList[act - 1]);
 
-                Console.WriteLine();
-                Console.WriteLine(">> 다음");
-                Console.ReadKey();
             }
             //전체 타겟 스킬인 경우
             else if (player.getSkillList[act - 1].Range == 0)
             {
                 SkillAttackAll(player, player.getSkillList[act - 1]);
 
-                Console.WriteLine();
-                Console.WriteLine(">> 다음");
-                Console.ReadKey();
             }
+
+            Console.WriteLine();
+            Console.WriteLine(">> 다음");
+            Console.ReadKey();
         }
 
 
