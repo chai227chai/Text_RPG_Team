@@ -14,6 +14,8 @@ namespace Text_RPG_Team
         public int Coefficient { get; }
         public int Range { get; }
 
+        public static int SkillNum;
+
         public static int SkillCnt = 0;
 
         public static Skill[] _skills;

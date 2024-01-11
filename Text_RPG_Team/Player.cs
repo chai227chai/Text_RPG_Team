@@ -98,6 +98,7 @@ namespace Text_RPG_Team
                 }
             }
         }
+        
 
         //캐릭터 레벨
         public int Level

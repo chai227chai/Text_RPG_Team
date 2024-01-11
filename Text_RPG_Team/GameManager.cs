@@ -79,7 +79,7 @@ namespace Text_RPG_Team
                     character.Defence = 10;
                     character.Speed = 3;
                     setJob = character.GetJob;
-                    UseSkill(setJob);
+                    GiveSkill(setJob);
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
@@ -90,7 +90,7 @@ namespace Text_RPG_Team
                     character.Defence = 5;
                     character.Speed = 2;
                     setJob = character.GetJob;
-                    UseSkill(setJob);
+                    GiveSkill(setJob);
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
@@ -101,7 +101,7 @@ namespace Text_RPG_Team
                     character.Defence = 8;
                     character.Speed = 5;
                     setJob = character.GetJob;
-                    UseSkill(setJob);
+                    GiveSkill(setJob);
                     break;
             }
             Console.Clear();
@@ -395,7 +395,7 @@ namespace Text_RPG_Team
         }
       
         //스킬 부여 함수
-        static void UseSkill(string setJob)
+        static void GiveSkill(string setJob)
         {
             Skill._skills = new Skill[10];
 
