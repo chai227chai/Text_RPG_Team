@@ -113,7 +113,11 @@ namespace Text_RPG_Team
         {
             if(portion.Type == PortionType.HP)
             {
-                HpPortion.Count = 0;
+                HpPortion.Count = portion.Count;
+            }
+            else if(portion.Type == PortionType.MP)
+            {
+                MpPortion.Count = portion.Count;
             }
         }
 
