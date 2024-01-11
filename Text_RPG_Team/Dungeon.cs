@@ -357,7 +357,21 @@ namespace Text_RPG_Team
         //스킬 선택
         private void UseSkill(int act)
         {
-            if (Skill._skills[act-1].Range == 1)
+            //마나 부족한지 확인
+            if (player.Mp >= Skill._skills[act - 1].MP)
+            {
+                //마나 소모
+                player.Mp -= Skill._skills[act - 1].MP;
+            }
+            else
+            {
+                Console.WriteLine("마나가 부족합니다.");
+                Thread.Sleep(1000);
+                PlayerSkillTurn();
+            }
+
+            //단일 타겟 스킬인 경우
+            if (Skill._skills[act - 1].Range == 1) 
             {
                 //스킬 넘버 부여
                 Skill.SkillNum = act;
@@ -368,6 +382,9 @@ namespace Text_RPG_Team
                 //아무것도 선택하지 않았을 때
                 if (act == 0)
                 {
+                    //마나 돌려줌
+                    player.Mp += Skill._skills[act - 1].MP;
+
                     //다시 되돌아 옴
                     PlayerSkillTurn();
                 }
@@ -387,6 +404,8 @@ namespace Text_RPG_Team
                     return;
                 }
             }
+
+            //전체 타겟 스킬인 경우
             else if (Skill._skills[act-1].Range == 2)
             {
                 int miss = random.Next(1, 10);
