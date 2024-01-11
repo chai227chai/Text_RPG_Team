@@ -17,7 +17,8 @@ namespace Text_RPG_Team
         TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        Portion portion = new Portion();
+        Portion hpportion = new Portion(PortionType.HP);
+        Portion mpportion = new Portion(PortionType.MP);
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
@@ -96,7 +97,8 @@ namespace Text_RPG_Team
                 case 1:
                     character.Gold = 1500;
                     character.UseSkill();
-                    portion.StartPortion(3);
+                    hpportion.SetPortion(3);
+                    mpportion.SetPortion(3);
                     break;
                 case 2:
                     SetJob();
@@ -294,22 +296,25 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■회복■");
-            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {portion.myportion})");
+            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다");
             Console.WriteLine();
             Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
             Console.WriteLine($"현재 체력 : {character.Health}");
             Console.WriteLine();
-            Console.WriteLine("1. 사용하기");
+            Console.WriteLine("1. 체력 회복하기");
+            Console.WriteLine("2. 마나 회복하기");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-            int act = IsValidInput(1, 0);
-
+            int act = IsValidInput(2, 0);
             switch (act)
             {
                 case 0:
                     break;
                 case 1:
-                    portion.UsePortion(character);
+                    hpportion.UsePortion(character);
+                    break;
+                case 2:
+                    mpportion.UsePortion(character);
                     break;
             }
         }
@@ -320,8 +325,7 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■인벤토리■");
-            Console.WriteLine("");
-            Console.WriteLine();
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList(inventory.GetInventoryList);
@@ -437,7 +441,7 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
         //스킬 부여 함수
-        static void UseSkill(string setJob)
+        static void GiveSkill(string setJob)
         {
             Skill._skills = new Skill[10];
 

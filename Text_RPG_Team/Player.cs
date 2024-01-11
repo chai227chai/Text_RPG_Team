@@ -33,6 +33,7 @@ namespace Text_RPG_Team
         int health;
         int maxhealth;
         int mp;
+        int maxmp;
         int gold;
         int speed;
         int plusSpeed;
@@ -82,6 +83,7 @@ namespace Text_RPG_Team
             health = Health;
             maxhealth = MaxHealth;
             mp = Mp;
+            maxmp = MaxMp;
             speed = Speed;
             plusSpeed = 0;
             gold = Gold;
@@ -129,6 +131,7 @@ namespace Text_RPG_Team
                 }
             }
         }
+        
 
         //캐릭터 레벨
         public int Level
@@ -155,6 +158,12 @@ namespace Text_RPG_Team
         {
             get { return mp; }
             set { mp = value; }
+        }
+
+        public int MaxMp
+        {
+            get { return maxmp; }
+            set { maxmp = value; }
         }
 
         //캐릭터 공격력
