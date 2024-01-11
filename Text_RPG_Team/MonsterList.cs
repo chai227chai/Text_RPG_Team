@@ -43,12 +43,12 @@ namespace Text_RPG_Team
             {
                 AddMonster("공성 미니언", 5, 25, 8, 1, 1, MonsterType.ELITE_MINION);
             }
-            if(dungeon_stage >= 5 && dungeon_stage < 9)
+            if(dungeon_stage >= 5 && dungeon_stage <= 9)
             {
                 AddMonster("늑대", 7, 25, 12, 1, 3, MonsterType.ELITE_WOLF);
                 AddMonster("칼날부리", 7, 20, 15, 1, 4, MonsterType.ELITE_BIRD);
             }
-            if(dungeon_stage >= 7 && dungeon_stage < 9)
+            if(dungeon_stage >= 7 && dungeon_stage <= 9)
             {
                 AddMonster("독두꺼비", 10, 35, 12, 3, 2, MonsterType.ELITE_FROG);
             }

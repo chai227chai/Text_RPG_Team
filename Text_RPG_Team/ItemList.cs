@@ -69,8 +69,7 @@ namespace Text_RPG_Team
                 }
                 Console.Write($"{itemlist[i].NowEquip}{itemlist[i].Name}");
                 Console.Write(" | ");
-                if (itemlist[i].Type == ItemType.WEAPON) Console.Write($"공격력 + {itemlist[i].GetSpec}");
-                if (itemlist[i].Type == ItemType.ARMOR) Console.Write($"방어력 + {itemlist[i].GetSpec}");
+                Console.Write($"{itemlist[i].GetSpecName}");
                 Console.Write(" | ");
                 if (checkgold)
                 {

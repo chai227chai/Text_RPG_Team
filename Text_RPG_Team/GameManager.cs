@@ -23,10 +23,13 @@ namespace Text_RPG_Team
         Store store = new Store();
         Inventory inventory = new Inventory();
 
+        string name;
+
         public GameManager()
         {
             FirstScreen();
-            character.Name = SetCharacter();
+            //character.Name = SetCharacter();
+            name = SetCharacter();
             SetJob();
             MainTown();
         }
@@ -73,44 +76,17 @@ namespace Text_RPG_Team
             switch(chooseJob)
             {
                 case 1:
-                    character.Job = JOB.WARRIOR;
-                    character.MaxHealth = 200;
-                    character.Health = character.MaxHealth;
-                    character.MaxMp = 50;
-                    character.Mp = character.MaxMp;
-                    character.Attack = 5;
-                    character.Defence = 10;
-                    character.Speed = 3;
-                    setJob = character.GetJob;
-                    GiveSkill(setJob);
+                    character = new Player(name, JOB.WARRIOR, 200, 50, 5, 10, 3);
                     break;
                 case 2:
-                    character.Job = JOB.WIZARD;
-                    character.MaxHealth = 100;
-                    character.Health = character.MaxHealth;
-                    character.MaxMp = 200;
-                    character.Mp = character.MaxMp;
-                    character.Attack = 10;
-                    character.Defence = 5;
-                    character.Speed = 2;
-                    setJob = character.GetJob;
-                    GiveSkill(setJob);
+                    character = new Player(name, JOB.WIZARD, 100, 200, 10, 5, 2);
                     break;
                 case 3:
-                    character.Job = JOB.ROGUE;
-                    character.MaxHealth = 150;
-                    character.Health = character.MaxHealth;
-                    character.MaxMp = 100;
-                    character.Mp = character.MaxMp;
-                    character.Attack = 8;
-                    character.Defence = 8;
-                    character.Speed = 5;
-                    setJob = character.GetJob;
-                    GiveSkill(setJob);
+                    character = new Player(name, JOB.ROGUE, 150, 100, 8, 8, 5);
                     break;
             }
             Console.Clear();
-            Console.WriteLine($"당신의 직업은 {setJob} 입니다. 확정하시겠습니까?");
+            Console.WriteLine($"당신의 직업은 {character.GetJob} 입니다. 확정하시겠습니까?");
             Console.WriteLine();
             Console.WriteLine("1. 예 2.아니오");
             Console.WriteLine();
@@ -120,6 +96,7 @@ namespace Text_RPG_Team
             {
                 case 1:
                     character.Gold = 1500;
+                    character.UseSkill();
                     hpportion.SetPortion(3);
                     mpportion.SetPortion(3);
                     break;
@@ -169,15 +146,7 @@ namespace Text_RPG_Team
             }
         }
 
-        //---------------------------------------------------------------------------------------------------------------
-        private void EnterDungeon()
-        {
-            dungeon.GoDungeon(character);
-
-            MainTown();
-        }
-
-
+        
         //---------------------------------------------------------------------------------------------------------------
         //입력이 올바른지 확인하는 함수
         public int IsValidInput(int max, int min)
@@ -228,13 +197,13 @@ namespace Text_RPG_Team
             Console.WriteLine("LV : " + character.Level.ToString("00"));
             Console.WriteLine($"{character.Name} ( {character.GetJob} )");
             Console.Write($"공격력 : {character.Attack}");
-            if (character.CheckAttack)
+            if (character.PlusAttack > 0)
             {
                 Console.WriteLine($" (+{character.PlusAttack})");
             }
             else Console.WriteLine();
             Console.Write($"방어력 : {character.Defence}");
-            if (character.CheckDefence)
+            if (character.PlusDefence > 0)
             {
                 Console.WriteLine($" (+{character.PlusDefence})");
             }
@@ -250,6 +219,73 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 0:
+                    break;
+            }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //2. 던전 입장
+        private void EnterDungeon()
+        {
+            Console.Clear();
+            Console.WriteLine("■던전입장■");
+            Console.WriteLine("던전에 도전하여 보상을 획득할 수 있습니다.");
+            Console.WriteLine();
+
+            Console.WriteLine($"현재 {dungeon.Now_Stage}층에 도전 중 입니다.");
+
+            Console.WriteLine();
+            Console.WriteLine("[상태]");
+            Console.WriteLine($"LV. {character.Level}");
+            Console.WriteLine($"Chad ({character.Name})");
+            Console.WriteLine($"공격력 : {character.Total_Attack}");
+            Console.WriteLine($"방어력 : {character.Total_Defence}");
+            Console.WriteLine($"체 력 : {character.Health}");
+            Console.WriteLine();
+
+            Console.WriteLine();
+
+            Console.WriteLine("1. 던전 입장");
+            Console.WriteLine("2. 던전 초기화");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+
+            int act = IsValidInput(2, 0);
+
+            switch (act)
+            {
+                case 1:
+                    dungeon.GoDungeon(character);
+                    break;
+                case 2:
+                    ResetDungeon();
+                    break;
+                case 0:
+                    break;
+            }
+            
+        }
+
+        void ResetDungeon()
+        {
+            Console.Clear();
+            Console.WriteLine("■던전초기화■");
+            Console.WriteLine("던전을 초기화 합니다.");
+            Console.WriteLine("초기화 할 경우, 던전을 1층부터 다시 도전해야 합니다. 정말로 초기화 하시겠습니까?");
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("1. 예 2.아니오");
+            Console.WriteLine();
+
+            int choose = IsValidInput(2, 1);
+            switch (choose)
+            {
+                case 1:
+                    dungeon.ResetDungeon();
+                    break;
+                case 2:
+                    EnterDungeon();
                     break;
             }
         }
@@ -330,7 +366,7 @@ namespace Text_RPG_Team
             else
             {
                 Item selectitem = inventory.GetItem(act);
-                inventory.SetPlayerSpec(selectitem.Type, selectitem, character);
+                inventory.SetPlayerSpec(character, selectitem);
                 InventoryManager();
             }
         }
@@ -401,7 +437,9 @@ namespace Text_RPG_Team
                 }
             }
         }
-      
+
+
+        //---------------------------------------------------------------------------------------------------------------
         //스킬 부여 함수
         static void GiveSkill(string setJob)
         {

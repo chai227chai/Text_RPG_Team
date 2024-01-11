@@ -111,8 +111,13 @@ namespace Text_RPG_Team
         // 몬스터 방어력
         public int Defence
         {
-            get{ return defence; }
+            get { return defence; }
             set { defence = value; }
+        }
+
+        public int Total_Defence
+        {
+            get { return Defence; }
         }
 
         //몬스터 스피드 (오차값 20% 소수값 올림)
@@ -162,14 +167,15 @@ namespace Text_RPG_Team
         }
 
         //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
-        public int SetSpeed()
+        public int Ran_Speed()
         {
             int span = (int)Math.Ceiling((float)speed * 0.2f);
             int ran_speed = random.Next(speed - span, speed + span + 1);
             return ran_speed;
         }
 
-        public int Damage_check(int attack)
+        //실 적용 공격력 (공격력 오차값 10% 소수값 올림)
+        public int Ran_Attack()
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1);
             int damage = random.Next(attack - damage_range, attack + damage_range + 1);
