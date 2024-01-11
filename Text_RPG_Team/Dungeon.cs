@@ -9,6 +9,13 @@ namespace Text_RPG_Team
 {
     internal class Dungeon
     {
+        enum ClassMp
+        {
+            Worrior = 50,
+            Mage = 200,
+            Rogue = 100
+        }
+
         private Random random = new Random();
 
         Player? player;
@@ -18,6 +25,7 @@ namespace Text_RPG_Team
         ICharacter[]? allCharacter;
 
         int player_health;
+        int player_mp;
         int stage_exp;
         int stage;
 
@@ -41,6 +49,7 @@ namespace Text_RPG_Team
             this.battle_monster = new List<ICharacter>();
 
             player_health = player.Health;
+            player_mp = player.Mp;
 
             int number = 1;
             if(stage >= 1 && stage < 4)
@@ -213,6 +222,11 @@ namespace Text_RPG_Team
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
+
+                int currentMp = player.Mp;
+                player.Mp = player.Mp + 10 > player_mp ? player_mp : player.Mp + 10;
+                Console.WriteLine($"MP {player_mp} -> {currentMp}");
+                Console.WriteLine($"MP 회복(10) -> {player.Mp}");
 
                 player.LevelUp(stage_exp);
 
