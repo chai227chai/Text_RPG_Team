@@ -29,6 +29,7 @@ namespace Text_RPG_Team
         int plusdefence;
         bool checkdefence;
         int health;
+        int maxhealth;
         int mp;
         int gold;
         int speed;
@@ -50,7 +51,7 @@ namespace Text_RPG_Team
             defence = Defence;
             plusdefence = 0;
             checkdefence = false;
-            health = Health;
+            health = MaxHealth;
             mp = Mp;
             speed = Speed;
             gold = 1500;
@@ -110,7 +111,13 @@ namespace Text_RPG_Team
             get { return health; }
             set { health = value; }
         }
-        
+
+        public int MaxHealth
+        {
+            get { return maxhealth; }
+            set { maxhealth = value; }
+        }
+
         //캐릭터 마나
         public int Mp
         {
