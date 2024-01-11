@@ -18,21 +18,13 @@ namespace Text_RPG_Team
     internal class Portion
     {
         private PortionType portiontype;
-        private int hpportion;
-        private int mpportion;
+        private int portioncount;
 
         //생성자
         public Portion(PortionType type)
         {
             portiontype = type;
-            if (portiontype == PortionType.HP)
-            {
-                hpportion = 0;
-            }
-            else if(portiontype == PortionType.MP)
-            { 
-                mpportion = 0; 
-            }
+            portioncount = 0;
         }
 
         //----------------------------------------------------------------------------------------------
@@ -44,51 +36,40 @@ namespace Text_RPG_Team
             set { portiontype = value; }
         }
 
-        public int HpCount
-        { 
-            get { return hpportion; } 
-            set { hpportion = value; }
-        }
-
-        public int MpCount
+        public int Count
         {
-            get { return mpportion; }
-            set { mpportion = value; }
+            get { return portioncount; }
+            set { portioncount = value; }
         }
 
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
 
         //포션 갯수 추가
-        public void SetHpPortion(int n)
+        public void SetPortion(int n)
         {
-            HpCount += n;
-        }
-        public void SetMpPortion(int n)
-        {
-            MpCount += n;
+            Count += n;
         }
 
         //포션 갯수 가져오기
-        public int GetPortion()
+        public int GetCount()
         {
-            return HpCount;
-        }
-        public int GetMpPortion()
-        {
-            return MpCount;
+            return Count;
         }
 
         //포션 사용
-        public void UseHpPortion(Player player)
+        public void UsePortion(Player player)
         {
-            if (HpCount <= 0)
+            if (Count <= 0)
             {
                 Console.WriteLine("포션이 부족합니다.");
+                Console.WriteLine("처음 화면으로 돌아갑니다.");
+                Thread.Sleep(2000);
+                return;
             }
-            else
+            else if (Type == PortionType.HP)
             {
-                if(player.MaxHealth == player.Health)
+                if (player.MaxHealth == player.Health)
                 {
                     Console.WriteLine();
 
@@ -103,37 +84,31 @@ namespace Text_RPG_Team
                 }
                 else player.Health += 30;
 
-                HpCount--;
-                Console.WriteLine("회복을 완료했습니다.");
+                Count--;
             }
-        }
-
-        public void UseMpPortion(Player player)
-        {
-            if (player.MaxMp == player.Mp)
+            else if (Type == PortionType.MP)
             {
-                Console.WriteLine();
-
-                Console.WriteLine("최대입니다.");
-                Console.WriteLine("처음 화면으로 돌아갑니다.");
-                Thread.Sleep(2000);
-                return;
-            }
-            else if (MpCount <= 0)
-            {
-                Console.WriteLine("포션이 부족합니다.");
-            }
-            else
-            {
-                if (player.MaxMp - player.Mp < 30)
+                if (player.MaxMp == player.Mp)
                 {
-                    player.Mp = player.MaxMp;
-                }
-                else player.Mp += 30;
+                    Console.WriteLine();
 
-                HpCount--;
-                Console.WriteLine("회복을 완료했습니다.");
+                    Console.WriteLine("최대 마나입니다.");
+                    Console.WriteLine("처음 화면으로 돌아갑니다.");
+                    Thread.Sleep(2000);
+                    return;
+                }
+                else
+                {
+                    if (player.MaxMp - player.Mp < 30)
+                    {
+                        player.Mp = player.MaxMp;
+                    }
+                    else player.Mp += 30;
+
+                    Count--;
+                }
             }
+            Console.WriteLine("회복을 완료했습니다.");
         }
     }
 }

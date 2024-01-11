@@ -252,8 +252,8 @@ namespace Text_RPG_Team
                 }
             }
             player.Gold += rewardGold;
-            HPportion.SetHpPortion(rewardHpPotion);
-            MPportion.SetMpPortion(rewardMpPotion);
+            HPportion.SetPortion(rewardHpPotion);
+            MPportion.SetPortion(rewardMpPotion);
             Console.WriteLine("[획득 아이템]");
             Console.WriteLine($"{rewardGold} Gold");
             if(rewardHpPotion >= 1)

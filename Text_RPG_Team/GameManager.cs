@@ -22,6 +22,7 @@ namespace Text_RPG_Team
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
+
         public GameManager()
         {
             FirstScreen();
@@ -119,7 +120,8 @@ namespace Text_RPG_Team
             {
                 case 1:
                     character.Gold = 1500;
-                    hpportion.SetHpPortion(3);
+                    hpportion.SetPortion(3);
+                    mpportion.SetPortion(3);
                     break;
                 case 2:
                     SetJob();
@@ -258,21 +260,25 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■회복■");
-            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {hpportion.HpCount})");
+            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다");
             Console.WriteLine();
             Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
             Console.WriteLine($"현재 체력 : {character.Health}");
             Console.WriteLine();
-            Console.WriteLine("1. 사용하기");
+            Console.WriteLine("1. 체력 회복하기");
+            Console.WriteLine("2. 마나 회복하기");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-            int act = IsValidInput(1, 0);
+            int act = IsValidInput(2, 0);
             switch (act)
             {
                 case 0:
                     break;
                 case 1:
-                    hpportion.UseHpPortion(character);
+                    hpportion.UsePortion(character);
+                    break;
+                case 2:
+                    mpportion.UsePortion(character);
                     break;
             }
         }
