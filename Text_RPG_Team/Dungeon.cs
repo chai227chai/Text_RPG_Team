@@ -160,7 +160,7 @@ namespace Text_RPG_Team
                     //캐릭이 몬스터일 때
                     else if(character.Tag == CHAR_TAG.MONSTER && !character.IsDead)
                     {
-                        EnemyTurn(character);
+                        EnemyTurn((Monster)character);
                     }
                 }
 
@@ -425,14 +425,47 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private void EnemyTurn(ICharacter character)
+        private void EnemyTurn(Monster character)
         {
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine($"{character.Name} 이(가) 행동합니다.");
             Thread.Sleep(500);
 
-            Attack(character, player);
+            int useSkill;
+            if(monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
+            {
+                useSkill = random.Next(1, 11);
+            }
+            else
+            {
+                useSkill = 0;
+            }
+
+            if (character.Type == MonsterType.BOSS_HERAID)
+            {
+                if (useSkill >= 6)
+                {
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    SkillAttack(character, player, skill);
+                }
+                else
+                {
+                    Attack(character, player);
+                }
+            }
+            else
+            {
+                if (useSkill == 1)
+                {
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    SkillAttack(character, player, skill);
+                }
+                else
+                {
+                    Attack(character, player);
+                }
+            }
  
             Console.WriteLine();
             Console.WriteLine("0. 다음");
@@ -443,6 +476,48 @@ namespace Text_RPG_Team
             {
                 return;
             }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //몬스터 스킬 사용
+        private void SkillAttack(ICharacter attacker, ICharacter victim, MonsterSkill skill)
+        {
+            int critical = random.Next(1, 100);
+            Console.WriteLine();
+            Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
+
+            int damage = (int)((float)attacker.Damage_check(attacker.Attack) * skill.Coefficient) - victim.Defence;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            if (critical <= 15)
+            {
+                damage = (int)Math.Ceiling((float)damage * 1.6);
+                Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
+            }
+            else
+            {
+                Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
+            }
+
+            Console.WriteLine();
+
+            int health = victim.Health;
+            victim.TakeDamage(damage);
+
+            Console.WriteLine($"Lv.{victim.Level} {victim.Name}");
+            if (victim.IsDead)
+            {
+                Console.WriteLine($"HP {health} -> dead");
+            }
+            else
+            {
+                Console.WriteLine($"HP {health} -> {victim.Health}");
+            }
+
+            return;
         }
 
 
@@ -495,6 +570,7 @@ namespace Text_RPG_Team
                 Console.WriteLine($"HP {health} -> {victim.Health}");
             }
 
+            return;
         }
 
         //---------------------------------------------------------------------------------------------------------------
