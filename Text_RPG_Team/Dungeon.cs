@@ -749,8 +749,8 @@ namespace Text_RPG_Team
             }
             else
             {
-                //보스몹이 아닐 땐 스킬 사용 확률 10%
-                if (useSkill == 1)
+                //보스몹이 아닐 땐 스킬 사용 확률 20%
+                if (useSkill >= 8)
                 {
                     //스킬 리스트에서 스킬 하나를 무작위로 빼옴
                     MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
