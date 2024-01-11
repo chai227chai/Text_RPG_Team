@@ -301,8 +301,8 @@ namespace Text_RPG_Team
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
             Console.WriteLine();
-            Console.WriteLine($"HP {player.Health}");
-            Console.WriteLine($"MP {player.Mp}");
+            Console.WriteLine($"HP {player.Health} / {player.MaxHealth}");
+            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
 
             Console.WriteLine();
             Console.WriteLine("1. 공격");
