@@ -621,7 +621,6 @@ namespace Text_RPG_Team
         {
             player.Mp -= skill.MP;
 
-            int critical = random.Next(1, 100);
             Console.Clear();
             Console.WriteLine($"{attacker.Name} 의 공격!");
             Console.WriteLine();
@@ -633,6 +632,8 @@ namespace Text_RPG_Team
                 {
                     damage = 0;
                 }
+
+                int critical = random.Next(1, 100);
 
                 if (critical <= 15)
                 {
