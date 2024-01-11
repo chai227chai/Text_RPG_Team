@@ -17,7 +17,8 @@ namespace Text_RPG_Team
         TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        Portion portion = new Portion();
+        Portion hpportion = new Portion(PortionType.HP);
+        Portion mpportion = new Portion(PortionType.MP);
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
@@ -74,7 +75,8 @@ namespace Text_RPG_Team
                     character.Job = JOB.WARRIOR;
                     character.MaxHealth = 200;
                     character.Health = character.MaxHealth;
-                    character.Mp = 50;
+                    character.MaxMp = 50;
+                    character.Mp = character.MaxMp;
                     character.Attack = 5;
                     character.Defence = 10;
                     character.Speed = 3;
@@ -85,7 +87,8 @@ namespace Text_RPG_Team
                     character.Job = JOB.WIZARD;
                     character.MaxHealth = 100;
                     character.Health = character.MaxHealth;
-                    character.Mp = 200;
+                    character.MaxMp = 200;
+                    character.Mp = character.MaxMp;
                     character.Attack = 10;
                     character.Defence = 5;
                     character.Speed = 2;
@@ -96,7 +99,8 @@ namespace Text_RPG_Team
                     character.Job = JOB.ROGUE;
                     character.MaxHealth = 150;
                     character.Health = character.MaxHealth;
-                    character.Mp = 100;
+                    character.MaxMp = 100;
+                    character.Mp = character.MaxMp;
                     character.Attack = 8;
                     character.Defence = 8;
                     character.Speed = 5;
@@ -115,7 +119,7 @@ namespace Text_RPG_Team
             {
                 case 1:
                     character.Gold = 1500;
-                    portion.StartPortion(3);
+                    hpportion.SetHpPortion(3);
                     break;
                 case 2:
                     SetJob();
@@ -254,7 +258,7 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■회복■");
-            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {portion.myportion})");
+            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {hpportion.HpCount})");
             Console.WriteLine();
             Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
             Console.WriteLine($"현재 체력 : {character.Health}");
@@ -263,13 +267,12 @@ namespace Text_RPG_Team
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
             int act = IsValidInput(1, 0);
-
             switch (act)
             {
                 case 0:
                     break;
                 case 1:
-                    portion.UsePortion(character);
+                    hpportion.UseHpPortion(character);
                     break;
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,101 +10,128 @@ using System.Xml.Linq;
 
 namespace Text_RPG_Team
 {
+    public enum PortionType
+    {
+        HP, MP
+    }
+
     internal class Portion
     {
-<<<<<<< HEAD
-        public enum PortionType
-=======
-        public int myportion =0;
-
-        public Portion()
-        {
-        }
-
-        //초기포션
-        public void StartPortion(int n)
->>>>>>> main
-        {
-            HP, MP
-        }
-
-<<<<<<< HEAD
-        private int amoportion;
-        private int portioncount;
-        private PortionType type;
-        private Portion hpportion;
-        private Portion mpportion;
-
-
-        public int AmoPortion
-=======
-        //포션 생성
-        public void GetPortion(int n)
->>>>>>> main
-        {
-            get { return amoportion; }
-            set { amoportion = value; }
-        }
-
-        public int PortionCount
-        {
-            get { return portioncount; }
-            set { portioncount = value; }
-        }
-
-        public PortionType Type 
-        { 
-            get { return type; }
-            set { type = value; }
-        }
-
-        public Portion HpPortion
-        {
-            get { return hpportion; }
-        }
-
-        public Portion MpPortion
-        {
-            get { return mpportion; }
-        }
+        private PortionType portiontype;
+        private int hpportion;
+        private int mpportion;
 
         //생성자
-        public Portion(PortionType type, int n)
+        public Portion(PortionType type)
         {
-            this.type = type;
-            if (type == PortionType.HP)
+            portiontype = type;
+            if (portiontype == PortionType.HP)
             {
-                HpPortion.portioncount = n;
+                hpportion = 0;
             }
-            else if (type == PortionType.MP)
-            {
-                HpPortion.portioncount = n;
+            else if(portiontype == PortionType.MP)
+            { 
+                mpportion = 0; 
             }
         }
 
-        //포션 갯수 추가, 수정 필요
-        private void GetPortion(PortionType type, int n)
+        //----------------------------------------------------------------------------------------------
+        //변수 반환 함수
+
+        public PortionType Type 
         {
-            PortionCount += n;
-            Type = type;
+            get { return portiontype; }
+            set { portiontype = value; }
         }
 
-        //HP 포션 사용
-        public void UsePortion(Player player)
+        public int HpCount
+        { 
+            get { return hpportion; } 
+            set { hpportion = value; }
+        }
+
+        public int MpCount
         {
-            if( PortionCount <= 0) 
+            get { return mpportion; }
+            set { mpportion = value; }
+        }
+
+        //----------------------------------------------------------------------------------------------
+        //변수 조작 함수
+
+        //포션 갯수 추가
+        public void SetHpPortion(int n)
+        {
+            HpCount += n;
+        }
+        public void SetMpPortion(int n)
+        {
+            MpCount += n;
+        }
+
+        //포션 갯수 가져오기
+        public int GetPortion()
+        {
+            return HpCount;
+        }
+        public int GetMpPortion()
+        {
+            return MpCount;
+        }
+
+        //포션 사용
+        public void UseHpPortion(Player player)
+        {
+            if (HpCount <= 0)
             {
                 Console.WriteLine("포션이 부족합니다.");
             }
             else
             {
-                if (player.MaxHealth - player.Health < 30)
+                if(player.MaxHealth == player.Health)
+                {
+                    Console.WriteLine();
+
+                    Console.WriteLine("최대 체력입니다.");
+                    Console.WriteLine("처음 화면으로 돌아갑니다.");
+                    Thread.Sleep(2000);
+                    return;
+                }
+                else if (player.MaxHealth - player.Health < 30)
                 {
                     player.Health = player.MaxHealth;
                 }
                 else player.Health += 30;
 
-                PortionCount--;
+                HpCount--;
+                Console.WriteLine("회복을 완료했습니다.");
+            }
+        }
+
+        public void UseMpPortion(Player player)
+        {
+            if (player.MaxMp == player.Mp)
+            {
+                Console.WriteLine();
+
+                Console.WriteLine("최대입니다.");
+                Console.WriteLine("처음 화면으로 돌아갑니다.");
+                Thread.Sleep(2000);
+                return;
+            }
+            else if (MpCount <= 0)
+            {
+                Console.WriteLine("포션이 부족합니다.");
+            }
+            else
+            {
+                if (player.MaxMp - player.Mp < 30)
+                {
+                    player.Mp = player.MaxMp;
+                }
+                else player.Mp += 30;
+
+                HpCount--;
                 Console.WriteLine("회복을 완료했습니다.");
             }
         }
