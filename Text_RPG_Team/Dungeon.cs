@@ -130,7 +130,7 @@ namespace Text_RPG_Team
                 turn++;
 
                 //턴 시작 시 마다 스피드 별로 정렬
-                allCharacter = allCharacter.OrderByDescending(x => x.SetSpeed()).ToArray();
+                allCharacter = allCharacter.OrderByDescending(x => x.Ran_Speed()).ToArray();
 
                 Console.Clear();
                 Console.WriteLine("Battle!!");
@@ -360,11 +360,18 @@ namespace Text_RPG_Team
             Console.WriteLine($"MP {player.Mp}");
             Console.WriteLine();
             index = 1;
-            for (int i = 0; i < Skill.SkillCnt; i++)
+            //for (int i = 0; i < Skill.SkillCnt; i++)
+            //{
+            //    Console.Write(index);
+            //    Console.WriteLine(". " + Skill._skills[i].Name + " - MP " + Skill._skills[i].MP);
+            //    Console.WriteLine("   " + Skill._skills[i].Description);
+            //    index++;
+            //}
+            foreach(Skill skill in player.getSkillList)
             {
                 Console.Write(index);
-                Console.WriteLine(". " + Skill._skills[i].Name + " - MP " + Skill._skills[i].MP);
-                Console.WriteLine("   " + Skill._skills[i].Description);
+                Console.WriteLine(". " + skill.Name + " - MP " + skill.MP);
+                Console.WriteLine("   " + skill.Description);
                 index++;
             }
             Console.WriteLine("0. 취소");
@@ -452,6 +459,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        //몬스터 행동 턴
         private void EnemyTurn(Monster character)
         {
             Console.Clear();
@@ -469,8 +477,10 @@ namespace Text_RPG_Team
                 useSkill = 0;
             }
 
+            //보스몹일 때
             if (character.Type == MonsterType.BOSS_HERAID)
             {
+                //스킬 사용 확률 40%
                 if (useSkill >= 6)
                 {
                     MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
@@ -483,8 +493,10 @@ namespace Text_RPG_Team
             }
             else
             {
+                //보스몹이 아닐 땐 스킬 사용 확률 10%
                 if (useSkill == 1)
                 {
+                    //스킬 리스트에서 스킬 하나를 무작위로 빼옴
                     MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
                     SkillAttack(character, player, skill);
                 }
@@ -513,7 +525,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
 
-            int damage = (int)((float)attacker.Damage_check(attacker.Attack) * skill.Coefficient) - victim.Defence;
+            int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - victim.Total_Defence;
             if (damage < 0)
             {
                 damage = 0;
@@ -544,26 +556,25 @@ namespace Text_RPG_Team
                 Console.WriteLine($"HP {health} -> {victim.Health}");
             }
 
-            return;
         }
 
 
         //---------------------------------------------------------------------------------------------------------------
-
+        //캐릭터 공격 함수
         private void Attack(ICharacter attacker, ICharacter victim)
         {
-            int miss = random.Next(1, 10);
-            int critical = random.Next(1, 100);
+            int miss = random.Next(0, 10);
+            int critical = random.Next(0, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
 
-            int damage = attacker.Damage_check(attacker.Attack) - victim.Defence;
+            int damage = attacker.Ran_Attack() - victim.Total_Defence;
             if (damage < 0)
             {
                 damage = 0;
             }
 
-            if (miss <= 1)
+            if (miss == 0)
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
                 damage = 0;
@@ -597,7 +608,6 @@ namespace Text_RPG_Team
                 Console.WriteLine($"HP {health} -> {victim.Health}");
             }
 
-            return;
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -649,7 +659,7 @@ namespace Text_RPG_Team
         //중복 이름 체크
         private void CheckName(List<Monster> monsterList)
         {
-            var list = monsterList.GroupBy(x => x.Name).Where(g => g.Count() > 0).Select(x => x.Key).ToList();
+            var list = monsterList.GroupBy(x => x.Name).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
 
             foreach(string m in list)
             {
@@ -664,5 +674,13 @@ namespace Text_RPG_Team
                 }
             }
         }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //던전 초기화
+        public void ResetDungeon()
+        {
+            stage = 1;
+        }
+
     }
 }

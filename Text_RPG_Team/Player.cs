@@ -18,6 +18,8 @@ namespace Text_RPG_Team
     {
         private Random random = new Random();
 
+        private List<Skill> skillList;
+
         string name;
         JOB job;
 
@@ -33,12 +35,38 @@ namespace Text_RPG_Team
         int mp;
         int gold;
         int speed;
+        int plusSpeed;
         int levelexp;
         int[] levelup = new int[2];
 
         CHAR_TAG tag;
 
         bool isdead;
+
+        public Player(string name, JOB job, int maxHealth, int mp, int attack, int defence, int speed)
+        {
+            this.name = name;
+            this.job = job;
+            this.level = 1;
+            this.attack = attack;
+            plusattack = 0;
+            checkattack = false;
+            this.defence = defence;
+            plusdefence = 0;
+            checkdefence = false;
+            this.maxhealth = maxHealth;
+            this.health = this.maxhealth;
+            this.mp = mp;
+            this.speed = speed;
+            plusSpeed = 0;
+            levelexp = 0;
+            levelup[0] = 10;
+            levelup[1] = 25;
+            tag = CHAR_TAG.PLAYER;
+            isdead = false;
+
+            skillList = new List<Skill>();
+        }
 
         public Player()
         {
@@ -55,12 +83,15 @@ namespace Text_RPG_Team
             maxhealth = MaxHealth;
             mp = Mp;
             speed = Speed;
+            plusSpeed = 0;
             gold = Gold;
             levelexp = 0;
             levelup[0] = 10;
             levelup[1] = 25;
             tag = CHAR_TAG.PLAYER;
             isdead = false;
+
+            skillList = new List<Skill>();
         }
 
         //----------------------------------------------------------------------------------------------
@@ -144,6 +175,11 @@ namespace Text_RPG_Team
             set { plusattack = value; }
         }
 
+        public int Total_Attack
+        {
+            get { return Attack + PlusAttack; }
+        }
+
         public bool CheckAttack
         {
             get { return checkattack; }
@@ -166,6 +202,12 @@ namespace Text_RPG_Team
         {
             get { return plusdefence; }
             set { plusdefence = value; }
+        }
+
+        //캐릭터 총 방어력
+        public int Total_Defence
+        {
+            get { return Defence + PlusDefence; }
         }
 
         public bool CheckDefence
@@ -200,6 +242,22 @@ namespace Text_RPG_Team
             set { speed = value; }
         }
 
+        public int PlusSpeed
+        {
+            get { return plusSpeed; }
+            set { plusSpeed = value; }
+        }
+
+        public int Total_Speed
+        {
+            get { return speed + plusSpeed; }
+        }
+
+        public List<Skill> getSkillList
+        {
+            get { return skillList; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
 
@@ -217,7 +275,9 @@ namespace Text_RPG_Team
         //레벨 업
         public void LevelUp(int exp)
         {
-            int prev_level = level;
+            int pre_level = level;
+            int pre_attack = Attack;
+            int pre_defence = Defence;
             levelexp += exp;
             if(levelexp >= levelup[0])
             {
@@ -230,25 +290,51 @@ namespace Text_RPG_Team
                 Console.WriteLine();
                 Console.WriteLine("Level UP");
                 Console.WriteLine();
-                Console.WriteLine($"Lv. {prev_level} -> Lv. {Level}");
+                Console.WriteLine($"Lv. {pre_level} -> Lv. {Level}");
+                Console.WriteLine($"ATK {pre_attack} -> ATK {Attack}");
+                Console.WriteLine($"DEF {pre_defence} -> DEF {Defence}");
                 Console.WriteLine($"Lv.{Level} {Name}");
                 
             }
         }
 
         //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
-        public int SetSpeed()
+        public int Ran_Speed()
         {
-            int span = (int)Math.Ceiling((float)speed * 0.2f);
-            int ran_speed = random.Next(speed - span, speed + span + 1);
+            int span = (int)Math.Ceiling((float)Total_Speed * 0.2f);
+            int ran_speed = random.Next(Total_Speed - span, Total_Speed + span + 1);
             return ran_speed;
         }
 
-        public int Damage_check(int attack)
+        //실 적용 공격력 (공격력 오차값 10% 소수값 올림)
+        public int Ran_Attack()
         {
-            int damage_range = (int)Math.Ceiling((float)attack * 0.1);
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            int damage_range = (int)Math.Ceiling((float)Total_Attack * 0.1);
+            int damage = random.Next(Total_Attack - damage_range, Total_Attack + damage_range + 1);
             return damage;
         }
+
+
+        //---------------------------------------------------------------------------------------------------------------
+        //스킬 부여 함수
+        public void UseSkill()
+        {
+            switch (this.job)
+            {
+                case JOB.WARRIOR:
+                    skillList.Add(new Skill("파워 스트라이크", "한 명의 적에게 강한 데미지를 가합니다.", 5, 3, 1));
+                    skillList.Add(new Skill("슬래시 블러스트", "모든 적에게 데미지를 가합니다.", 10, 2, 2));
+                    break;
+                case JOB.WIZARD:
+                    skillList.Add(new Skill("에너지 볼트", "한 명의 적에게 데미지를 입힙니다.", 20, 2, 1));
+                    skillList.Add(new Skill("메테오 스트라이크", "모든 적에게 강력한 데미지를 입힙니다.", 100, 5, 2));
+                    break;
+                case JOB.ROGUE:
+                    skillList.Add(new Skill("부식", "한 명의 적에게 데미지를 줍니다.", 10, 2, 1));
+                    skillList.Add(new Skill("암살", "한 명의 적에게 치명적인 데미지를 줍니다.", 100, 10, 1));
+                    break;
+            }
+        }
+
     }
 }
