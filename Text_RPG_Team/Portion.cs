@@ -11,11 +11,23 @@ namespace Text_RPG_Team
 {
     internal class Portion
     {
+<<<<<<< HEAD
         public enum PortionType
+=======
+        public int myportion =0;
+
+        public Portion()
+        {
+        }
+
+        //초기포션
+        public void StartPortion(int n)
+>>>>>>> main
         {
             HP, MP
         }
 
+<<<<<<< HEAD
         private int amoportion;
         private int portioncount;
         private PortionType type;
@@ -24,6 +36,10 @@ namespace Text_RPG_Team
 
 
         public int AmoPortion
+=======
+        //포션 생성
+        public void GetPortion(int n)
+>>>>>>> main
         {
             get { return amoportion; }
             set { amoportion = value; }

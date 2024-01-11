@@ -55,7 +55,7 @@ namespace Text_RPG_Team
             maxhealth = MaxHealth;
             mp = Mp;
             speed = Speed;
-            gold = 1500;
+            gold = Gold;
             levelexp = 0;
             levelup[0] = 10;
             levelup[1] = 25;
@@ -242,6 +242,13 @@ namespace Text_RPG_Team
             int span = (int)Math.Ceiling((float)speed * 0.2f);
             int ran_speed = random.Next(speed - span, speed + span + 1);
             return ran_speed;
+        }
+
+        public int Damage_check(int attack)
+        {
+            int damage_range = (int)Math.Ceiling((float)attack * 0.1);
+            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            return damage;
         }
     }
 }
