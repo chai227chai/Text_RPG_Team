@@ -150,5 +150,12 @@ namespace Text_RPG_Team
             int ran_speed = random.Next(speed - span, speed + span + 1);
             return ran_speed;
         }
+
+        public int Damage_check(int attack)
+        {
+            int damage_range = (int)Math.Ceiling((float)attack * 0.1);
+            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            return damage;
+        }
     }
 }

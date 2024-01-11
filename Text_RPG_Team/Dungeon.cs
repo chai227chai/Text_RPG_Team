@@ -455,7 +455,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
 
-            int damage = Damage_check(attacker.Attack) - victim.Defence;
+            int damage = attacker.Damage_check(attacker.Attack) - victim.Defence;
             if (damage < 0)
             {
                 damage = 0;

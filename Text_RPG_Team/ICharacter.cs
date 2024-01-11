@@ -28,5 +28,7 @@ namespace Text_RPG_Team
         void TakeDamage(int damage);
 
         int SetSpeed();
+
+        int Damage_check(int attack);
     }
 }
