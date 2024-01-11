@@ -44,20 +44,21 @@ namespace Text_RPG_Team
 
         bool isdead;
 
-        public Player(string name, JOB job, int maxHealth, int mp, int attack, int defence, int speed)
+        public Player(string name, JOB job, int maxHealth, int maxMp, int attack, int defence, int speed)
         {
             this.name = name;
             this.job = job;
-            this.level = 1;
+            level = 1;
             this.attack = attack;
             plusattack = 0;
             checkattack = false;
             this.defence = defence;
             plusdefence = 0;
             checkdefence = false;
-            this.maxhealth = maxHealth;
-            this.health = this.maxhealth;
-            this.mp = mp;
+            maxhealth = maxHealth;
+            health = maxhealth;
+            maxmp = maxMp;
+            mp = maxmp;
             this.speed = speed;
             plusSpeed = 0;
             levelexp = 0;

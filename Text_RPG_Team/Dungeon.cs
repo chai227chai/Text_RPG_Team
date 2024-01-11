@@ -217,6 +217,7 @@ namespace Text_RPG_Team
 
                 Console.WriteLine($"던전에서 몬스터 {battle_monster.Count}마리를 잡았습니다.");
 
+                Console.WriteLine();
                 Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
@@ -252,22 +253,23 @@ namespace Text_RPG_Team
             int rewardGold = 0;
             int rewardHpPotion = 0;
             int rewardMpPotion = 0;
-            int i = random.Next(1, 5);
             foreach(Monster mon in battle_monster)
             {
+                int i = random.Next(1, 5);
                 rewardGold = 300 * mon.Level;
-                if(i <= 2)
-                {
-                    rewardHpPotion += 1;
-                }
-                else if (i <= 3)
+                if(i <= 1)
                 {
                     rewardMpPotion += 1;
+                }
+                else if (1 < i && i <= 3)
+                {
+                    rewardHpPotion += 1;
                 }
             }
             player.Gold += rewardGold;
             HPportion.SetPortion(rewardHpPotion);
             MPportion.SetPortion(rewardMpPotion);
+            Console.WriteLine();
             Console.WriteLine("[획득 아이템]");
             Console.WriteLine($"{rewardGold} Gold");
             if(rewardHpPotion >= 1)
@@ -279,6 +281,25 @@ namespace Text_RPG_Team
                 Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
             }
         }
+
+        //포션 보상 적용
+        public void PlusPortion(Portion portion)
+        {
+            if(portion.Type == PortionType.HP)
+            {
+                portion.SetPortion(HPportion.Count);
+                HPportion.Count = 0;
+            }
+            else if (portion.Type == PortionType.MP)
+            {
+                portion.SetPortion(MPportion.Count);
+                MPportion.Count = 0;
+            }
+        }
+
+
+
+
         //---------------------------------------------------------------------------------------------------------------
         //플레이어 행동 턴
         private void PlayerTurn()
