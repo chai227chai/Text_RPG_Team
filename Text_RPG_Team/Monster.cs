@@ -7,6 +7,11 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Text_RPG_Team
 {
+    public enum MonsterType
+    {
+        NIMION, ELITE_MINION, ELITE_WOLF, ELITE_BIRD, ELITE_FROG, BOSS_HERAID
+    }
+
     internal class Monster : ICharacter
     {
         private Random random = new Random();
@@ -21,10 +26,11 @@ namespace Text_RPG_Team
         int drop_exp;// 몬스터가 제공하는 경험치
 
         CHAR_TAG tag;
+        MonsterType type;
 
         bool isdead;
 
-        public Monster(string name, int level, int health, int attack, int defence, int speed) 
+        public Monster(string name, int level, int health, int attack, int defence, int speed, MonsterType type) 
         {
             this.name = name;
             this.level = level;
@@ -33,7 +39,10 @@ namespace Text_RPG_Team
             this.speed = speed;
             this.defence = defence;
             this.drop_exp = this.level;//경험치 = 몬스터의 레벨 1당 1의 경험치
+
             tag = CHAR_TAG.MONSTER;
+            this.type = type;
+
             isdead = false;
         }
 
@@ -46,7 +55,10 @@ namespace Text_RPG_Team
             this.defence = dupplicate.defence;
             this.speed = dupplicate.speed;
             this.drop_exp = dupplicate.drop_exp;
+
             tag = dupplicate.tag;
+            this.type = dupplicate.type;
+
             isdead = dupplicate.isdead;
         }
 
@@ -129,6 +141,12 @@ namespace Text_RPG_Team
             get { return tag; }
         }
 
+        //몬스터 종류
+        public MonsterType Type
+        {
+            get { return type; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
 
@@ -149,6 +167,13 @@ namespace Text_RPG_Team
             int span = (int)Math.Ceiling((float)speed * 0.2f);
             int ran_speed = random.Next(speed - span, speed + span + 1);
             return ran_speed;
+        }
+
+        public int Damage_check(int attack)
+        {
+            int damage_range = (int)Math.Ceiling((float)attack * 0.1);
+            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            return damage;
         }
     }
 }

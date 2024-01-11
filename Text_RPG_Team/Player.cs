@@ -23,8 +23,13 @@ namespace Text_RPG_Team
 
         int level;
         int attack;
+        int plusattack;
+        bool checkattack;
         int defence;
+        int plusdefence;
+        bool checkdefence;
         int health;
+        int maxhealth;
         int mp;
         int gold;
         int speed;
@@ -41,11 +46,16 @@ namespace Text_RPG_Team
             job = Job;
             level = 1;
             attack = Attack;
+            plusattack = 0;
+            checkattack = false;
             defence = Defence;
+            plusdefence = 0;
+            checkdefence = false;
             health = Health;
+            maxhealth = MaxHealth;
             mp = Mp;
             speed = Speed;
-            gold = 1500;
+            gold = Gold;
             levelexp = 0;
             levelup[0] = 10;
             levelup[1] = 25;
@@ -103,7 +113,13 @@ namespace Text_RPG_Team
             get { return health; }
             set { health = value; }
         }
-        
+
+        public int MaxHealth
+        {
+            get { return maxhealth; }
+            set { maxhealth = value; }
+        }
+
         //캐릭터 마나
         public int Mp
         {
@@ -122,6 +138,19 @@ namespace Text_RPG_Team
             set { attack = value; }
         }
 
+        //캐릭터 추가 공격력
+        public int PlusAttack
+        {
+            get { return plusattack; }
+            set { plusattack = value; }
+        }
+
+        public bool CheckAttack
+        {
+            get { return checkattack; }
+            set { checkattack = value; }
+        }
+
         //캐릭터 방어력
         public int Defence
         {
@@ -131,6 +160,19 @@ namespace Text_RPG_Team
                 return now_defence; 
             }
             set { defence = value; }
+        }
+
+        //캐릭터 추가 방어력
+        public int PlusDefence
+        {
+            get { return plusdefence; }
+            set { plusdefence = value; }
+        }
+
+        public bool CheckDefence
+        {
+            get { return checkdefence; }
+            set { checkdefence = value; }
         }
 
         //보유 골드
@@ -201,6 +243,13 @@ namespace Text_RPG_Team
             int span = (int)Math.Ceiling((float)speed * 0.2f);
             int ran_speed = random.Next(speed - span, speed + span + 1);
             return ran_speed;
+        }
+
+        public int Damage_check(int attack)
+        {
+            int damage_range = (int)Math.Ceiling((float)attack * 0.1);
+            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            return damage;
         }
     }
 }

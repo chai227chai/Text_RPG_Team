@@ -11,15 +11,20 @@ namespace Text_RPG_Team
 {
     internal class Portion
     {
-        public int myportion;
+        public int myportion =0;
 
-        public Portion(int n)
+        public Portion()
+        {
+        }
+
+        //초기포션
+        public void StartPortion(int n)
         {
             myportion = n;
         }
 
         //포션 생성
-        private void GetPortion(int n)
+        public void GetPortion(int n)
         {
             myportion += n;
         }
@@ -33,9 +38,9 @@ namespace Text_RPG_Team
             }
             else
             {
-                if (player.Health > 70)
+                if (player.MaxHealth - player.Health < 30)
                 {
-                    player.Health = 100;
+                    player.Health = player.MaxHealth;
                 }
                 else player.Health += 30;
 
