@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,6 @@ namespace Text_RPG_Team
 {
     internal class Dungeon
     {
-        enum ClassMp
-        {
-            Worrior = 50,
-            Mage = 200,
-            Rogue = 100
-        }
-
         private Random random = new Random();
 
         Player? player;
@@ -57,7 +51,7 @@ namespace Text_RPG_Team
             {
                 number = random.Next(stage, stage + 1);
             }
-            else if(stage >= 5 && stage < 9)
+            else if(stage >= 5 && stage <= 9)
             {
                 number = random.Next(3, 6);
             }
@@ -216,6 +210,7 @@ namespace Text_RPG_Team
                 Console.WriteLine();
 
                 Console.WriteLine($"던전에서 몬스터 {battle_monster.Count}마리를 잡았습니다.");
+                Console.WriteLine();
 
                 Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
@@ -226,8 +221,10 @@ namespace Text_RPG_Team
                 Console.WriteLine($"MP {player_mp} -> {currentMp}");
                 Console.WriteLine($"MP 회복(10) -> {player.Mp}");
 
+                Console.WriteLine();
                 Rewards();
 
+                Console.WriteLine();
                 player.LevelUp(stage_exp);
 
                 Console.WriteLine();
@@ -326,7 +323,6 @@ namespace Text_RPG_Team
                 {
                     //다시 되돌아 옴
                     PlayerTurn();
-                    return;
                 }
                 else
                 {
@@ -342,7 +338,6 @@ namespace Text_RPG_Team
             else if (act == 2)
             {
                 PlayerSkillTurn();
-                return;
             }
         }
         //---------------------------------------------------------------------------------------------------
@@ -372,14 +367,8 @@ namespace Text_RPG_Team
             Console.WriteLine($"HP {player.Health}");
             Console.WriteLine($"MP {player.Mp}");
             Console.WriteLine();
+
             index = 1;
-            //for (int i = 0; i < Skill.SkillCnt; i++)
-            //{
-            //    Console.Write(index);
-            //    Console.WriteLine(". " + Skill._skills[i].Name + " - MP " + Skill._skills[i].MP);
-            //    Console.WriteLine("   " + Skill._skills[i].Description);
-            //    index++;
-            //}
             foreach(Skill skill in player.getSkillList)
             {
                 Console.Write(index);
@@ -387,54 +376,59 @@ namespace Text_RPG_Team
                 Console.WriteLine("   " + skill.Description);
                 index++;
             }
+            Console.WriteLine();
             Console.WriteLine("0. 취소");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            int act = IsValidInput(index - 1, 0);
 
-            if (act != 0)
+            int act;
+            while (true)
             {
-                UseSkill(act);
+                act = IsValidInput(index - 1, 0);
+
+                //나가기
+                if (act == 0)
+                {
+                    break;
+                }
+                else if (act < index && act > 0)
+                {
+                    //마나가 부족한지 확인
+                    if (player.Mp >= player.getSkillList[act-1].MP)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("마나가 부족합니다.");
+                    }
+
+                }
             }
-            else 
-            {
-                PlayerTurn();
-            }
+
+            UseSkill(act);
         }
 
         //------------------------------------------------------------------------------------------------------
         //스킬 선택
         private void UseSkill(int act)
         {
-            //마나 부족한지 확인
-            if (player.Mp >= Skill._skills[act - 1].MP)
+            if(act == 0)
             {
-                //마나 소모
-                player.Mp -= Skill._skills[act - 1].MP;
-            }
-            else
-            {
-                Console.WriteLine("마나가 부족합니다.");
-                Thread.Sleep(1000);
                 PlayerSkillTurn();
             }
 
             //단일 타겟 스킬인 경우
-            if (Skill._skills[act - 1].Range == 1) 
+            if (player.getSkillList[act - 1].Range == 1) 
             {
-                //스킬 넘버 부여
-                Skill.SkillNum = act;
 
                 //공격 행동 선택 시 타겟을 선택
-                act = SelectTarget();
+                int target = SelectTarget();
 
                 //아무것도 선택하지 않았을 때
-                if (act == 0)
+                if (target == 0)
                 {
-                    //마나 돌려줌
-                    player.Mp += Skill._skills[act - 1].MP;
-
                     //다시 되돌아 옴
                     PlayerSkillTurn();
                 }
@@ -442,126 +436,31 @@ namespace Text_RPG_Team
                 {
                     //대상을 선택했다면, 스킬 공격
                     Console.Clear();
-                    SkillRange1(player, battle_monster[act - 1], Skill.SkillNum);
+                    SkillAttackOne(player, battle_monster[target - 1], player.getSkillList[act - 1]);
+                    player.Mp -= player.getSkillList[act - 1].MP;
                 }
+
                 Console.WriteLine();
-                Console.WriteLine("0. 다음");
-
-                int act2 = IsValidInput(0, 0);
-
-                if (act2 == 0)
-                {
-                    return;
-                }
+                Console.WriteLine(">> 다음");
+                Console.ReadKey();
             }
+            //무작위 타겟 스킬인 경우
+            else if (player.getSkillList[act - 1].Range > 1)
+            {
+                SkillAttackRandom(player, player.getSkillList[act - 1]);
 
+                Console.WriteLine();
+                Console.WriteLine(">> 다음");
+                Console.ReadKey();
+            }
             //전체 타겟 스킬인 경우
-            else if (Skill._skills[act-1].Range == 2)
+            else if (player.getSkillList[act - 1].Range == 0)
             {
-                int miss = random.Next(1, 10);
-                int critical = random.Next(1, 100);
-                Console.Clear();
-                Console.WriteLine($"{player.Name} 의 공격!");
+                SkillAttackAll(player, player.getSkillList[act - 1]);
+
                 Console.WriteLine();
-
-                foreach (Monster mon in battle_monster)
-                {
-                    int damage = Damage_check(player.Attack * Skill._skills[act - 1].Coefficient) - mon.Defence;
-                    if (damage < 0)
-                    {
-                        damage = 0;
-                    }
-
-                    if (miss <= 1)
-                    {
-                        Console.WriteLine($"{mon.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
-                        damage = 0;
-                        return;
-                    }
-                    else
-                    {
-                        if (critical <= 15)
-                        {
-                            damage = (int)Math.Ceiling((float)damage * 1.6);
-                            Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
-                        }
-                    }
-
-                    int health = mon.Health;
-                    mon.TakeDamage(damage);
-
-                    Console.WriteLine($"Lv.{mon.Level} {mon.Name}");
-                    if (mon.IsDead)
-                    {
-                        Console.WriteLine($"HP {health} -> dead");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"HP {health} -> {mon.Health}");
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine("0. 다음");
-
-                int act2 = IsValidInput(0, 0);
-
-                if (act2 == 0)
-                {
-                    return;
-                }
-            }
-        }
-
-        // 스킬 범위 1인 경우
-        private void SkillRange1(ICharacter attacker, ICharacter victim, int skillNum)
-        {
-            int miss = random.Next(1, 10);
-            int critical = random.Next(1, 100);
-            Console.WriteLine();
-            Console.WriteLine($"{attacker.Name} 의 공격!");
-
-            int damage = Damage_check(attacker.Attack * Skill._skills[skillNum].Coefficient) - victim.Defence;
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-
-            if (miss <= 1)
-            {
-                Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
-                damage = 0;
-                return;
-            }
-            else
-            {
-                if (critical <= 15)
-                {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
-                    Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
-                }
-                else
-                {
-                    Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
-                }
-            }
-
-            Console.WriteLine();
-
-            int health = victim.Health;
-            victim.TakeDamage(damage);
-
-            Console.WriteLine($"Lv.{victim.Level} {victim.Name}");
-            if (victim.IsDead)
-            {
-                Console.WriteLine($"HP {health} -> dead");
-            }
-            else
-            {
-                Console.WriteLine($"HP {health} -> {victim.Health}");
+                Console.WriteLine(">> 다음");
+                Console.ReadKey();
             }
         }
 
@@ -627,64 +526,11 @@ namespace Text_RPG_Team
 
         }
 
-        //---------------------------------------------------------------------------------------------------------------
-        //몬스터 행동 턴
-        private void EnemyTurn(Monster character)
-        {
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine($"{character.Name} 이(가) 행동합니다.");
-            Thread.Sleep(500);
-
-            int useSkill;
-            if(monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
-            {
-                useSkill = random.Next(1, 11);
-            }
-            else
-            {
-                useSkill = 0;
-            }
-
-            //보스몹일 때
-            if (character.Type == MonsterType.BOSS_HERAID)
-            {
-                //스킬 사용 확률 40%
-                if (useSkill >= 6)
-                {
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
-                    SkillAttack(character, player, skill);
-                }
-                else
-                {
-                    Attack(character, player);
-                }
-            }
-            else
-            {
-                //보스몹이 아닐 땐 스킬 사용 확률 10%
-                if (useSkill == 1)
-                {
-                    //스킬 리스트에서 스킬 하나를 무작위로 빼옴
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
-                    SkillAttack(character, player, skill);
-                }
-                else
-                {
-                    Attack(character, player);
-                }
-            }
- 
-            Console.WriteLine();
-            Console.WriteLine(">> 다음");
-            Console.ReadKey();
-        }
 
         //---------------------------------------------------------------------------------------------------------------
-        //몬스터 스킬 사용
-        private void SkillAttack(ICharacter attacker, ICharacter victim, MonsterSkill skill)
+        //스킬 범위 1인 경우
+        private void SkillAttackOne(ICharacter attacker, ICharacter victim, ISkill skill)
         {
-            int critical = random.Next(1, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
 
@@ -693,6 +539,8 @@ namespace Text_RPG_Team
             {
                 damage = 0;
             }
+
+            int critical = random.Next(1, 100);
 
             if (critical <= 15)
             {
@@ -718,12 +566,105 @@ namespace Text_RPG_Team
             {
                 Console.WriteLine($"HP {health} -> {victim.Health}");
             }
+        }
 
+        //---------------------------------------------------------------------------------------------------------------
+        //스킬 범위 무작위인 경우
+        public void SkillAttackRandom(Player attacker, Skill skill)
+        {
+            List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => random.Next()).Take(skill.Range).ToList();
+            player.Mp -= skill.MP;
+
+            Console.Clear();
+            Console.WriteLine($"{attacker.Name} 의 공격!");
+            Console.WriteLine();
+
+            foreach (Monster mon in victim)
+            {
+                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                if (damage < 0)
+                {
+                    damage = 0;
+                }
+
+                int critical = random.Next(1, 100);
+
+                if (critical <= 15)
+                {
+                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
+                }
+                else
+                {
+                    Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
+                }
+
+
+                int health = mon.Health;
+                mon.TakeDamage(damage);
+
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}");
+                if (mon.IsDead)
+                {
+                    Console.WriteLine($"HP {health} -> dead");
+                }
+                else
+                {
+                    Console.WriteLine($"HP {health} -> {mon.Health}");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //스킬 범위 전체인 경우
+        public void SkillAttackAll(Player attacker, Skill skill)
+        {
+            player.Mp -= skill.MP;
+
+            int critical = random.Next(1, 100);
+            Console.Clear();
+            Console.WriteLine($"{attacker.Name} 의 공격!");
+            Console.WriteLine();
+
+            foreach (Monster mon in battle_monster.FindAll(x => !x.IsDead))
+            {
+                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                if (damage < 0)
+                {
+                    damage = 0;
+                }
+
+                if (critical <= 15)
+                {
+                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
+                }
+                else
+                {
+                    Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
+                }
+
+
+                int health = mon.Health;
+                mon.TakeDamage(damage);
+
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}");
+                if (mon.IsDead)
+                {
+                    Console.WriteLine($"HP {health} -> dead");
+                }
+                else
+                {
+                    Console.WriteLine($"HP {health} -> {mon.Health}");
+                }
+                Console.WriteLine();
+            }
         }
 
 
         //---------------------------------------------------------------------------------------------------------------
-        //캐릭터 공격 함수
+        //캐릭터 일반 공격 함수
         private void Attack(ICharacter attacker, ICharacter victim)
         {
             int miss = random.Next(0, 10);
@@ -774,11 +715,56 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        private int Damage_check(int attack)
+        //몬스터 행동 턴
+        private void EnemyTurn(Monster character)
         {
-            int damage_range = (int)Math.Ceiling((float)attack * 0.1) ;
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1) ;
-            return damage;
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine($"{character.Name} 이(가) 행동합니다.");
+            Thread.Sleep(500);
+
+            int useSkill;
+            if (monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
+            {
+                useSkill = random.Next(1, 11);
+            }
+            else
+            {
+                useSkill = 0;
+            }
+
+            //보스몹일 때
+            if (character.Type == MonsterType.BOSS_HERAID)
+            {
+                //스킬 사용 확률 40%
+                if (useSkill >= 6)
+                {
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    SkillAttackOne(character, player, skill);
+                }
+                else
+                {
+                    Attack(character, player);
+                }
+            }
+            else
+            {
+                //보스몹이 아닐 땐 스킬 사용 확률 10%
+                if (useSkill == 1)
+                {
+                    //스킬 리스트에서 스킬 하나를 무작위로 빼옴
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    SkillAttackOne(character, player, skill);
+                }
+                else
+                {
+                    Attack(character, player);
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine(">> 다음");
+            Console.ReadKey();
         }
 
         //---------------------------------------------------------------------------------------------------------------

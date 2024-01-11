@@ -49,6 +49,10 @@ namespace Text_RPG_Team
             AddItem("5", ItemType.WEAPON, "스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다. ", 3000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 7 } }));
 
             AddItem("6", ItemType.WEAPON, "강철 톤파", "공방 양면으로 우수한 무기입니다. ", 1500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 3 }, { SpecType.DEFEND, 5 } }));
+
+            AddItem("7", ItemType.SHOES, "운동화", "평범한 신발입니다. ", 800, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 1 } }));
+
+            AddItem("8", ItemType.SHOES, "블레이드 부츠", "칼날이 달려 날카로운 신발입니다. ", 1200, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 1 }, { SpecType.ATTACK, 2 } }));
         }
 
         //아이템 리스트에서 아이템 하나 가져오기

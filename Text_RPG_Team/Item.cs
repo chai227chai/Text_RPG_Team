@@ -8,7 +8,7 @@ namespace Text_RPG_Team
 {
     public enum ItemType
     {
-        WEAPON, ARMOR
+        WEAPON, ARMOR, SHOES
     }
 
     internal class Item
@@ -112,6 +112,8 @@ namespace Text_RPG_Team
                         return "갑옷";
                     case ItemType.WEAPON:
                         return "무기";
+                    case ItemType.SHOES:
+                        return "신발";
                 }
                 return "";
             }
