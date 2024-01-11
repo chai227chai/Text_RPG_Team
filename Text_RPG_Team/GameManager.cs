@@ -74,6 +74,7 @@ namespace Text_RPG_Team
                 case 1:
                     character.Job = JOB.WARRIOR;
                     character.MaxHealth = 200;
+                    character.Health = character.MaxHealth;
                     character.Mp = 50;
                     character.Attack = 5;
                     character.Defence = 10;
@@ -84,6 +85,7 @@ namespace Text_RPG_Team
                 case 2:
                     character.Job = JOB.WIZARD;
                     character.MaxHealth = 100;
+                    character.Health = character.MaxHealth;
                     character.Mp = 200;
                     character.Attack = 10;
                     character.Defence = 5;
@@ -94,6 +96,7 @@ namespace Text_RPG_Team
                 case 3:
                     character.Job = JOB.ROGUE;
                     character.MaxHealth = 150;
+                    character.Health = character.MaxHealth;
                     character.Mp = 100;
                     character.Attack = 8;
                     character.Defence = 8;
@@ -251,6 +254,9 @@ namespace Text_RPG_Team
             Console.Clear();
             Console.WriteLine("■회복■");
             Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다. (남은 포션 : {portion.myportion})");
+            Console.WriteLine();
+            Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
+            Console.WriteLine($"현재 체력 : {character.Health}");
             Console.WriteLine();
             Console.WriteLine("1. 사용하기");
             Console.WriteLine("0. 나가기");

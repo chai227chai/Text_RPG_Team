@@ -51,7 +51,8 @@ namespace Text_RPG_Team
             defence = Defence;
             plusdefence = 0;
             checkdefence = false;
-            health = MaxHealth;
+            health = Health;
+            maxhealth = MaxHealth;
             mp = Mp;
             speed = Speed;
             gold = 1500;
