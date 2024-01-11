@@ -17,11 +17,10 @@ namespace Text_RPG_Team
         TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        Portion portion = new Portion(3);
+        Portion portion = new Portion();
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
-
         public GameManager()
         {
             FirstScreen();
@@ -112,6 +111,8 @@ namespace Text_RPG_Team
             switch (choose)
             {
                 case 1:
+                    character.Gold = 1500;
+                    portion.StartPortion(3);
                     break;
                 case 2:
                     SetJob();

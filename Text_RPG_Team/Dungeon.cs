@@ -13,6 +13,7 @@ namespace Text_RPG_Team
 
         Player? player;
         MonsterList? monsterList;
+        Portion portion = new Portion();
 
         List<ICharacter>? battle_monster;
         ICharacter[]? allCharacter;
@@ -211,8 +212,11 @@ namespace Text_RPG_Team
 
                 Console.WriteLine($"던전에서 몬스터 {battle_monster.Count}마리를 잡았습니다.");
 
+                Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
+
+                Rewards();
 
                 player.LevelUp(stage_exp);
 
@@ -231,7 +235,30 @@ namespace Text_RPG_Team
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------
+        //몬스터 보상계산
+        private void Rewards()
+        {
+            int rewardGold = 0;
+            int rewardPotion = 0;
+            int i = random.Next(1, 5);
+            foreach(Monster mon in battle_monster)
+            {
+                rewardGold = 300 * mon.Level;
+                if(i <= 2)
+                {
+                    rewardPotion += 1;
+                }
+            }
+            player.Gold += rewardGold;
+            portion.GetPortion(rewardPotion);
+            Console.WriteLine("[획득 아이템]");
+            Console.WriteLine($"{rewardGold} Gold");
+            if(rewardPotion >= 1)
+            {
+                Console.WriteLine($"포션 - {rewardPotion}");
+            }
+        }
         //---------------------------------------------------------------------------------------------------------------
         //플레이어 행동 턴
         private void PlayerTurn()

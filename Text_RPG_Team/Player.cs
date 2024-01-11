@@ -45,7 +45,7 @@ namespace Text_RPG_Team
             health = Health;
             mp = Mp;
             speed = Speed;
-            gold = 1500;
+            gold = Gold;
             levelexp = 0;
             levelup[0] = 10;
             levelup[1] = 25;
