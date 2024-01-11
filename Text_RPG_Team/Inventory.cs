@@ -35,7 +35,7 @@ namespace Text_RPG_Team
             if (equipedTem.ContainsKey(type) && equipedTem[type] != item) //장착된게 있고, 현재 장착하고 있는 것과 다르면!
             {
                 equipedTem[type].SetEquip(); //원래 끼고 있던 아이템 장착 해제
-                equipedTem.Remove(type); //장착
+                equipedTem.Remove(type); //제거
 
                 equipedTem.Add(type, item);
                 item.SetEquip();

@@ -198,9 +198,9 @@ namespace Text_RPG_Team
             Console.WriteLine("LV : " + character.Level.ToString("00"));
             Console.WriteLine($"{character.Name} ( {character.GetJob} )");
             Console.Write($"공격력 : {character.Total_Attack}");
-            Console.WriteLine((character.PlusAttack > 0) ? $" (+{character.PlusAttack})" : "");
+            Console.WriteLine((character.PlusAttack > 0) ? $" ( +{character.PlusAttack})" : "");
             Console.Write($"방어력 : {character.Total_Defence}");
-            Console.WriteLine((character.PlusDefence > 0) ? $" (+{character.PlusDefence})" : "");
+            Console.WriteLine((character.PlusDefence > 0) ? $" ( +{character.PlusDefence})" : "");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
             Console.WriteLine($"Gold : {character.Gold}G");
