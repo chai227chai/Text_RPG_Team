@@ -73,7 +73,7 @@ namespace Text_RPG_Team
             {
                 case 1:
                     character.Job = JOB.WARRIOR;
-                    character.Health = 200;
+                    character.MaxHealth = 200;
                     character.Mp = 50;
                     character.Attack = 5;
                     character.Defence = 10;
@@ -83,7 +83,7 @@ namespace Text_RPG_Team
                     break;
                 case 2:
                     character.Job = JOB.WIZARD;
-                    character.Health = 100;
+                    character.MaxHealth = 100;
                     character.Mp = 200;
                     character.Attack = 10;
                     character.Defence = 5;
@@ -93,7 +93,7 @@ namespace Text_RPG_Team
                     break;
                 case 3:
                     character.Job = JOB.ROGUE;
-                    character.Health = 150;
+                    character.MaxHealth = 150;
                     character.Mp = 100;
                     character.Attack = 8;
                     character.Defence = 8;
