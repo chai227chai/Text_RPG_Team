@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -13,6 +14,10 @@ namespace Text_RPG_Team
         private List<Item> inventoryList;
 
         private Dictionary<ItemType, Item> equipedTem;//장착된 아이템
+
+        //포션
+        private Portion HpPortion = new Portion(PortionType.HP);
+        private Portion MpPortion = new Portion(PortionType.MP);
 
         public Inventory()
         {
@@ -102,6 +107,21 @@ namespace Text_RPG_Team
                 player.Defence += player.PlusDefence;
             }
         }
+
+        //포션 가져오기
+        public void GetPortion(Portion portion)
+        {
+            if(portion.Type == PortionType.HP)
+            {
+                HpPortion.Count = portion.Count;
+            }
+            else if(portion.Type == PortionType.MP)
+            {
+                MpPortion.Count = portion.Count;
+            }
+        }
+
+
 
         //인벤토리에 있는 아이템 하나 가져오기
         public Item GetItem(int n)

@@ -20,8 +20,8 @@ namespace Text_RPG_Team
 
         Player? player;
         MonsterList? monsterList;
-        Portion portion = new Portion();
-
+        Portion HPportion = new Portion(PortionType.HP);
+        Portion MPportion = new Portion(PortionType.MP);
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
@@ -109,18 +109,10 @@ namespace Text_RPG_Team
                 Console.WriteLine($"Lv.{mon.Level} {mon.Name} ");
             }
             Console.WriteLine();
+            Console.WriteLine(">> 다음");
+            Console.ReadKey();
 
-            Console.WriteLine();
-            Console.WriteLine("0. 다음");
-
-            int act = IsValidInput(0, 0);
-
-            if (act == 0)
-            {
-                Battle_phase();
-                return;
-            }
-
+            Battle_phase();
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -258,23 +250,33 @@ namespace Text_RPG_Team
         private void Rewards()
         {
             int rewardGold = 0;
-            int rewardPotion = 0;
+            int rewardHpPotion = 0;
+            int rewardMpPotion = 0;
             int i = random.Next(1, 5);
             foreach(Monster mon in battle_monster)
             {
                 rewardGold = 300 * mon.Level;
                 if(i <= 2)
                 {
-                    rewardPotion += 1;
+                    rewardHpPotion += 1;
+                }
+                else if (i <= 3)
+                {
+                    rewardMpPotion += 1;
                 }
             }
             player.Gold += rewardGold;
-            portion.GetPortion(rewardPotion);
+            HPportion.SetPortion(rewardHpPotion);
+            MPportion.SetPortion(rewardMpPotion);
             Console.WriteLine("[획득 아이템]");
             Console.WriteLine($"{rewardGold} Gold");
-            if(rewardPotion >= 1)
+            if(rewardHpPotion >= 1)
             {
-                Console.WriteLine($"포션 - {rewardPotion}");
+                Console.WriteLine($"체력 회복 포션 - {rewardHpPotion}");
+            }
+            if(rewardMpPotion >= 1)
+            {
+                Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
             }
         }
         //---------------------------------------------------------------------------------------------------------------
@@ -301,12 +303,14 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
+            Console.WriteLine();
             Console.WriteLine($"HP {player.Health}");
             Console.WriteLine($"MP {player.Mp}");
 
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
+            Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             int act = IsValidInput(2, 1);
@@ -331,14 +335,8 @@ namespace Text_RPG_Team
                     Attack(player, battle_monster[target - 1]);
                 }
                 Console.WriteLine();
-                Console.WriteLine("0. 다음");
-
-                int act2 = IsValidInput(0, 0);
-
-                if (act2 == 0)
-                {
-                    return;
-                }
+                Console.WriteLine(">> 다음");
+                Console.ReadKey();
 
             }
             else if (act == 2)
@@ -666,14 +664,8 @@ namespace Text_RPG_Team
             }
  
             Console.WriteLine();
-            Console.WriteLine("0. 다음");
-
-            int act = IsValidInput(0, 0);
-
-            if (act == 0)
-            {
-                return;
-            }
+            Console.WriteLine(">> 다음");
+            Console.ReadKey();
         }
 
         //---------------------------------------------------------------------------------------------------------------
