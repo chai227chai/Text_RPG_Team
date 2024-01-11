@@ -279,8 +279,7 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■인벤토리■");
-            Console.WriteLine("");
-            Console.WriteLine();
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList(inventory.GetInventoryList);
