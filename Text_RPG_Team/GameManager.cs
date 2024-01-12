@@ -17,8 +17,8 @@ namespace Text_RPG_Team
         TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        Portion hpportion = new Portion(PortionType.HP);
-        Portion mpportion = new Portion(PortionType.MP);
+        Portion hpportion = new Portion(PortionType.HP, PortionValue.Small);
+        Portion mpportion = new Portion(PortionType.MP, PortionValue.Small);
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
@@ -290,6 +290,7 @@ namespace Text_RPG_Team
             Console.Clear();
             Console.WriteLine("■회복■");
             Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다");
+            hpportion.SelectPortion();
             Console.WriteLine();
             Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
             Console.WriteLine($"현재 체력 : {character.Health}");

@@ -15,15 +15,24 @@ namespace Text_RPG_Team
         HP, MP
     }
 
+    public enum PortionValue
+    {
+        Small = 30,
+        Medium = 50, 
+        Big = 100,
+    }
+
     internal class Portion
     {
         private PortionType portiontype;
         private int portioncount;
+        private int portionvalue;
 
         //생성자
-        public Portion(PortionType type)
+        public Portion(PortionType type, PortionValue value)
         {
             portiontype = type;
+            portionvalue = (int)value;
             portioncount = 0;
         }
 
@@ -42,6 +51,12 @@ namespace Text_RPG_Team
             set { portioncount = value; }
         }
 
+        public int Value
+        {
+            get { return portionvalue; }
+            set { portionvalue = value; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
 
@@ -56,6 +71,14 @@ namespace Text_RPG_Team
         {
             return Count;
         }
+
+        //포션 선택
+        public void SelectPortion()
+        {
+            Console.WriteLine(Type);
+        }
+
+
 
         //포션 사용
         public void UsePortion(Player player)

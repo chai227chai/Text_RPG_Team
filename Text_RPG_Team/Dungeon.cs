@@ -20,8 +20,8 @@ namespace Text_RPG_Team
 
         Player? player;
         MonsterList? monsterList;
-        Portion HPportion = new Portion(PortionType.HP);
-        Portion MPportion = new Portion(PortionType.MP);
+        Portion HPportion = new Portion(PortionType.HP, PortionValue.Small);
+        Portion MPportion = new Portion(PortionType.MP, PortionValue.Small);
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 

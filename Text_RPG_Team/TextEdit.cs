@@ -60,7 +60,7 @@ namespace Text_RPG_Team
         public void ChangeTextColorCyan(string text) //아이템 선택 가능할 때 사용
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write(text);
+            Console.WriteLine(text);
             Console.ResetColor();
         }
 
