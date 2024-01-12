@@ -8,7 +8,7 @@ using System.Xml.Linq;
 namespace Text_RPG_Team
 {
     
-    internal class MonsterSkill
+    internal class MonsterSkill : ISkill
     {
         public string Name { get; }
         public float Coefficient { get; }

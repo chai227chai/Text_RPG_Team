@@ -34,7 +34,7 @@ namespace Text_RPG_Team
         {
             if (dungeon_stage >= 1 && dungeon_stage < 4)
             {
-                AddMonster("미니언", 2, 15, 5, 0, 1, MonsterType.NIMION);
+                AddMonster("전사 미니언", 2, 15, 5, 0, 1, MonsterType.NIMION);
                 AddMonster("마법사 미니언", 3, 10, 6, 0, 1, MonsterType.NIMION);
                 AddMonster("공허충", 3, 6, 9, 0, 2, MonsterType.NIMION);
                 AddMonster("바위게", 2, 20, 0, 0, 5, MonsterType.NIMION);
