@@ -60,6 +60,8 @@ namespace Text_RPG_Team
         //포션 사용
         public void UsePortion(Player player)
         {
+            int pre_hp = 0;
+            int pre_mp = 0;
             if (Count <= 0)
             {
                 Console.WriteLine("포션이 부족합니다.");
@@ -78,13 +80,12 @@ namespace Text_RPG_Team
                     Thread.Sleep(2000);
                     return;
                 }
-                else if (player.MaxHealth - player.Health < 30)
+                else
                 {
-                    player.Health = player.MaxHealth;
+                    pre_hp = player.Health;
+                    player.Health = (player.MaxHealth - player.Health < 30) ? player.MaxHealth : player.Health + 30;
+                    Count--;
                 }
-                else player.Health += 30;
-
-                Count--;
             }
             else if (Type == PortionType.MP)
             {
@@ -99,16 +100,14 @@ namespace Text_RPG_Team
                 }
                 else
                 {
-                    if (player.MaxMp - player.Mp < 30)
-                    {
-                        player.Mp = player.MaxMp;
-                    }
-                    else player.Mp += 30;
-
+                    pre_mp = player.Mp;
+                    player.Mp = (player.MaxMp - player.Mp < 30) ? player.MaxMp : player.Mp + 30;
                     Count--;
                 }
             }
             Console.WriteLine("회복을 완료했습니다.");
+            Console.Write((pre_hp != 0) ? $"{pre_hp} -> {player.Health}\n" : "");
+            Console.Write((pre_mp != 0) ? $"{pre_mp} -> {player.Mp}\n" : "");
         }
     }
 }

@@ -40,5 +40,37 @@ namespace Text_RPG_Team
             int padding = (totalLength - currentLength) / 2;
             return str.PadRight(str.Length + padding);
         }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //text 색 바꿔주는 함수
+        public void ChangeTextColorMagenta(string text) //화면 제목에 사용
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        public void ChangeTextColorDarkMagenta(string text) //아이템 선택 가능할 때 사용
+        {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
+        public void ChangeTextColorCyan(string text) //아이템 선택 가능할 때 사용
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        public void HighlightsTextColorYellow(string s1, string s2, string s3 = "") //스탯 보여줄 때 사용
+        {
+            Console.Write(s1);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(s2);
+            Console.ResetColor();
+            Console.WriteLine(s3);
+        }
     }
 }

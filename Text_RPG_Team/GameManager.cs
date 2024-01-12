@@ -48,7 +48,7 @@ namespace Text_RPG_Team
             Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
             Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
             Console.WriteLine("=============================================================================================");
-            Console.WriteLine(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
+            textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
             Console.WriteLine("=============================================================================================");
             Console.ReadKey();
         }
@@ -64,7 +64,6 @@ namespace Text_RPG_Team
         }
         public void SetJob() //직업선택후 직업에 따른스탯변경
         {
-            string setJob = "초보자";
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
             Console.WriteLine();
@@ -133,6 +132,8 @@ namespace Text_RPG_Team
                     break;
                 case 2:
                     EnterDungeon();
+                    dungeon.PlusPortion(hpportion);
+                    dungeon.PlusPortion(mpportion);
                     break;
                 case 3:
                     ViewPortion();
@@ -196,18 +197,10 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("LV : " + character.Level.ToString("00"));
             Console.WriteLine($"{character.Name} ( {character.GetJob} )");
-            Console.Write($"공격력 : {character.Attack}");
-            if (character.PlusAttack > 0)
-            {
-                Console.WriteLine($" (+{character.PlusAttack})");
-            }
-            else Console.WriteLine();
-            Console.Write($"방어력 : {character.Defence}");
-            if (character.PlusDefence > 0)
-            {
-                Console.WriteLine($" (+{character.PlusDefence})");
-            }
-            else Console.WriteLine();
+            Console.Write($"공격력 : {character.Total_Attack}");
+            Console.WriteLine((character.PlusAttack > 0) ? $" ( +{character.PlusAttack})" : "");
+            Console.Write($"방어력 : {character.Total_Defence}");
+            Console.WriteLine((character.PlusDefence > 0) ? $" ( +{character.PlusDefence})" : "");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
             Console.Write($"속  도 : {character.Speed}");
@@ -337,6 +330,9 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList(inventory.GetInventoryList);
+            Console.WriteLine();
+            Console.WriteLine($"체력 포션 - {hpportion.Count}개");
+            Console.WriteLine($"마나 포션 - {mpportion.Count}개");
             Console.WriteLine();
             Console.WriteLine("1. 장착관리");
             Console.WriteLine("0. 나가기");

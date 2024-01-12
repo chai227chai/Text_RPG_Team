@@ -48,17 +48,17 @@ namespace Text_RPG_Team
         {
             this.name = name;
             this.job = job;
-            this.level = 1;
+            level = 1;
             this.attack = attack;
             plusattack = 0;
             checkattack = false;
             this.defence = defence;
             plusdefence = 0;
             checkdefence = false;
-            this.maxhealth = maxHealth;
-            this.health = this.maxhealth;
-            this.MaxMp = maxMp;
-            this.mp = MaxMp;
+            maxhealth = maxHealth;
+            health = maxhealth;
+            maxmp = maxMp;
+            mp = maxmp;
             this.speed = speed;
             plusSpeed = 0;
             levelexp = 0;
