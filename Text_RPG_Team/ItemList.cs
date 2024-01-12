@@ -35,12 +35,24 @@ namespace Text_RPG_Team
         //여기에 새로운 아이템을 추가하시면 됩니다.
         public void Initialize()
         {
-            AddItem("0", ItemType.ARMOR, "수련자 갑옷", "수련에 도움을 주는 갑옷입니다. ", 1000, new ItemSpec(SpecType.DEFEND, 5));
-            AddItem("1", ItemType.ARMOR, "무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다. ", 2000, new ItemSpec(SpecType.DEFEND, 9));
-            AddItem("2", ItemType.ARMOR, "스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500, new ItemSpec(SpecType.DEFEND, 15));
-            AddItem("3", ItemType.WEAPON, "낡은 검", "쉽게 볼 수 있는 낡은 검 입니다. ", 600, new ItemSpec(SpecType.ATTACK, 2));
-            AddItem("4", ItemType.WEAPON, "청동 도끼", "어디선가 사용됐던거 같은 도끼입니다. ", 1500, new ItemSpec(SpecType.ATTACK, 5));
-            AddItem("5", ItemType.WEAPON, "스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다. ", 3000, new ItemSpec(SpecType.ATTACK, 7));
+
+            AddItem("0", ItemType.ARMOR, "수련자 갑옷", "수련에 도움을 주는 갑옷입니다. ", 1000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 5 } }));
+
+            AddItem("1", ItemType.ARMOR, "무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다. ", 2000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 9 } }));
+
+            AddItem("2", ItemType.ARMOR, "스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 9 } }));
+
+            AddItem("3", ItemType.WEAPON, "낡은 검", "쉽게 볼 수 있는 낡은 검 입니다. ", 600, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 2 } }));
+
+            AddItem("4", ItemType.WEAPON, "청동 도끼", "어디선가 사용됐던거 같은 도끼입니다. ", 1500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 5 } }));
+
+            AddItem("5", ItemType.WEAPON, "스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다. ", 3000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 7 } }));
+
+            AddItem("6", ItemType.WEAPON, "강철 톤파", "공방 양면으로 우수한 무기입니다. ", 1500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 3 }, { SpecType.DEFEND, 5 } }));
+
+            AddItem("7", ItemType.SHOES, "운동화", "평범한 신발입니다. ", 800, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 1 } }));
+
+            AddItem("8", ItemType.SHOES, "블레이드 부츠", "칼날이 달려 날카로운 신발입니다. ", 1200, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 1 }, { SpecType.ATTACK, 2 } }));
         }
 
         //아이템 리스트에서 아이템 하나 가져오기
@@ -69,7 +81,9 @@ namespace Text_RPG_Team
                 }
                 Console.Write($"{itemlist[i].NowEquip}{itemlist[i].Name}");
                 Console.Write(" | ");
-                Console.Write($"{itemlist[i].GetSpecName}");
+                Console.Write($"{itemlist[i].GetType}");
+                Console.Write(" | ");
+                itemlist[i].GetSpecName();
                 Console.Write(" | ");
                 if (checkgold)
                 {

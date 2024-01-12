@@ -78,9 +78,9 @@ namespace Text_RPG_Team
         public int ExAttack()
         {
             int exAttack = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.GetSpecType == SpecType.ATTACK))
+            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.ATTACK) ))
             {
-                exAttack += item.GetSpec;
+                exAttack += item.Spec.GetSpec(SpecType.ATTACK);
             }
 
             return exAttack;
@@ -90,9 +90,9 @@ namespace Text_RPG_Team
         public int ExDefend()
         {
             int exDefend = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.GetSpecType == SpecType.DEFEND))
+            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.DEFEND) ))
             {
-                exDefend += item.GetSpec;
+                exDefend += item.Spec.GetSpec(SpecType.DEFEND);
             }
 
             return exDefend;
@@ -102,9 +102,9 @@ namespace Text_RPG_Team
         public int ExSpeed()
         {
             int exSpeed = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.GetSpecType == SpecType.SPEED))
+            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.SPEED) ))
             {
-                exSpeed += item.GetSpec;
+                exSpeed += item.Spec.GetSpec(SpecType.SPEED); ;
             }
 
             return exSpeed;

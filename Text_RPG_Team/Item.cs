@@ -8,7 +8,7 @@ namespace Text_RPG_Team
 {
     public enum ItemType
     {
-        WEAPON, ARMOR
+        WEAPON, ARMOR, SHOES
     }
 
     internal class Item
@@ -112,27 +112,34 @@ namespace Text_RPG_Team
                         return "갑옷";
                     case ItemType.WEAPON:
                         return "무기";
+                    case ItemType.SHOES:
+                        return "신발";
                 }
                 return "";
             }
         }
 
         //아이템 능력치 종류
-        public SpecType GetSpecType
+        //public SpecType GetSpecType
+        //{
+        //    get { return spec.getSpecType(); }
+        //}
+
+        public ItemSpec Spec
         {
-            get { return spec.getSpecType(); }
+            get { return spec; }
         }
 
         //아이템 능력치 수치
-        public int GetSpec
+        public int GetSpec(SpecType specType)
         {
-            get { return spec.getSpec(); }
+            return spec.GetSpec(specType);
         }
 
         //아이템 능력치 종류 출력
-        public string GetSpecName
+        public void GetSpecName()
         {
-            get { return spec.getSpecName(); }
+            spec.getSpecList();
         }
 
         //아이템 장착 여부

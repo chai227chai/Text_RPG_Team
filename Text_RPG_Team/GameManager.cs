@@ -15,7 +15,7 @@ namespace Text_RPG_Team
     internal class GameManager
     {
         TextEdit textedit = new TextEdit();
-        Player character = new Player();
+        Player character;
         Dungeon dungeon = new Dungeon();
         Portion hpportion = new Portion(PortionType.HP);
         Portion mpportion = new Portion(PortionType.MP);
@@ -203,6 +203,12 @@ namespace Text_RPG_Team
             Console.WriteLine((character.PlusDefence > 0) ? $" ( +{character.PlusDefence})" : "");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
+            Console.Write($"속  도 : {character.Speed}");
+            if (character.PlusSpeed > 0)
+            {
+                Console.WriteLine($" (+{character.PlusSpeed})");
+            }
+            else Console.WriteLine();
             Console.WriteLine($"Gold : {character.Gold}G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -233,7 +239,9 @@ namespace Text_RPG_Team
             Console.WriteLine($"Chad ({character.Name})");
             Console.WriteLine($"공격력 : {character.Total_Attack}");
             Console.WriteLine($"방어력 : {character.Total_Defence}");
-            Console.WriteLine($"체 력 : {character.Health}");
+            Console.WriteLine($"체  력 : {character.Health}");
+            Console.WriteLine($"마  나 : {character.Mp}");
+            Console.WriteLine($"속  도 : {character.Total_Speed}");
             Console.WriteLine();
 
             Console.WriteLine();
@@ -434,28 +442,5 @@ namespace Text_RPG_Team
             }
         }
 
-
-        //---------------------------------------------------------------------------------------------------------------
-        //스킬 부여 함수
-        static void GiveSkill(string setJob)
-        {
-            Skill._skills = new Skill[10];
-
-            if (setJob == "전사")
-            {
-                Skill.AddSkill(new Skill("파워 스트라이크", "한 명의 적에게 강한 데미지를 가합니다.", 5, 3, 1));
-                Skill.AddSkill(new Skill("슬래시 블러스트", "모든 적에게 데미지를 가합니다.", 10, 2, 2));
-            }
-            else if (setJob == "마법사")
-            {
-                Skill.AddSkill(new Skill("에너지 볼트", "한 명의 적에게 데미지를 입힙니다.", 20, 2, 1));
-                Skill.AddSkill(new Skill("메테오 스트라이크", "모든 적에게 강력한 데미지를 입힙니다.", 100, 5, 2));
-            }
-            else if (setJob == "도적")
-            {
-                Skill.AddSkill(new Skill("부식", "한 명의 적에게 데미지를 줍니다.", 10, 2, 1));
-                Skill.AddSkill(new Skill("암살", "한 명의 적에게 치명적인 데미지를 줍니다.", 100, 10, 1));
-            }
-        }
     }
 }

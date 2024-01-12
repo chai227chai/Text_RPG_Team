@@ -13,60 +13,54 @@ namespace Text_RPG_Team
 
     public class ItemSpec
     {
-        private SpecType specType;//아이템 능력치 유형
-        private int spec;//아이템 수치
 
         Dictionary<SpecType, int> specMap;
 
-        public ItemSpec(SpecType specType, int spec)
-        {
-            this.specType = specType;
-            this.spec = spec;
-        }
-
+        //아이템 스펙 생성
         public ItemSpec(Dictionary<SpecType, int> specMap)
         {
             if(specMap == null)
             {
-                specMap = new Dictionary<SpecType, int>();
+                this.specMap = new Dictionary<SpecType, int>();
             }
             else
             {
-                specMap = new Dictionary<SpecType, int>(specMap);
+                this.specMap = new Dictionary<SpecType, int>(specMap);
             }
         }
 
         //아이템 능력치 수치
-        public int getSpec()
-        {
-            return spec;
-        }
-
-        public int getSpec(SpecType specType)
+        public int GetSpec(SpecType specType)
         {
             return specMap[specType];
         }
 
-        //아이템 능력치 유형
-        public SpecType getSpecType()
+        //아이템 전체 능력치
+        public Dictionary<SpecType, int> SpecMap
         {
-            return this.specType;
+            get { return specMap; }
         }
 
-        //아이템 능력치 유형 출력
-        public string getSpecName()
+        //아이템 능력치 출력
+        public void getSpecList()
         {
-            switch (this.specType)
+            foreach (KeyValuePair<SpecType, int> s in specMap)
             {
-                case SpecType.ATTACK:
-                    return "공격력 +" + spec.ToString();
-                case SpecType.DEFEND:
-                    return "방어력 +" + spec.ToString();
-                case SpecType.SPEED:
-                    return "속  도 +" + spec.ToString();
+                switch (s.Key)
+                {
+                    case SpecType.ATTACK:
+                        Console.Write($" 공격력 {(s.Value > 0 ? "+" : "")} {s.Value} ");
+                        break;
+                    case SpecType.DEFEND:
+                        Console.Write($" 방어력 {(s.Value > 0 ? "+" : "")} {s.Value} ");
+                        break;
+                    case SpecType.SPEED:
+                        Console.Write($" 속  도 {(s.Value > 0 ? "+" : "")} {s.Value} ");
+                        break;
+                }
             }
+            
 
-            return "";
         }
 
     }
