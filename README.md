@@ -41,7 +41,20 @@
 -
 
 ##### 2. 회복 아이템 추가
--
+
+    public enum PortionType
+    {
+        HP, MP
+    }
+
+    public enum PortionValue
+    {
+        Small = 30,
+        Medium = 50, 
+        Big = 100,
+    }
+    
+- 
 ##### 3. 아이템 착용
 -
 ##### 4. 전투 스테이지 추가
