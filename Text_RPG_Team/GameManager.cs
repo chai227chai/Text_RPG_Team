@@ -197,13 +197,13 @@ namespace Text_RPG_Team
             Console.WriteLine("LV : " + character.Level.ToString("00"));
             Console.WriteLine($"{character.Name} ( {character.GetJob} )");
             Console.Write($"공격력 : {character.Total_Attack}");
-            Console.WriteLine((character.PlusAttack != 0) ? $" ( {(character.PlusAttack > 0 ? "+" : "")} {character.PlusAttack})" : "");
+            Console.WriteLine((character.PlusAttack != 0) ? $" ({(character.PlusAttack > 0 ? "+" : "")}{character.PlusAttack})" : "");
             Console.Write($"방어력 : {character.Total_Defence}");
-            Console.WriteLine((character.PlusDefence != 0) ? $" ( {(character.PlusDefence > 0 ? "+" : "")} {character.PlusDefence})" : "");
+            Console.WriteLine((character.PlusDefence != 0) ? $" ({(character.PlusDefence > 0 ? "+" : "")}{character.PlusDefence})" : "");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
             Console.Write($"속  도 : {character.Total_Speed}");
-            Console.WriteLine((character.PlusSpeed != 0) ? $" ( {(character.PlusSpeed > 0 ? "+" : "")} {character.PlusSpeed})" : "");
+            Console.WriteLine((character.PlusSpeed != 0) ? $" ({(character.PlusSpeed > 0 ? "+" : "")}{character.PlusSpeed})" : "");
             Console.WriteLine($"Gold : {character.Gold}G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
