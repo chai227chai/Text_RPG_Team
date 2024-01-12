@@ -57,7 +57,7 @@ namespace Text_RPG_Team
             }
             else if(stage >= 5 && stage <= 9)
             {
-                number = random.Next(3, 6);
+                number = random.Next(3, 7);
             }
             else if(stage == 10)
             {
@@ -90,6 +90,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        //던전 시작
         private void Start_phase()
         {
             Console.Clear();
@@ -390,8 +391,8 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
-            Console.WriteLine($"HP {player.Health}");
-            Console.WriteLine($"MP {player.Mp}");
+            Console.WriteLine($"HP {player.Health} / {player.MaxHealth}");
+            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
             Console.WriteLine();
 
             index = 1;
@@ -513,7 +514,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
-            Console.WriteLine($"HP {player.Health}");
+            Console.WriteLine($"HP {player.Health} / {player.MaxHealth}");
 
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
