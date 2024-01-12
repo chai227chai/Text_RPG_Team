@@ -49,13 +49,13 @@ namespace Text_RPG_Team
                 switch (s.Key)
                 {
                     case SpecType.ATTACK:
-                        Console.Write($" 공격력 + {s.Value} ");
+                        Console.Write($" 공격력 {(s.Value > 0 ? "+" : "")} {s.Value} ");
                         break;
                     case SpecType.DEFEND:
-                        Console.Write($" 방어력 + {s.Value} ");
+                        Console.Write($" 방어력 {(s.Value > 0 ? "+" : "")} {s.Value} ");
                         break;
                     case SpecType.SPEED:
-                        Console.Write($" 속  도 + {s.Value} ");
+                        Console.Write($" 속  도 {(s.Value > 0 ? "+" : "")} {s.Value} ");
                         break;
                 }
             }
