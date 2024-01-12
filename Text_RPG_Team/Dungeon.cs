@@ -22,6 +22,7 @@ namespace Text_RPG_Team
         MonsterList? monsterList;
         Portion HPportion = new Portion(PortionType.HP);
         Portion MPportion = new Portion(PortionType.MP);
+
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
@@ -256,18 +257,18 @@ namespace Text_RPG_Team
             foreach(Monster mon in battle_monster)
             {
                 rewardGold = 300 * mon.Level;
-                if(i <= 2)
+                if(i <= 3)
                 {
                     rewardHpPotion += 1;
                 }
-                else if (i <= 3)
+                else if (i >= 3)
                 {
                     rewardMpPotion += 1;
                 }
             }
             player.Gold += rewardGold;
-            HPportion.SetPortion(rewardHpPotion);
-            MPportion.SetPortion(rewardMpPotion);
+            HPportion.AddPortion(rewardHpPotion);
+            MPportion.AddPortion(rewardMpPotion);
             Console.WriteLine("[획득 아이템]");
             Console.WriteLine($"{rewardGold} Gold");
             if(rewardHpPotion >= 1)
@@ -310,10 +311,11 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
+            Console.WriteLine("3. 포션");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            int act = IsValidInput(2, 1);
+            int act = IsValidInput(3, 1);
 
             int target;
             if(act == 1)
@@ -342,6 +344,22 @@ namespace Text_RPG_Team
             else if (act == 2)
             {
                 PlayerSkillTurn();
+                return;
+            }
+            else if(act == 3)
+            {
+                Console.WriteLine("사용하실 포션을 선택해 주세요.");
+                Console.WriteLine($"1.체력 포션({HPportion.Count})\n2.마나 포션({MPportion.Count})");
+                int i = IsValidInput(2, 1);
+                switch(i)
+                {
+                    case 1:
+                        HPportion.BattlePortion(player);
+                        break;
+                    case 2:
+                        MPportion.BattlePortion(player);
+                        break;
+                }
                 return;
             }
         }

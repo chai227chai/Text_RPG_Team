@@ -300,6 +300,8 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
             Console.WriteLine($"현재 체력 : {character.Health}");
+            Console.WriteLine($"보유한 체력 포션 :{hpportion.Count}");
+            Console.WriteLine($"보유한 마나 포션 :{mpportion.Count}");
             Console.WriteLine();
             Console.WriteLine("1. 체력 회복하기");
             Console.WriteLine("2. 마나 회복하기");
