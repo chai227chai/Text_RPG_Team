@@ -15,15 +15,25 @@ namespace Text_RPG_Team
         HP, MP
     }
 
+    public enum PortionValue
+    {
+        Small = 30,
+        Medium = 50, 
+        Big = 100,
+    }
+
     internal class Portion
     {
         private PortionType portiontype;
         private int portioncount;
+        private PortionValue portionvalue;
+        
 
         //생성자
-        public Portion(PortionType type)
+        public Portion(PortionType type, PortionValue value)
         {
             portiontype = type;
+            portionvalue = value;
             portioncount = 0;
         }
 
@@ -42,6 +52,11 @@ namespace Text_RPG_Team
             set { portioncount = value; }
         }
 
+        public PortionValue Value
+        {
+            get { return portionvalue; }
+        }
+
         //----------------------------------------------------------------------------------------------
         //변수 조작 함수
 
@@ -57,57 +72,10 @@ namespace Text_RPG_Team
             return Count;
         }
 
-        //포션 사용
-        public void UsePortion(Player player)
+        //포션 회복량 가져오기
+        public int GetValue()
         {
-            int pre_hp = 0;
-            int pre_mp = 0;
-            if (Count <= 0)
-            {
-                Console.WriteLine("포션이 부족합니다.");
-                Console.WriteLine("처음 화면으로 돌아갑니다.");
-                Thread.Sleep(2000);
-                return;
-            }
-            else if (Type == PortionType.HP)
-            {
-                if (player.MaxHealth == player.Health)
-                {
-                    Console.WriteLine();
-
-                    Console.WriteLine("최대 체력입니다.");
-                    Console.WriteLine("처음 화면으로 돌아갑니다.");
-                    Thread.Sleep(2000);
-                    return;
-                }
-                else
-                {
-                    pre_hp = player.Health;
-                    player.Health = (player.MaxHealth - player.Health < 30) ? player.MaxHealth : player.Health + 30;
-                    Count--;
-                }
-            }
-            else if (Type == PortionType.MP)
-            {
-                if (player.MaxMp == player.Mp)
-                {
-                    Console.WriteLine();
-
-                    Console.WriteLine("최대 마나입니다.");
-                    Console.WriteLine("처음 화면으로 돌아갑니다.");
-                    Thread.Sleep(2000);
-                    return;
-                }
-                else
-                {
-                    pre_mp = player.Mp;
-                    player.Mp = (player.MaxMp - player.Mp < 30) ? player.MaxMp : player.Mp + 30;
-                    Count--;
-                }
-            }
-            Console.WriteLine("회복을 완료했습니다.");
-            Console.Write((pre_hp != 0) ? $"{pre_hp} -> {player.Health}\n" : "");
-            Console.Write((pre_mp != 0) ? $"{pre_mp} -> {player.Mp}\n" : "");
+            return (int)Value;
         }
     }
 }
