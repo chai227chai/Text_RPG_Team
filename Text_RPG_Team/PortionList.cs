@@ -37,6 +37,12 @@ namespace Text_RPG_Team
             portionlist.Add(portion);
         }
 
+        //포션 리스트 가져오기
+        public List<Portion> GetPortionList() 
+        {  
+            return portionlist; 
+        }
+
         //포션 리스트 출력
         public void PrintPortionList()
         {
@@ -80,7 +86,6 @@ namespace Text_RPG_Team
             return false;
         }
 
-
         //포션 가져오기
         public Portion GetPortion(PortionType type, int n)
         {
@@ -97,7 +102,7 @@ namespace Text_RPG_Team
         }
 
         //포션 삭제하기
-        public void RemovePortion(Portion portion)
+        private void RemovePortion(Portion portion)
         {
             portionlist.Remove(portion);
         }

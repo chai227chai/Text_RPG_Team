@@ -247,7 +247,7 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
-                    dungeon.GoDungeon(character);
+                    dungeon.GoDungeon(character,portionlist);
                     break;
                 case 2:
                     ResetDungeon();

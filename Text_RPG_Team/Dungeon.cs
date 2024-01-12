@@ -22,6 +22,7 @@ namespace Text_RPG_Team
         MonsterList? monsterList;
         Portion HPportion = new Portion(PortionType.HP, PortionValue.Small);
         Portion MPportion = new Portion(PortionType.MP, PortionValue.Small);
+        PortionList portionList;
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
@@ -42,9 +43,10 @@ namespace Text_RPG_Team
         }
 
         //던전 생성
-        public void GoDungeon(Player player)
+        public void GoDungeon(Player player, PortionList portionList)
         {
             this.player = player;
+            this.portionList = portionList;
             this.monsterList = new MonsterList(stage);
 
             this.battle_monster = new List<Monster>();
@@ -275,29 +277,16 @@ namespace Text_RPG_Team
             if(rewardHpPotion >= 1)
             {
                 Console.WriteLine($"체력 회복 포션 - {rewardHpPotion}");
+                portionList.AddPortion(HPportion.Type, HPportion.Value, rewardHpPotion);
+                HPportion.Count = 0;
             }
             if(rewardMpPotion >= 1)
             {
                 Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
-            }
-        }
-
-        //포션 보상 적용
-        public void PlusPortion(Portion portion)
-        {
-            if(portion.Type == PortionType.HP)
-            {
-                portion.SetPortion(HPportion.Count);
-                HPportion.Count = 0;
-            }
-            else if (portion.Type == PortionType.MP)
-            {
-                portion.SetPortion(MPportion.Count);
+                portionList.AddPortion(MPportion.Type, MPportion.Value, rewardMpPotion);
                 MPportion.Count = 0;
             }
         }
-
-
 
 
         //---------------------------------------------------------------------------------------------------------------
