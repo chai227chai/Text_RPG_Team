@@ -12,6 +12,7 @@
 <!--
 주석표시방법
 <img width = "10%" img alt="Static Badge" src="https://img.shields.io/badge/%ED%95%98%EC%A7%80%ED%98%9C%20-%2C?style=social&label=%ED%8C%80%EC%9B%90&color=%23640064">
+https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 -->
 
 ### 주요 기능
