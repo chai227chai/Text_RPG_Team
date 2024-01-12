@@ -317,10 +317,11 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
+            Console.WriteLine("3. 포션");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            int act = IsValidInput(2, 1);
+            int act = IsValidInput(3, 1);
 
             int target;
             if(act == 1)
@@ -349,6 +350,26 @@ namespace Text_RPG_Team
             else if (act == 2)
             {
                 PlayerSkillTurn();
+            }
+            else if (act == 3)
+            {
+                portionList.PrintPortionList();
+                Console.WriteLine("사용하실 포션을 선택해 주세요.");
+                Console.WriteLine("1.체력 포션\n2.마나 포션\n0.나가기");
+                int i = IsValidInput(2, 0);
+                switch (i)
+                {
+                    case 0:
+                        PlayerTurn();
+                        break;
+                    case 1:
+                        portionList.UsePortion(player, HPportion);
+                        break;
+                    case 2:
+                        portionList.UsePortion(player, MPportion);
+                        break;
+                }
+                return;
             }
         }
         //---------------------------------------------------------------------------------------------------
