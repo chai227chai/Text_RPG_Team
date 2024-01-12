@@ -181,5 +181,84 @@ namespace Text_RPG_Team
             int damage = random.Next(attack - damage_range, attack + damage_range + 1);
             return damage;
         }
+
+        public string[] DropTable(Monster monster)
+        {
+            string[] dropTable = new string[] {};
+
+            switch (monster.Type)
+            {
+                case MonsterType.NIMION:
+                    dropTable = new string[] { "0", "3" };
+                    break;
+                case MonsterType.ELITE_MINION:
+                    dropTable = new string[] { "0", "3", "1" };
+                    break;
+                case MonsterType.ELITE_WOLF: case MonsterType.ELITE_BIRD:
+                    dropTable = new string[] { "0", "3", "1", "4" };
+                    break;
+                case MonsterType.ELITE_FROG:
+                    dropTable = new string[] { "6", "9", "12" };
+                    break;
+            }
+
+            return dropTable;
+        }
+
+        public string dropItem(Monster monster)
+        {
+            Random ran = new Random();
+
+            switch (monster.Type)
+            {
+                case MonsterType.NIMION:
+                    int drop = ran.Next(0, 11);
+                    if (drop <= 1)
+                    {
+                        return DropTable(monster)[ran.Next(0, 2)];
+                    }
+                    break;
+                case MonsterType.ELITE_MINION:
+                    drop = ran.Next(0, 11);
+                    if (drop <= 2)
+                    {
+                        return DropTable(monster)[ran.Next(0, 2)];
+                    }
+                    else if(drop == 3)
+                    {
+                        return DropTable(monster)[2];
+                    }
+                    break;
+                case MonsterType.ELITE_WOLF: case MonsterType.ELITE_BIRD:
+                    drop = ran.Next(0, 100);
+                    if (drop < 30)
+                    {
+                        return DropTable(monster)[ran.Next(0, 2)];
+                    }
+                    else if (drop < 40 && drop >= 30)
+                    {
+                        return DropTable(monster)[2];
+                    }
+                    else if(drop < 45 && drop >= 40)
+                    {
+                        return DropTable(monster)[3];
+                    }
+                    break;
+                case MonsterType.ELITE_FROG:
+                    drop = ran.Next(0, 100);
+                    if (drop <= 0)
+                    {
+                        return DropTable(monster)[ran.Next(1, 3)];
+                    }
+                    else if (drop <= 10 && drop > 0)
+                    {
+                        return DropTable(monster)[0];
+                    }
+                    break;
+            }
+
+            return "-1";
+        }
+
     }
 }

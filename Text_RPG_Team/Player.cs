@@ -16,6 +16,8 @@ namespace Text_RPG_Team
 
     internal class Player : ICharacter
     {
+        Inventory inventory = new Inventory();
+
         private Random random = new Random();
 
         private List<Skill> skillList;
@@ -240,6 +242,11 @@ namespace Text_RPG_Team
         public List<Skill> getSkillList
         {
             get { return skillList; }
+        }
+
+        public Inventory GetInventory
+        {
+            get { return inventory; }
         }
 
         //----------------------------------------------------------------------------------------------
