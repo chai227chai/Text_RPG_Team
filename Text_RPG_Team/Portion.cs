@@ -80,18 +80,12 @@ namespace Text_RPG_Team
                     Thread.Sleep(2000);
                     return;
                 }
-                else if (player.MaxHealth - player.Health < 30)
-                {
-                    pre_hp = player.Health;
-                    player.Health = player.MaxHealth;
-                }
                 else
                 {
                     pre_hp = player.Health;
-                    player.Health += 30;
+                    player.Health = (player.MaxHealth - player.Health < 30) ? player.MaxHealth : player.Health + 30;
+                    Count--;
                 }
-
-                Count--;
             }
             else if (Type == PortionType.MP)
             {
@@ -106,16 +100,8 @@ namespace Text_RPG_Team
                 }
                 else
                 {
-                    if (player.MaxMp - player.Mp < 30)
-                    {
-                        pre_mp = player.Mp;
-                        player.Mp = player.MaxMp;
-                    }
-                    else
-                    {
-                        pre_mp = player.Mp;
-                        player.Mp += 30;
-                    }
+                    pre_mp = player.Mp;
+                    player.Mp = (player.MaxMp - player.Mp < 30) ? player.MaxMp : player.Mp + 30;
                     Count--;
                 }
             }
