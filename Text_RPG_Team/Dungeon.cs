@@ -258,6 +258,13 @@ namespace Text_RPG_Team
             {
                 rewardGold = 300 * mon.Level;
                 if(i <= 3)
+<<<<<<< Updated upstream
+=======
+                {
+                    rewardMpPotion += 1;
+                }
+                else if (i >= 3)
+>>>>>>> Stashed changes
                 {
                     rewardHpPotion += 1;
                 }
@@ -358,6 +365,26 @@ namespace Text_RPG_Team
                         break;
                     case 2:
                         MPportion.BattlePortion(player);
+                        break;
+                }
+                return;
+            }
+            else if (act == 3)
+            {
+                portionList.PrintPortionList();
+                Console.WriteLine("사용하실 포션을 선택해 주세요.");
+                Console.WriteLine("1.체력 포션\n2.마나 포션\n0.나가기");
+                int i = IsValidInput(2, 0);
+                switch (i)
+                {
+                    case 0:
+                        PlayerTurn();
+                        break;
+                    case 1:
+                        portionList.UsePortion(player, HPportion);
+                        break;
+                    case 2:
+                        portionList.UsePortion(player, MPportion);
                         break;
                 }
                 return;
