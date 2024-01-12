@@ -48,7 +48,7 @@ namespace Text_RPG_Team
             Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
             Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
             Console.WriteLine("=============================================================================================");
-            Console.WriteLine(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
+            textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
             Console.WriteLine("=============================================================================================");
             Console.ReadKey();
         }

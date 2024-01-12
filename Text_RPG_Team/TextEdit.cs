@@ -72,6 +72,5 @@ namespace Text_RPG_Team
             Console.ResetColor();
             Console.WriteLine(s3);
         }
-
     }
 }
