@@ -67,12 +67,17 @@ namespace Text_RPG_Team
             Console.Clear();
             Console.WriteLine("캐릭터의 직업을 선택해 주세요");
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("1.전사 ");
+            Console.Write("1. ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("전사  ");
+            Console.ResetColor();
+            Console.Write("2. ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("2.마법사 ");
+            Console.Write("마법사  ");
+            Console.ResetColor();
+            Console.Write("3. ");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("3.도적");
+            Console.WriteLine("도적");
             Console.ResetColor();
 
             Console.WriteLine();
@@ -91,8 +96,28 @@ namespace Text_RPG_Team
                     break;
             }
             Console.Clear();
-            Console.WriteLine($"당신의 직업은 {character.GetJob} 입니다. 확정하시겠습니까?");
+            Console.Write($"당신의 직업은 ");
+            switch (character.GetJob)
+            {
+                case "전사":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case "마법사":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case "도적":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                default:
+                    break;
+            }
+            Console.Write($"{character.GetJob}");
+            Console.ResetColor();
+            Console.WriteLine(" 입니다. ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("확정하시겠습니까?");
             Console.WriteLine();
+            Console.ResetColor();
             Console.WriteLine("1. 예 2.아니오");
             Console.WriteLine();
 
@@ -207,7 +232,25 @@ namespace Text_RPG_Team
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             Console.WriteLine("LV : " + character.Level.ToString("00"));
-            Console.WriteLine($"{character.Name} ( {character.GetJob} )");
+            Console.Write($"{character.Name} ");
+            Console.Write("( ");
+            switch (character.GetJob)
+            {
+                case "전사":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case "마법사":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case "도적":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                default:
+                    break;
+            }
+            Console.Write($"{character.GetJob}");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(" )");
             Console.Write($"공격력 : {character.Total_Attack}");
             Console.WriteLine((character.PlusAttack != 0) ? $" ( {(character.PlusAttack > 0 ? "+" : "")} {character.PlusAttack})" : "");
             Console.Write($"방어력 : {character.Total_Defence}");
