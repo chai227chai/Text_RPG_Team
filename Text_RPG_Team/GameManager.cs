@@ -17,8 +17,7 @@ namespace Text_RPG_Team
         TextEdit textedit = new TextEdit();
         Player character = new Player();
         Dungeon dungeon = new Dungeon();
-        Portion hpportion = new Portion(PortionType.HP, PortionValue.Small);
-        Portion mpportion = new Portion(PortionType.MP, PortionValue.Small);
+        PortionList portionlist = new PortionList();
         ItemList itemlist = new ItemList();
         Store store = new Store();
         Inventory inventory = new Inventory();
@@ -96,8 +95,8 @@ namespace Text_RPG_Team
                 case 1:
                     character.Gold = 1500;
                     character.UseSkill();
-                    hpportion.SetPortion(3);
-                    mpportion.SetPortion(3);
+                    portionlist.AddPortion(PortionType.HP, PortionValue.Small, 3);
+                    portionlist.AddPortion(PortionType.MP, PortionValue.Small, 3);
                     break;
                 case 2:
                     SetJob();
@@ -132,8 +131,8 @@ namespace Text_RPG_Team
                     break;
                 case 2:
                     EnterDungeon();
-                    dungeon.PlusPortion(hpportion);
-                    dungeon.PlusPortion(mpportion);
+                    //dungeon.PlusPortion(hpportion);
+                    //dungeon.PlusPortion(mpportion);
                     break;
                 case 3:
                     ViewPortion();
@@ -289,11 +288,10 @@ namespace Text_RPG_Team
         {
             Console.Clear();
             Console.WriteLine("■회복■");
-            Console.WriteLine($"포션을 사용하면 체력을 30 회복할 수 있습니다");
-            hpportion.SelectPortion();
+            Console.WriteLine($"포션을 사용하면 체력 또는 마나를 회복할 수 있습니다");
             Console.WriteLine();
-            Console.WriteLine($"회복 가능한 최대 체력 : {character.MaxHealth}");
-            Console.WriteLine($"현재 체력 : {character.Health}");
+            Console.WriteLine("[포션 목록]");
+            portionlist.PrintPortionList();
             Console.WriteLine();
             Console.WriteLine("1. 체력 회복하기");
             Console.WriteLine("2. 마나 회복하기");
@@ -305,11 +303,53 @@ namespace Text_RPG_Team
                 case 0:
                     break;
                 case 1:
-                    hpportion.UsePortion(character);
+                    if (portionlist.CheckPortion(PortionType.HP)) UsePortion(PortionType.HP);
+                    else
+                    {
+                        Console.WriteLine("보유 중인 포션이 없습니다.");
+                        Console.ReadKey();
+                        ViewPortion();
+                    }
                     break;
                 case 2:
-                    mpportion.UsePortion(character);
+                    if (portionlist.CheckPortion(PortionType.MP)) UsePortion(PortionType.MP);
+                    else
+                    {
+                        Console.WriteLine("보유 중인 포션이 없습니다.");
+                        Console.ReadKey();
+                        ViewPortion();
+                    }
                     break;
+            }
+        }
+
+        private void UsePortion(PortionType portionType)
+        {
+            Console.Clear ();
+            Console.WriteLine("■회복 - 사용■");
+            Console.Write($"포션을 사용하면 ");
+            Console.Write((portionType == PortionType.HP) ? "체력" : "마나");
+            Console.WriteLine("를 회복할 수 있습니다");
+            Console.WriteLine();
+            Console.WriteLine((portionType == PortionType.HP) ? $"최대 체력 : {character.MaxHealth}" : $"최대 마나 : {character.MaxMp}");
+            Console.WriteLine((portionType == PortionType.HP) ? $"현재 체력 : {character.Health}" : $"현재 마나 : {character.Mp}");
+            Console.WriteLine();
+            Console.WriteLine("[포션 목록]");
+            int listlenght = portionlist.UsePortionList(portionType);
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            int act = IsValidInput(listlenght, 0);
+
+            if (act == 0)
+            {
+                ViewPortion();
+                return;
+            }
+            else
+            {
+                Portion portion = portionlist.GetPortion(portionType, act);
+                portionlist.UsePortion(character, portion);
+                ViewPortion();
             }
         }
       
@@ -323,9 +363,6 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             itemlist.PrintItemList(inventory.GetInventoryList);
-            Console.WriteLine();
-            Console.WriteLine($"체력 포션 - {hpportion.Count}개");
-            Console.WriteLine($"마나 포션 - {mpportion.Count}개");
             Console.WriteLine();
             Console.WriteLine("1. 장착관리");
             Console.WriteLine("0. 나가기");
