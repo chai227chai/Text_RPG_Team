@@ -157,5 +157,5 @@ public enum ItemType
  
  ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/aa7ab7c8-362d-40f6-87f3-5b608b9a32c2)
 
- - 게임 저장 시 현재 시간으로 세이브 파일이 저장됩니다.
+ - 게임 저장 시 현재 시간으로 세이브 파일이 생성됩니다.
  - 게임 불러오기를 선택할 시, 원하는 파일을 선택하여 불러올 수 있습니다.
