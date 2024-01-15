@@ -30,7 +30,7 @@ namespace Text_RPG_Team
 
         public Dungeon()
         {
-            stage = 1;
+            stage = 4;
         }
 
         public int Now_Stage
@@ -369,9 +369,10 @@ namespace Text_RPG_Team
             }
             else if (act == 3)
             {
-                portionList.PrintPortionList();
+                Console.WriteLine();
                 Console.WriteLine("사용하실 포션을 선택해 주세요.");
                 Console.WriteLine("1.체력 포션\n2.마나 포션\n0.나가기");
+
                 int i = IsValidInput(2, 0);
                 switch (i)
                 {
@@ -379,10 +380,30 @@ namespace Text_RPG_Team
                         PlayerTurn();
                         break;
                     case 1:
-                        portionList.UsePortion(player, HPportion);
+                        int listlenght = portionList.UsePortionList(PortionType.HP);
+
+                        int p_target = IsValidInput(listlenght, 0);
+
+                        if (p_target == 0)
+                        {
+                            PlayerTurn();
+                            break;
+                        }
+                        Portion portion = portionList.GetPortion(PortionType.HP, p_target);
+                        portionList.UsePortion(player, portion);
                         break;
                     case 2:
-                        portionList.UsePortion(player, MPportion);
+                        listlenght = portionList.UsePortionList(PortionType.MP);
+
+                        p_target = IsValidInput(listlenght, 0);
+
+                        if (p_target == 0)
+                        {
+                            PlayerTurn();
+                            break;
+                        }
+                        portion = portionList.GetPortion(PortionType.MP, p_target);
+                        portionList.UsePortion(player, portion);
                         break;
                 }
                 return;
