@@ -30,7 +30,7 @@ namespace Text_RPG_Team
 
         public Dungeon()
         {
-            stage = 4;
+            stage = 1;
         }
 
         public int Now_Stage
