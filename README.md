@@ -142,4 +142,5 @@ public enum ItemType
 #### 7. 게임 저장 및 불러오기
 
  ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/f5b33ee8-da17-4cac-8055-d43a6ddc9049)
+ 
  ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/917d9d39-8374-4f3a-9f52-255cd8378cc0)
