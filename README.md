@@ -33,7 +33,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 [4. 추가 구현](#추가-구현)
 
-# 게임 시작화면
+### 게임 시작화면
 
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
 
@@ -42,7 +42,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/bbefc77d-9ad7-4e5d-b6c2-bddbb1255a13)
 
 ----
-# 상태보기
+### 상태보기
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/fbaf9815-7952-427d-ae3d-3e0d4ae1aab6)
 
 - 설정한 캐릭터의 이름과 선택한 직업을 볼 수 있습니다.
@@ -61,7 +61,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - 직업을 선택할 수 있으며 직업에 따라 능력치와 사용할 수 있는 스킬이 다릅니다.
 
 ----
-# 전투
+### 전투
 -
 #### 1. 스킬
 예시)전사
