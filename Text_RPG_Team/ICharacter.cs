@@ -21,6 +21,12 @@ namespace Text_RPG_Team
         int Defence { get; set; }
         int Total_Defence { get; }
         int Speed { get; set; }
+        int Crit_Rate { get; }
+        int Total_Crit_Rate { get; }
+        float Crit_DMG { get; }
+        float Total_Crit_DMG { get; }
+        int Evasion { get; }
+        int Total_Evasion { get; }
 
         bool IsDead { get; }
 

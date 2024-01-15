@@ -302,6 +302,24 @@ namespace Text_RPG_Team
             Console.WriteLine($"마  나 : {character.Mp}");
             Console.Write($"속  도 : {character.Total_Speed}");
             Console.WriteLine((character.PlusSpeed != 0) ? $" ({(character.PlusSpeed > 0 ? "+" : "")}{character.PlusSpeed})" : "");
+            if (character.Plus_Crit_Rate != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"치명타율 : {character.Total_Crit_Rate} ({(character.Plus_Crit_Rate > 0 ? "+" : "")}{character.Plus_Crit_Rate})");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+            if (character.Plus_Crit_DMG != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"치명타피해 : {character.Total_Crit_DMG} ({(character.Plus_Crit_DMG > 0 ? "+" : "")}{character.Plus_Crit_DMG})");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+            if (character.Plus_Evasion != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"회피율 : {character.Total_Evasion} ({(character.Plus_Evasion > 0 ? "+" : "")}{character.Plus_Evasion})");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
             Console.WriteLine($"Gold : {character.Gold}G");
             Console.ResetColor();
             Console.WriteLine();
@@ -700,6 +718,7 @@ namespace Text_RPG_Team
                 Console.Write(" )");
                 Console.WriteLine();
                 Console.WriteLine("LV : " + dataSave.character.Level.ToString("00"));
+                Console.WriteLine("현재 도전 중인 층 : " + dataSave.dungeon.Now_Stage);
                 Console.WriteLine();
 
                 Console.WriteLine("1. 예 2. 아니오");
@@ -714,13 +733,14 @@ namespace Text_RPG_Team
                         this.itemlist = dataSave.itemList;
                         this.portionlist = dataSave.portionlist;
                         this.dungeon = dataSave.dungeon;
+                        fs.Close();
                         break;
                     case 2:
+                        fs.Close();
                         LoadGame();
                         break;
                 }
 
-                fs.Close();
             }
 
             return;

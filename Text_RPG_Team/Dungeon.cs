@@ -508,7 +508,7 @@ namespace Text_RPG_Team
                 {
                     //대상을 선택했다면, 스킬 공격
                     Console.Clear();
-                    SkillAttackOne(player, battle_monster[target - 1], player.getSkillList[act - 1]);
+                    SkillAttackOne((Player)player, battle_monster[target - 1], player.getSkillList[act - 1]);
                     player.Mp -= player.getSkillList[act - 1].MP;
                 }
 
@@ -608,11 +608,11 @@ namespace Text_RPG_Team
                 damage = 0;
             }
 
-            int critical = new Random().Next(1, 100);
+            int critical = new Random().Next(0, 100);
 
-            if (critical <= 15)
+            if (critical <= attacker.Total_Crit_Rate)
             {
-                damage = (int)Math.Ceiling((float)damage * 1.6);
+                damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
                 Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
             }
             else
@@ -655,11 +655,11 @@ namespace Text_RPG_Team
                     damage = 0;
                 }
 
-                int critical = new Random().Next(1, 100);
+                int critical = new Random().Next(0, 100);
 
-                if (critical <= 15)
+                if (critical <= attacker.Total_Crit_Rate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -702,11 +702,11 @@ namespace Text_RPG_Team
                     damage = 0;
                 }
 
-                int critical = new Random().Next(1, 100);
+                int critical = new Random().Next(0, 100);
 
-                if (critical <= 15)
+                if (critical <= attacker.Total_Crit_Rate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -736,7 +736,7 @@ namespace Text_RPG_Team
         //캐릭터 일반 공격 함수
         private void Attack(ICharacter attacker, ICharacter victim)
         {
-            int miss = new Random().Next(0, 10);
+            int miss = new Random().Next(0, 100);
             int critical = new Random().Next(0, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
@@ -747,7 +747,7 @@ namespace Text_RPG_Team
                 damage = 0;
             }
 
-            if (miss == 0)
+            if (miss <= victim.Total_Evasion)
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
                 damage = 0;
@@ -755,9 +755,9 @@ namespace Text_RPG_Team
             }
             else
             {
-                if (critical <= 15)
+                if (critical <= attacker.Total_Crit_Rate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
                     Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else

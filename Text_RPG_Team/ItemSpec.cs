@@ -8,7 +8,7 @@ namespace Text_RPG_Team
 {
     public enum SpecType
     {
-        ATTACK, DEFEND, SPEED
+        ATTACK, DEFEND, SPEED, CRIT_RATE, CRIT_DMG, EVASION
     }
 
     [Serializable]
@@ -57,6 +57,15 @@ namespace Text_RPG_Team
                         break;
                     case SpecType.SPEED:
                         Console.Write($" 속  도 {(s.Value > 0 ? "+" : "")}{s.Value} ");
+                        break;
+                    case SpecType.CRIT_RATE:
+                        Console.Write($" 치명타율 {(s.Value > 0 ? "+" : "")}{s.Value}% ");
+                        break;
+                    case SpecType.CRIT_DMG:
+                        Console.Write($" 치명타피해 {(s.Value > 0 ? "+" : "")}{s.Value}% ");
+                        break;
+                    case SpecType.EVASION:
+                        Console.Write($" 회피율 {(s.Value > 0 ? "+" : "")}{s.Value}% ");
                         break;
                 }
             }

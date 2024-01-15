@@ -23,6 +23,9 @@ namespace Text_RPG_Team
         int defence;
         int speed;
         int drop_exp;// 몬스터가 제공하는 경험치
+        int crit_rate;
+        float crit_dmg;
+        int evasion;
 
         CHAR_TAG tag;
         MonsterType type;
@@ -38,6 +41,9 @@ namespace Text_RPG_Team
             this.speed = speed;
             this.defence = defence;
             this.drop_exp = this.level;//경험치 = 몬스터의 레벨 1당 1의 경험치
+            crit_rate = 15;
+            crit_dmg = 1.6f;
+            evasion = 10;
 
             tag = CHAR_TAG.MONSTER;
             this.type = type;
@@ -137,6 +143,36 @@ namespace Text_RPG_Team
         public int Drop_Exp
         {
             get { return drop_exp; }
+        }
+
+        public int Crit_Rate
+        {
+            get { return crit_rate; }
+        }
+
+        public int Total_Crit_Rate
+        {
+            get { return Crit_Rate; }
+        }
+
+        public float Crit_DMG
+        {
+            get { return crit_dmg; }
+        }
+
+        public float Total_Crit_DMG
+        {
+            get { return Crit_DMG; }
+        }
+
+        public int Evasion
+        {
+            get { return evasion; }
+        }
+
+        public int Total_Evasion
+        {
+            get { return Evasion; }
         }
 
         //캐릭터 태그

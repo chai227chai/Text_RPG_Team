@@ -27,10 +27,8 @@ namespace Text_RPG_Team
         int level;
         int attack;
         int plusattack;
-        bool checkattack;
         int defence;
         int plusdefence;
-        bool checkdefence;
         int health;
         int maxhealth;
         int mp;
@@ -40,6 +38,12 @@ namespace Text_RPG_Team
         int plusSpeed;
         int levelexp;
         int[] levelup = new int[2];
+        int crit_rate;
+        int plus_crit_rate;
+        float crit_dmg;
+        float plus_crit_dmg;
+        int evasion;
+        int plus_evasion;
 
         CHAR_TAG tag;
 
@@ -52,16 +56,20 @@ namespace Text_RPG_Team
             level = 1;
             this.attack = attack;
             plusattack = 0;
-            checkattack = false;
             this.defence = defence;
             plusdefence = 0;
-            checkdefence = false;
             maxhealth = maxHealth;
             health = maxhealth;
             maxmp = maxMp;
             mp = maxmp;
             this.speed = speed;
             plusSpeed = 0;
+            crit_rate = 15;
+            plus_crit_rate = 0;
+            crit_dmg = 1.6f;
+            plus_crit_dmg = 0;
+            evasion = 10;
+            plus_evasion = 0;
             levelexp = 0;
             levelup[0] = 10;
             levelup[1] = 25;
@@ -160,15 +168,10 @@ namespace Text_RPG_Team
             set { plusattack = value; }
         }
 
+        //캐릭터 총 공격력
         public int Total_Attack
         {
             get { return Attack + PlusAttack; }
-        }
-
-        public bool CheckAttack
-        {
-            get { return checkattack; }
-            set { checkattack = value; }
         }
 
         //캐릭터 방어력
@@ -195,17 +198,68 @@ namespace Text_RPG_Team
             get { return Defence + PlusDefence; }
         }
 
-        public bool CheckDefence
-        {
-            get { return checkdefence; }
-            set { checkdefence = value; }
-        }
-
         //보유 골드
         public int Gold
         {
             get { return gold; }
             set { gold = value; }
+        }
+
+        //캐릭터 치명타율
+        public int Crit_Rate
+        {
+            get { return crit_rate; }
+        }
+
+        //캐릭터 추가 치명타율
+        public int Plus_Crit_Rate
+        {
+            get { return plus_crit_rate; }
+            set { plus_crit_rate = value; }
+        }
+
+        //캐릭터 총 치명타율
+        public int Total_Crit_Rate
+        {
+            get { return Crit_Rate + Plus_Crit_Rate; }
+        }
+
+        //캐릭터 치명타 데미지
+        public float Crit_DMG
+        {
+            get { return crit_dmg; }
+        }
+
+        //캐릭터 추가 치명타 데미지
+        public float Plus_Crit_DMG
+        {
+            get { return plus_crit_dmg; }
+            set { plus_crit_dmg = value; } 
+        }
+
+        //캐릭터 총 치명타 데미지
+        public float Total_Crit_DMG
+        {
+            get { return Crit_DMG + Plus_Crit_DMG; }
+        }
+
+        //캐릭터 회피율
+        public int Evasion
+        {
+            get { return evasion; }
+        }
+
+        //캐릭터 추가 회피율
+        public int Plus_Evasion
+        {
+            get { return plus_evasion; }
+            set { plus_evasion = value; }
+        }
+
+        //캐릭터 총 회피율
+        public int Total_Evasion
+        {
+            get { return Evasion + Plus_Evasion; }
         }
 
         //캐릭터 사망 여부
@@ -227,22 +281,26 @@ namespace Text_RPG_Team
             set { speed = value; }
         }
 
+        //캐릭터 추가 스피드
         public int PlusSpeed
         {
             get { return plusSpeed; }
             set { plusSpeed = value; }
         }
 
+        //캐릭터 총 스피드
         public int Total_Speed
         {
             get { return speed + plusSpeed; }
         }
 
+        //스킬 리스트
         public List<Skill> getSkillList
         {
             get { return skillList; }
         }
 
+        //인벤토리
         public Inventory GetInventory
         {
             get { return inventory; }
