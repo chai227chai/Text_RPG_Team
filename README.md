@@ -29,7 +29,8 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 ----
 ### 상태 보기
-![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/6ecf3729-62fe-4e17-ae2e-d836f2ff1489)
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/fbaf9815-7952-427d-ae3d-3e0d4ae1aab6)
+
 
 -
 #### 1. 캐릭터 생성
@@ -38,7 +39,10 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 -
 
 #### 2. 직업 선택
-![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/9ccb57c7-c970-4338-a3e4-2b4455d1d1a4)
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/38e9bf7b-c0ac-4334-9a1f-240123cd5f5c)
+
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/9c7036d9-c0a9-451a-8eab-1d1fe9790de9)
+
 
 -
 
