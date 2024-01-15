@@ -24,6 +24,10 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 ## 주요 기능
 
+### 목차
+[1. 게임 시작화면](#게임시작화면) 
+
+
 ### 게임 시작 화면
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
 
@@ -97,7 +101,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
     
 - HP와 MP 회복 물약이 있습니다. 각 30, 50, 100씩 회복이 가능한 물약이 존재합니다.
 - 처음 캐릭터 생성 시 HP 30, MP 30 회복 물약을 3개씩 가지고 있습니다.
-
+# 게임시작화면
 #### 3. 아이템 착용
 ```
 public enum ItemType
