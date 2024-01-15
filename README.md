@@ -151,6 +151,11 @@ public enum ItemType
 
 #### 6. 게임 저장 및 불러오기
 
+ ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/5cf4f02d-d8b4-433a-8a2f-6afb7fd01f8c)
+
  ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/f5b33ee8-da17-4cac-8055-d43a6ddc9049)
  
- ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/917d9d39-8374-4f3a-9f52-255cd8378cc0)
+ ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/aa7ab7c8-362d-40f6-87f3-5b608b9a32c2)
+
+ - 게임 저장 시 현재 시간으로 세이브 파일이 저장됩니다.
+ - 게임 불러오기를 선택할 시, 원하는 파일을 선택하여 불러올 수 있습니다.
