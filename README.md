@@ -26,6 +26,8 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 ### 게임 시작 화면
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/97dfe05d-9300-46a8-a966-0ccb79b07dca)
+
 
 ----
 ### 상태 보기
@@ -95,3 +97,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/8fdad15d-6d13-4818-b39e-dd31f76423b1)
 - 몬스터가 20% 확률로 스킬을 사용합니다. 특별한 몬스터는 더 자주 스킬을 사용합니다.
 
+#### 7. 게임 저장 및 불러오기
+
+ - ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/f5b33ee8-da17-4cac-8055-d43a6ddc9049)
+ - ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/917d9d39-8374-4f3a-9f52-255cd8378cc0)
