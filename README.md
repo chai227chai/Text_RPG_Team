@@ -44,9 +44,9 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
 
-![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/2f8e6013-bc64-4247-9366-699820dcbd25)
-
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/bbefc77d-9ad7-4e5d-b6c2-bddbb1255a13)
+
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/2f8e6013-bc64-4247-9366-699820dcbd25)
 
 ----
 ### 상태보기
