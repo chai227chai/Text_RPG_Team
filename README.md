@@ -26,41 +26,55 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 ### 게임 시작 화면
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
+
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/2f8e6013-bc64-4247-9366-699820dcbd25)
+
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/bbefc77d-9ad7-4e5d-b6c2-bddbb1255a13)
 
 ----
 ### 상태 보기
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/fbaf9815-7952-427d-ae3d-3e0d4ae1aab6)
 
-
+- 설정한 캐릭터의 이름과 선택한 직업을 볼 수 있습니다.
+- 착용한 아이템이 있다면 아이템의 능력치가 추가되어 나타납니다.
 -
 #### 1. 캐릭터 생성
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/54561e71-5b8d-40b2-9b5e-7a0998877bbb)
 
--
+- 원하는 캐릭터의 이름을 작성합니다.
 
 #### 2. 직업 선택
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/38e9bf7b-c0ac-4334-9a1f-240123cd5f5c)
 
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/9c7036d9-c0a9-451a-8eab-1d1fe9790de9)
 
-
--
+- 직업을 선택할 수 있으며 직업에 따라 능력치와 사용할 수 있는 스킬이 다릅니다.
 
 ----
 ### 전투
 -
 #### 1. 스킬
+예시)전사
+
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/bb719fef-a7cb-4300-8da1-6d7a68d90e7a)
+
+- 직업당 3개의 스킬을 보유하고 있습니다.
+- 스킬마다 공격받는 적의 수와 공격 데미지가 다릅니다.
+- 공격 데미지는 현재 공격력의 영향을 받습니다.
 -
 #### 2. 치명타
 -
 #### 3. 회피
 -
 #### 4. 레벨 업
--
+- 쓰러트린 몬스터의 레벨1 당 경험치 1을 얻습니다.
+- 레벨마다 정해진 경험치를 얻으면 레벨 업을 하게 됩니다.
+- 레벨 업을 하게 되면 공격력과 방어력이 소량 증가하게 됩니다.
 
 #### 5. 보상
--
+- 쓰러트린 몬스터마다 한개의 보상을 드랍합니다.
+- 보상에는 착용가능한 장비와 포션이 있습니다.
+
 ----
 ### 추가 구현
 -
@@ -85,7 +99,19 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - 처음 캐릭터 생성 시 HP 30, MP 30 회복 물약을 3개씩 가지고 있습니다.
 
 #### 3. 아이템 착용
--
+```
+public enum ItemType
+{
+    WEAPON, ARMOR, SHOES
+}
+```
+
+- 상점에서 구매하거나 던전에서 얻은 아이템이 인벤토리에 들어가게 됩니다.
+- 인벤토리에서 아이템을 착용할 수 있습니다.
+- 아이템의 종류마다 한개의 아이템만 착용 가능합니다.
+- 같은 종류가 착용되어 있으면 착용된 아이템은 해제되고 선택한 아이템이 착용됩니다.
+- 착용한 아이템을 선택하면 착용 해제됩니다.
+- 착용한 아이템의 스탯은 적용됩니다.
 
 #### 4. 전투 스테이지 추가
 -
