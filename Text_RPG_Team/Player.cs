@@ -14,11 +14,10 @@ namespace Text_RPG_Team
         WARRIOR, WIZARD, ROGUE
     }
 
+    [Serializable]
     internal class Player : ICharacter
     {
         Inventory inventory = new Inventory();
-
-        private Random random = new Random();
 
         private List<Skill> skillList;
 
@@ -293,7 +292,7 @@ namespace Text_RPG_Team
         public int Ran_Speed()
         {
             int span = (int)Math.Ceiling((float)Total_Speed * 0.2f);
-            int ran_speed = random.Next(Total_Speed - span, Total_Speed + span + 1);
+            int ran_speed = new Random().Next(Total_Speed - span, Total_Speed + span + 1);
             return ran_speed;
         }
 
@@ -301,7 +300,7 @@ namespace Text_RPG_Team
         public int Ran_Attack()
         {
             int damage_range = (int)Math.Ceiling((float)Total_Attack * 0.1);
-            int damage = random.Next(Total_Attack - damage_range, Total_Attack + damage_range + 1);
+            int damage = new Random().Next(Total_Attack - damage_range, Total_Attack + damage_range + 1);
             return damage;
         }
 

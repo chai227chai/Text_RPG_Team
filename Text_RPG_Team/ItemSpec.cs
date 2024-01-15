@@ -11,6 +11,7 @@ namespace Text_RPG_Team
         ATTACK, DEFEND, SPEED
     }
 
+    [Serializable]
     public class ItemSpec
     {
 

@@ -11,6 +11,7 @@ namespace Text_RPG_Team
         WEAPON, ARMOR, SHOES
     }
 
+    [Serializable]
     internal class Item
     {
         private string name;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -26,9 +27,10 @@ namespace Text_RPG_Team
         public GameManager()
         {
             FirstScreen();
-            //character.Name = SetCharacter();
-            name = SetCharacter();
-            SetJob();
+            while (character is null)
+            {
+                StartGame();
+            }
             MainTown();
         }
 
@@ -49,6 +51,38 @@ namespace Text_RPG_Team
             textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
             Console.WriteLine("=============================================================================================");
             Console.ReadKey();
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        //게임 시작
+        private void StartGame()
+        {
+            Console.Clear();
+            Console.WriteLine("...................................................................................................................");
+            Console.WriteLine("..$$$$....$$$$.............$$$$$$..$$$$$$.......$$$$$...$$$$$$...$$$$...$$$$$$..$$..$$...$$$$......................");
+            Console.WriteLine(".$$......$$..$$..............$$......$$.........$$..$$..$$......$$........$$....$$$.$$..$$.........................");
+            Console.WriteLine("..$$$$...$$..$$..............$$......$$.........$$$$$...$$$$....$$.$$$....$$....$$.$$$...$$$$......................");
+            Console.WriteLine(".....$$..$$..$$...$$.........$$......$$.........$$..$$..$$......$$..$$....$$....$$..$$......$$....$$....$$....$$...");
+            Console.WriteLine("..$$$$....$$$$.....$.......$$$$$$....$$.........$$$$$...$$$$$$...$$$$...$$$$$$..$$..$$...$$$$.....$$....$$....$$...");
+            Console.WriteLine("...................................................................................................................");
+            Console.WriteLine();
+
+            textedit.ChangeTextColorYellow("1. 새로 시작하기");
+            textedit.ChangeTextColorCyan("2. 게임 불러오기");
+            Console.WriteLine();
+
+            int chooseJob = IsValidInput(2, 1);
+            switch (chooseJob)
+            {
+                case 1:
+                    name = SetCharacter();
+                    SetJob();
+                    break;
+                case 2:
+                    LoadGame();
+                    break;
+            }
+            
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -116,7 +150,7 @@ namespace Text_RPG_Team
             Console.WriteLine("확정하시겠습니까?");
             Console.WriteLine();
             Console.ResetColor();
-            Console.WriteLine("1. 예 2.아니오");
+            Console.WriteLine("1. 예 2. 아니오");
             Console.WriteLine();
 
             int choose = IsValidInput(2, 1);
@@ -153,8 +187,13 @@ namespace Text_RPG_Team
             Console.ResetColor();
 
             Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("6. 게임 세이브");
+            Console.WriteLine("7. 게임 로드");
 
-            int act = IsValidInput(5, 1);
+            Console.WriteLine();
+
+            int act = IsValidInput(7, 1);
 
             switch (act)
             {
@@ -163,8 +202,6 @@ namespace Text_RPG_Team
                     break;
                 case 2:
                     EnterDungeon();
-                    //dungeon.PlusPortion(hpportion);
-                    //dungeon.PlusPortion(mpportion);
                     break;
                 case 3:
                     ViewPortion();
@@ -174,6 +211,14 @@ namespace Text_RPG_Team
                     break;
                 case 5:
                     ViewStore();
+                    break;
+                case 6:
+                    SaveGame();
+                    MainTown();
+                    break;
+                case 7:
+                    LoadGame();
+                    MainTown();
                     break;
             }
         }
@@ -399,7 +444,9 @@ namespace Text_RPG_Team
         private void UsePortion(PortionType portionType)
         {
             Console.Clear ();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("■회복 - 사용■");
+            Console.ResetColor();
             Console.Write($"포션을 사용하면 ");
             Console.Write((portionType == PortionType.HP) ? "체력" : "마나");
             Console.WriteLine("를 회복할 수 있습니다");
@@ -560,6 +607,123 @@ namespace Text_RPG_Team
                     ViewStore();
                 }
             }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
+        void SaveGame()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            string root_dir = ".\\SaveData";
+            if(Directory.Exists(root_dir) == false)
+            {
+                Directory.CreateDirectory(root_dir);
+            }
+            FileStream fs = new FileStream( root_dir + "\\savefile" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".save", FileMode.Create);
+            SaveField dataSave = new SaveField();
+
+            dataSave.character = this.character;
+            dataSave.itemList = this.itemlist;
+            dataSave.portionlist = this.portionlist;
+            dataSave.dungeon = this.dungeon;
+
+            bf.Serialize(fs, dataSave);
+            fs.Close();
+
+        }
+
+        void LoadGame()
+        {
+            string root_dir = ".\\SaveData";
+            if (Directory.Exists(root_dir) == false)
+            {
+                Directory.CreateDirectory(root_dir);
+            }
+
+            string[] files = Directory.GetFiles(root_dir);
+            Array.Sort(files);
+            Array.Reverse(files);
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("■게임 로드■");
+            Console.ResetColor();
+            Console.WriteLine("세이브 데이터를 선택하세요.");
+            Console.WriteLine();
+
+            int index = 1;
+            foreach(string file in files)
+            {
+                Console.WriteLine(index + "." + file);
+                index++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+
+            Console.WriteLine();
+            int act = IsValidInput(index - 1, 0);
+
+            if (act == 0)
+            {
+                return;
+            }
+            else
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream fs = new FileStream(files[act - 1], FileMode.Open);
+                SaveField dataSave = new SaveField();
+
+                dataSave = bf.Deserialize(fs) as SaveField;
+
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("해당 캐릭터로 시작하시겠습니까?");
+                Console.WriteLine();
+                Console.ResetColor();
+                Console.Write($"{dataSave.character.Name} ");
+                Console.Write("( ");
+                switch (dataSave.character.GetJob)
+                {
+                    case "전사":
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        break;
+                    case "마법사":
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    case "도적":
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                    default:
+                        break;
+                }
+                Console.Write($"{dataSave.character.GetJob}");
+                Console.ResetColor();
+                Console.Write(" )");
+                Console.WriteLine();
+                Console.WriteLine("LV : " + dataSave.character.Level.ToString("00"));
+                Console.WriteLine();
+
+                Console.WriteLine("1. 예 2. 아니오");
+                Console.WriteLine();
+
+                int act2 = IsValidInput(2, 1);
+
+                switch (act2)
+                {
+                    case 1:
+                        this.character = dataSave.character;
+                        this.itemlist = dataSave.itemList;
+                        this.portionlist = dataSave.portionlist;
+                        this.dungeon = dataSave.dungeon;
+                        break;
+                    case 2:
+                        LoadGame();
+                        break;
+                }
+
+                fs.Close();
+            }
+
+            return;
         }
 
     }

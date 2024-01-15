@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class Inventory
     {
         private List<Item> inventoryList;

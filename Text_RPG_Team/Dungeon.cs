@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class Dungeon
     {
-        private Random random = new Random();
 
         Player? player;
         MonsterList? monsterList;
@@ -30,7 +31,7 @@ namespace Text_RPG_Team
 
         public Dungeon()
         {
-            stage = 4;
+            stage = 1;
         }
 
         public int Now_Stage
@@ -53,11 +54,11 @@ namespace Text_RPG_Team
             int number = 1;
             if(stage >= 1 && stage <= 4)
             {
-                number = random.Next(stage, stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
             else if(stage >= 5 && stage <= 9)
             {
-                number = random.Next(3, 7);
+                number = new Random().Next(3, 7);
             }
             else if(stage == 10)
             {
@@ -65,7 +66,7 @@ namespace Text_RPG_Team
             }
             else if(stage > 10)
             {
-                number = random.Next(stage, stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
 
             int exp = 0;
@@ -75,7 +76,7 @@ namespace Text_RPG_Team
 
             for (int i = 0; i < number; i++)
             {
-                int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
+                int random_monster = new Random().Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
                 battle_monster.Add(newMonster);
 
@@ -259,7 +260,7 @@ namespace Text_RPG_Team
 
             foreach(Monster mon in battle_monster)
             {
-                int i = random.Next(1, 5);
+                int i = new Random().Next(1, 5);
                 rewardGold = 300 * mon.Level;
                 if(i <= 1)
                 {
@@ -607,7 +608,7 @@ namespace Text_RPG_Team
                 damage = 0;
             }
 
-            int critical = random.Next(1, 100);
+            int critical = new Random().Next(1, 100);
 
             if (critical <= 15)
             {
@@ -639,7 +640,7 @@ namespace Text_RPG_Team
         //스킬 범위 무작위인 경우
         public void SkillAttackRandom(Player attacker, Skill skill)
         {
-            List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => random.Next()).Take(skill.Range).ToList();
+            List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => new Random().Next()).Take(skill.Range).ToList();
             player.Mp -= skill.MP;
 
             Console.Clear();
@@ -654,7 +655,7 @@ namespace Text_RPG_Team
                     damage = 0;
                 }
 
-                int critical = random.Next(1, 100);
+                int critical = new Random().Next(1, 100);
 
                 if (critical <= 15)
                 {
@@ -701,7 +702,7 @@ namespace Text_RPG_Team
                     damage = 0;
                 }
 
-                int critical = random.Next(1, 100);
+                int critical = new Random().Next(1, 100);
 
                 if (critical <= 15)
                 {
@@ -735,8 +736,8 @@ namespace Text_RPG_Team
         //캐릭터 일반 공격 함수
         private void Attack(ICharacter attacker, ICharacter victim)
         {
-            int miss = random.Next(0, 10);
-            int critical = random.Next(0, 100);
+            int miss = new Random().Next(0, 10);
+            int critical = new Random().Next(0, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
 
@@ -794,7 +795,7 @@ namespace Text_RPG_Team
             int useSkill;
             if (monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
             {
-                useSkill = random.Next(1, 11);
+                useSkill = new Random().Next(1, 11);
             }
             else
             {
@@ -807,7 +808,7 @@ namespace Text_RPG_Team
                 //스킬 사용 확률 40%
                 if (useSkill >= 6)
                 {
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else
@@ -821,7 +822,7 @@ namespace Text_RPG_Team
                 if (useSkill >= 8)
                 {
                     //스킬 리스트에서 스킬 하나를 무작위로 빼옴
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else

@@ -10,6 +10,7 @@ using System.Xml.Linq;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class PortionList
     {
         List<Portion> portionlist = new List<Portion>();

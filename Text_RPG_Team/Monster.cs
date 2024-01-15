@@ -12,10 +12,9 @@ namespace Text_RPG_Team
         NIMION, ELITE_MINION, ELITE_WOLF, ELITE_BIRD, ELITE_FROG, BOSS_HERAID
     }
 
+    [Serializable]
     internal class Monster : ICharacter
     {
-        private Random random = new Random();
-
         string name;
 
         int level;
@@ -170,7 +169,7 @@ namespace Text_RPG_Team
         public int Ran_Speed()
         {
             int span = (int)Math.Ceiling((float)speed * 0.2f);
-            int ran_speed = random.Next(speed - span, speed + span + 1);
+            int ran_speed = new Random().Next(speed - span, speed + span + 1);
             return ran_speed;
         }
 
@@ -178,7 +177,7 @@ namespace Text_RPG_Team
         public int Ran_Attack()
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1);
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            int damage = new Random().Next(attack - damage_range, attack + damage_range + 1);
             return damage;
         }
 

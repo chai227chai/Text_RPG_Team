@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     public class Skill : ISkill
     {
         public string Name { get; }

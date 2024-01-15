@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class ItemList
     {
         private List<Item> itemList;

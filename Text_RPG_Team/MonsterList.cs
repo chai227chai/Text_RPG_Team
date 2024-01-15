@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class MonsterList
     {
         private List<Monster> monsterList;
