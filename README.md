@@ -22,13 +22,19 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - **[팀원]하지혜** : 캐릭터 생성, 레벨업 기능 추가,  상점 제작 및 인벤토리 아이템 적용, 포션 제작(HP, MP) 및 회복량 추가
  
 
-## 주요 기능
-
-### 목차
-[1. 게임 시작화면](#게임시작화면) 
+## 주요 기능 목차
 
 
-### 게임 시작 화면
+[1. 게임 시작화면](#게임-시작화면)
+
+[2. 상태보기](#상태보기) 
+
+[3. 전투](#전투)
+
+[4. 추가 구현](#추가-구현)
+
+# 게임 시작화면
+
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
 
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/2f8e6013-bc64-4247-9366-699820dcbd25)
@@ -36,7 +42,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/bbefc77d-9ad7-4e5d-b6c2-bddbb1255a13)
 
 ----
-### 상태 보기
+# 상태보기
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/fbaf9815-7952-427d-ae3d-3e0d4ae1aab6)
 
 - 설정한 캐릭터의 이름과 선택한 직업을 볼 수 있습니다.
@@ -55,7 +61,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - 직업을 선택할 수 있으며 직업에 따라 능력치와 사용할 수 있는 스킬이 다릅니다.
 
 ----
-### 전투
+# 전투
 -
 #### 1. 스킬
 예시)전사
@@ -101,7 +107,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
     
 - HP와 MP 회복 물약이 있습니다. 각 30, 50, 100씩 회복이 가능한 물약이 존재합니다.
 - 처음 캐릭터 생성 시 HP 30, MP 30 회복 물약을 3개씩 가지고 있습니다.
-# 게임시작화면
+
 #### 3. 아이템 착용
 ```
 public enum ItemType
