@@ -1,4 +1,6 @@
 # Text_RPG_Team
+- 선택지를 입력하여 진행되는 Text RPG Game
+
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/visual%20studio-9B4DE3?style=for-the-badge&logo=visual%20studio&logoColor=white)
 <!--
@@ -10,10 +12,10 @@
 https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 -->
 
- 
+ ----
 ## 개발 기간
 #### **2024/01/09 ~ 2021/01/16**
-
+----
 ## 멤버 구성
 
 - **[팀장]신채윤** - 전투, 레벨업 기능 적용, 던전 스테이지 추가, 캐릭터 속도 시스템 추가, 몬스터 이름 중복 방지, 몬스터 스킬 추가 및 적용, 아이템 능력치 변경
@@ -21,9 +23,13 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 - **[팀원]김준서** - 직업 선택, 크리티컬, 회피기능추가, 몬스터 보상추가, 전투시 포션사용
 - **[팀원]하지혜** : 캐릭터 생성, 레벨업 기능 추가,  상점 제작 및 인벤토리 아이템 적용, 포션 제작(HP, MP) 및 회복량 추가
  
-
+----
 ## 주요 기능 목차
-
+<!--
+이동 링크 넣는 법
+[화면에 보일 텍스트](#이동할 곳의 제목)
+띄어쓰기 있을 경우 -를 적어줘야 적용 가능
+-->
 
 [1. 게임 시작화면](#게임-시작화면)
 
@@ -33,6 +39,7 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 
 [4. 추가 구현](#추가-구현)
 
+----
 ### 게임 시작화면
 
 ![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
@@ -129,10 +136,10 @@ public enum ItemType
 -
 #### 6. 몬스터 스킬 추가
 
-- ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/8fdad15d-6d13-4818-b39e-dd31f76423b1)
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/8fdad15d-6d13-4818-b39e-dd31f76423b1)
 - 몬스터가 20% 확률로 스킬을 사용합니다. 특별한 몬스터는 더 자주 스킬을 사용합니다.
 
 #### 7. 게임 저장 및 불러오기
 
- - ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/f5b33ee8-da17-4cac-8055-d43a6ddc9049)
- - ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/917d9d39-8374-4f3a-9f52-255cd8378cc0)
+ ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/f5b33ee8-da17-4cac-8055-d43a6ddc9049)
+ ![image](https://github.com/chai227chai/Text_RPG_Team/assets/37549333/917d9d39-8374-4f3a-9f52-255cd8378cc0)
