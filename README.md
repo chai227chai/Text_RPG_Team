@@ -18,14 +18,23 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 ### 주요 기능
 
 #### 게임 시작 화면
--
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/59f75680-1031-4792-97d2-9f42bc7433f7)
+
 ----
 #### 상태 보기
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/6ecf3729-62fe-4e17-ae2e-d836f2ff1489)
+
 -
 ##### 1. 캐릭터 생성
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/54561e71-5b8d-40b2-9b5e-7a0998877bbb)
+
 -
+
 ##### 2. 직업 선택
+![image](https://github.com/chai227chai/Text_RPG_Team/assets/154485025/9ccb57c7-c970-4338-a3e4-2b4455d1d1a4)
+
 -
+
 ----
 #### 전투
 -
@@ -37,13 +46,13 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
 -
 ##### 4. 레벨 업
 -
+
 ##### 5. 보상
 -
 ----
 #### 추가 구현
 -
 ##### 1. 몬스터 종류 추가
-
 -
 
 ##### 2. 회복 아이템 추가
@@ -61,8 +70,10 @@ https://shields.io/badges : 아이콘이나 명찰 등 만드는 곳
     }
     
 - 회복 아이템 종류 및 회복량 변경.
+
 ##### 3. 아이템 착용
 -
+
 ##### 4. 전투 스테이지 추가
 -
 ##### 5. 보상
