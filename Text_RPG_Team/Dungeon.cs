@@ -17,6 +17,8 @@ namespace Text_RPG_Team
         Portion HPportion = new Portion(PortionType.HP, PortionValue.Small);
         Portion MPportion = new Portion(PortionType.MP, PortionValue.Small);
         PortionList portionList;
+        ItemList itemList = new ItemList();
+
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
@@ -55,7 +57,7 @@ namespace Text_RPG_Team
             }
             else if(stage >= 5 && stage <= 9)
             {
-                number = random.Next(3, 6);
+                number = random.Next(3, 7);
             }
             else if(stage == 10)
             {
@@ -88,6 +90,7 @@ namespace Text_RPG_Team
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        //던전 시작
         private void Start_phase()
         {
             Console.Clear();
@@ -252,6 +255,8 @@ namespace Text_RPG_Team
             int rewardGold = 0;
             int rewardHpPotion = 0;
             int rewardMpPotion = 0;
+            List<Item> reward_items = new List<Item>();
+
             foreach(Monster mon in battle_monster)
             {
                 int i = random.Next(1, 5);
@@ -263,6 +268,12 @@ namespace Text_RPG_Team
                 else if (1 < i && i <= 3)
                 {
                     rewardHpPotion += 1;
+                }
+
+                string reward_item = mon.dropItem(mon);
+                if (!reward_item.Equals("-1"))
+                {
+                    reward_items.Add(itemList.GetItemList.Find(itemnumber => itemnumber.Number == reward_item));
                 }
             }
             player.Gold += rewardGold;
@@ -282,6 +293,11 @@ namespace Text_RPG_Team
                 Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
                 portionList.AddPortion(MPportion.Type, MPportion.Value, rewardMpPotion);
                 MPportion.Count = 0;
+            }
+            foreach(Item item in reward_items)
+            {
+                player.GetInventory.addInventroy(item);
+                Console.WriteLine($"{item.Name}");
             }
         }
 
@@ -396,8 +412,8 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
-            Console.WriteLine($"HP {player.Health}");
-            Console.WriteLine($"MP {player.Mp}");
+            Console.WriteLine($"HP {player.Health} / {player.MaxHealth}");
+            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
             Console.WriteLine();
 
             index = 1;
@@ -519,7 +535,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.Level} {player.Name}  ({player.GetJob})");
-            Console.WriteLine($"HP {player.Health}");
+            Console.WriteLine($"HP {player.Health} / {player.MaxHealth}");
 
             Console.WriteLine();
             Console.WriteLine("0. 나가기");

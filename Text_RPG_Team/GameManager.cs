@@ -20,7 +20,6 @@ namespace Text_RPG_Team
         PortionList portionlist = new PortionList();
         ItemList itemlist = new ItemList();
         Store store = new Store();
-        Inventory inventory = new Inventory();
 
         string name;
 
@@ -439,7 +438,7 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(inventory.GetInventoryList);
+            itemlist.PrintItemList(character.GetInventory.GetInventoryList);
             Console.WriteLine();
             Console.ResetColor();
 
@@ -468,12 +467,12 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(inventory.GetInventoryList, true);
+            itemlist.PrintItemList(character.GetInventory.GetInventoryList, true);
             Console.WriteLine("");
             Console.ResetColor();
             Console.WriteLine("0. 나가기");
             Console.WriteLine("");
-            int act = IsValidInput(inventory.GetInventoryList.Count, 0);
+            int act = IsValidInput(character.GetInventory.GetInventoryList.Count, 0);
 
             if (act == 0)
             {
@@ -482,8 +481,8 @@ namespace Text_RPG_Team
             }
             else
             {
-                Item selectitem = inventory.GetItem(act);
-                inventory.SetPlayerSpec(character, selectitem);
+                Item selectitem = character.GetInventory.GetItem(act);
+                character.GetInventory.SetPlayerSpec(character, selectitem);
                 InventoryManager();
             }
         }
@@ -553,7 +552,7 @@ namespace Text_RPG_Team
                 if(solditem != null)
                 {
                     character.Gold -= solditem.Price;
-                    inventory.addInventroy(solditem);
+                    character.GetInventory.addInventroy(solditem);
                     StoreBuy();
                 }
                 else
