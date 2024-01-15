@@ -14,8 +14,9 @@ namespace Text_RPG_Team
 
         Player? player;
         MonsterList? monsterList;
-        Portion HPportion = new Portion(PortionType.HP);
-        Portion MPportion = new Portion(PortionType.MP);
+        Portion HPportion = new Portion(PortionType.HP, PortionValue.Small);
+        Portion MPportion = new Portion(PortionType.MP, PortionValue.Small);
+        PortionList portionList;
         List<Monster>? battle_monster;
         ICharacter[]? allCharacter;
 
@@ -36,9 +37,10 @@ namespace Text_RPG_Team
         }
 
         //던전 생성
-        public void GoDungeon(Player player)
+        public void GoDungeon(Player player, PortionList portionList)
         {
             this.player = player;
+            this.portionList = portionList;
             this.monsterList = new MonsterList(stage);
 
             this.battle_monster = new List<Monster>();
@@ -272,29 +274,16 @@ namespace Text_RPG_Team
             if(rewardHpPotion >= 1)
             {
                 Console.WriteLine($"체력 회복 포션 - {rewardHpPotion}");
+                portionList.AddPortion(HPportion.Type, HPportion.Value, rewardHpPotion);
+                HPportion.Count = 0;
             }
             if(rewardMpPotion >= 1)
             {
                 Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
-            }
-        }
-
-        //포션 보상 적용
-        public void PlusPortion(Portion portion)
-        {
-            if(portion.Type == PortionType.HP)
-            {
-                portion.SetPortion(HPportion.Count);
-                HPportion.Count = 0;
-            }
-            else if (portion.Type == PortionType.MP)
-            {
-                portion.SetPortion(MPportion.Count);
+                portionList.AddPortion(MPportion.Type, MPportion.Value, rewardMpPotion);
                 MPportion.Count = 0;
             }
         }
-
-
 
 
         //---------------------------------------------------------------------------------------------------------------
@@ -328,10 +317,11 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
+            Console.WriteLine("3. 포션");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            int act = IsValidInput(2, 1);
+            int act = IsValidInput(3, 1);
 
             int target;
             if(act == 1)
@@ -360,6 +350,26 @@ namespace Text_RPG_Team
             else if (act == 2)
             {
                 PlayerSkillTurn();
+            }
+            else if (act == 3)
+            {
+                portionList.PrintPortionList();
+                Console.WriteLine("사용하실 포션을 선택해 주세요.");
+                Console.WriteLine("1.체력 포션\n2.마나 포션\n0.나가기");
+                int i = IsValidInput(2, 0);
+                switch (i)
+                {
+                    case 0:
+                        PlayerTurn();
+                        break;
+                    case 1:
+                        portionList.UsePortion(player, HPportion);
+                        break;
+                    case 2:
+                        portionList.UsePortion(player, MPportion);
+                        break;
+                }
+                return;
             }
         }
         //---------------------------------------------------------------------------------------------------

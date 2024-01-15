@@ -57,9 +57,9 @@ namespace Text_RPG_Team
         {
             AddEquipedTem(item.Type, item);
 
-            player.PlusAttack = ExAttack();
-            player.PlusDefence = ExDefend();
-            player.PlusSpeed = ExSpeed();
+            player.PlusAttack = ExSpec(SpecType.ATTACK);
+            player.PlusDefence = ExSpec(SpecType.DEFEND);
+            player.PlusSpeed = ExSpec(SpecType.SPEED);
         }
 
         //인벤토리에 있는 아이템 하나 가져오기
@@ -74,40 +74,16 @@ namespace Text_RPG_Team
             inventoryList.RemoveAt(n - 1);
         }
 
-        //장착한 아이템의 공격력 가져오기
-        public int ExAttack()
+        //장착한 아이템의 특정 능력치 가져오기
+        public int ExSpec(SpecType specType)
         {
-            int exAttack = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.ATTACK) ))
+            int exSpec = 0;
+            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(specType)))
             {
-                exAttack += item.Spec.GetSpec(SpecType.ATTACK);
+                exSpec += item.Spec.GetSpec(specType); ;
             }
 
-            return exAttack;
-        }
-
-        //장착한 아이템의 방어력 가져오기
-        public int ExDefend()
-        {
-            int exDefend = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.DEFEND) ))
-            {
-                exDefend += item.Spec.GetSpec(SpecType.DEFEND);
-            }
-
-            return exDefend;
-        }
-
-        //장착한 아이템의 스피드 가져오기
-        public int ExSpeed()
-        {
-            int exSpeed = 0;
-            foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(SpecType.SPEED) ))
-            {
-                exSpeed += item.Spec.GetSpec(SpecType.SPEED); ;
-            }
-
-            return exSpeed;
+            return exSpec;
         }
 
         //인벤토리 리스트 가져오기
