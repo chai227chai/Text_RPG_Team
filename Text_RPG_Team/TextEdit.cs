@@ -37,7 +37,7 @@ namespace Text_RPG_Team
         public static string PadRightForMixedText(string str, int totalLength)
         {
             int current_length = GetPrintableLength(str);
-            int padding = (totalLength - current_length) / 2;
+            int padding = (totalLength - current_length);
             return str.PadRight(str.Length + padding);
         }
 
