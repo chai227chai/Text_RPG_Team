@@ -29,15 +29,15 @@ namespace Text_RPG_Team
 
         public static string PadLeftForMixedText(string str, int totalLength)
         {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
+            int current_length = GetPrintableLength(str);
+            int padding = (totalLength - current_length) / 2;
             return str.PadLeft(str.Length + padding);
         }
 
         public static string PadRightForMixedText(string str, int totalLength)
         {
-            int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength);
+            int current_length = GetPrintableLength(str);
+            int padding = (totalLength - current_length) / 2;
             return str.PadRight(str.Length + padding);
         }
 

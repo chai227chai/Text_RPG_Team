@@ -7,7 +7,7 @@ namespace Text_RPG_Team
     {
         private List<Item> itemList;
 
-        public int itemnumber
+        public int ItemNumber
         {
             get
             {

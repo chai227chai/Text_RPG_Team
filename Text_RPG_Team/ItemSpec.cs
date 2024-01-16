@@ -43,7 +43,7 @@ namespace Text_RPG_Team
         }
 
         //아이템 능력치 출력
-        public void getSpecList()
+        public void GetSpecList()
         {
             foreach (KeyValuePair<SpecType, int> s in specMap)
             {

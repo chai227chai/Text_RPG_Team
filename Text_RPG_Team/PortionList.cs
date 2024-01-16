@@ -13,7 +13,7 @@ namespace Text_RPG_Team
     [Serializable]
     internal class PortionList
     {
-        List<Portion> portionlist = new List<Portion>();
+        List<Portion> portionList = new List<Portion>();
 
         //포션 추가
         public void AddPortion(PortionType type, PortionValue value, int count)
@@ -27,47 +27,47 @@ namespace Text_RPG_Team
         //같은 종류 포션 개수 합치기
         private void SumPortion(Portion portion)
         {
-            for (int i = 0; i < portionlist.Count; i++)
+            for (int i = 0; i < portionList.Count; i++)
             {
-                if (portionlist[i].Type == portion.Type && portionlist[i].Value == portion.Value)
+                if (portionList[i].Type == portion.Type && portionList[i].Value == portion.Value)
                 {
-                    portionlist[i].SetPortion(portion.Count);
+                    portionList[i].SetPortion(portion.Count);
                     return;
                 }
             }
-            portionlist.Add(portion);
+            portionList.Add(portion);
         }
 
         //포션 리스트 가져오기
         public List<Portion> GetPortionList() 
         {  
-            return portionlist; 
+            return portionList; 
         }
 
         //포션 리스트 출력
         public void PrintPortionList()
         {
-            portionlist.Sort((portion1, portion2) => portion1.Type == portion2.Type ? portion1.Value.CompareTo(portion2.Value) : portion1.Type.CompareTo(portion2.Type));
-            for (int i = 0; i < portionlist.Count; i++)
+            portionList.Sort((portion1, portion2) => portion1.Type == portion2.Type ? portion1.Value.CompareTo(portion2.Value) : portion1.Type.CompareTo(portion2.Type));
+            for (int i = 0; i < portionList.Count; i++)
             {
                 Console.Write("- ");
-                Console.WriteLine($"{portionlist[i].Type} 포션 | {(int)portionlist[i].Value} 회복 | {portionlist[i].Count}개");
+                Console.WriteLine($"{portionList[i].Type} 포션 | {(int)portionList[i].Value} 회복 | {portionList[i].Count}개");
             }
         }
 
         public int UsePortionList(PortionType type)
         {
             int number = 1;
-            for (int i = 0; i < portionlist.Count; i++)
+            for (int i = 0; i < portionList.Count; i++)
             {
-                if (portionlist[i].Type == type)
+                if (portionList[i].Type == type)
                 {
-                    Console.WriteLine($"- {number}. {portionlist[i].Type} 포션 | {(int)portionlist[i].Value} 회복 | {portionlist[i].Count}개");
+                    Console.WriteLine($"- {number}. {portionList[i].Type} 포션 | {(int)portionList[i].Value} 회복 | {portionList[i].Count}개");
                     number++;
                 }
-                else if (portionlist[i].Type == type)
+                else if (portionList[i].Type == type)
                 {
-                    Console.WriteLine($"- {number}. {portionlist[i].Type} 포션 | {(int)portionlist[i].Value} 회복 | {portionlist[i].Count}개");
+                    Console.WriteLine($"- {number}. {portionList[i].Type} 포션 | {(int)portionList[i].Value} 회복 | {portionList[i].Count}개");
                     number++;
                 }
             }
@@ -77,9 +77,9 @@ namespace Text_RPG_Team
         //포션 유무 확인
         public bool CheckPortion(PortionType type)
         {
-            for (int i = 0; i < portionlist.Count; i++)
+            for (int i = 0; i < portionList.Count; i++)
             {
-                if (portionlist[i].Type == type)
+                if (portionList[i].Type == type)
                 {
                     return true;
                 }
@@ -91,21 +91,21 @@ namespace Text_RPG_Team
         public Portion GetPortion(PortionType type, int n)
         {
             int idx = 0;
-            for (int i = 0; i < portionlist.Count; i++)
+            for (int i = 0; i < portionList.Count; i++)
             {
-                if (portionlist[i].Type != type)
+                if (portionList[i].Type != type)
                 {
                     idx++;
                 }
                 else break;
             }
-            return portionlist[idx + n -1];
+            return portionList[idx + n -1];
         }
 
         //포션 삭제하기
         private void RemovePortion(Portion portion)
         {
-            portionlist.Remove(portion);
+            portionList.Remove(portion);
         }
 
         //포션 사용하기

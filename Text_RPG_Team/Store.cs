@@ -12,9 +12,9 @@ namespace Text_RPG_Team
     internal class Store
     {
         //구매
-        public Item BuyItem(int number, ItemList itemlist, int playergold)
+        public Item BuyItem(int number, ItemList itemList, int player_gold)
         {
-            Item item = itemlist.GetItem(number);
+            Item item = itemList.GetItem(number);
             while (true)
             {
                 if (!item.GetSale())
@@ -23,7 +23,7 @@ namespace Text_RPG_Team
                 }
                 else
                 {
-                    if (playergold < item.Price)
+                    if (player_gold < item.Price)
                     {
                         Console.WriteLine("보유하신 골드가 부족합니다.");
                     }
@@ -47,13 +47,13 @@ namespace Text_RPG_Team
                     }
                     else
                     {
-                        item = BuyItem(Renumber, itemlist, playergold);
+                        item = BuyItem(Renumber, itemList, player_gold);
                         break;
                     }
                 }
                 else
                 {
-                    BuyItem(number, itemlist, playergold);
+                    BuyItem(number, itemList, player_gold);
                 }
                 break;
             }
