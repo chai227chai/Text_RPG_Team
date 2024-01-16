@@ -75,7 +75,7 @@ namespace Text_RPG_Team
         //아이템 리스트 보여주기
         public void PrintItemList(List<Item> itemList, bool check_number = false, bool check_gold = false)
         {
-            int paddingName = SetNameTotalLength(itemList);
+            int paddingName = SetNameTotalLength(itemList) + 5;
             int paddingDetail = SetDetailTotalLength(itemList);
             for (int i = 0; i < itemList.Count; i++)
             {
@@ -86,7 +86,7 @@ namespace Text_RPG_Team
                     Console.Write($"{n}. ");
                     if (i >= 9)
                     {
-                        paddingName = SetNameTotalLength(itemList) - 1;
+                        paddingName = SetNameTotalLength(itemList) + 4;
                     }
                 }
                 if (itemList[i].IsEquip)
