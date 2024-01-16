@@ -102,7 +102,7 @@ namespace Text_RPG_Team
                 Console.Write(" | ");
                 if (check_gold)
                 {
-                    Console.Write(TextEdit.PadRightForMixedText(itemList[i].SalePrice, 6));
+                    Console.Write(TextEdit.PadRightForMixedText(itemList[i].SalePrice, 8));
                     Console.Write(" | ");
                 }
 
