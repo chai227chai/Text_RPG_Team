@@ -58,9 +58,9 @@ namespace Text_RPG_Team
             plus_attack = 0;
             this.defence = defence;
             plus_defence = 0;
-            max_health = max_health;
+            this.max_health = max_health;
             health = max_health;
-            max_mp = max_mp;
+            this.max_mp = max_mp;
             mp = max_mp;
             this.speed = speed;
             plus_speed = 0;
