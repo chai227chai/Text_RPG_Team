@@ -15,7 +15,6 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
-        TextEdit textEdit = new TextEdit();
         Player character;
         Dungeon dungeon = new Dungeon();
         PortionList portionList = new PortionList();
@@ -53,7 +52,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -69,7 +68,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -85,7 +84,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -101,7 +100,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -117,7 +116,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -133,7 +132,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textEdit.ChangeTextColorCyan(textEdit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
@@ -161,8 +160,8 @@ namespace Text_RPG_Team
             Console.WriteLine("...................................................................................................................");
             Console.WriteLine();
 
-            textEdit.ChangeTextColorYellow("1. 새로 시작하기");
-            textEdit.ChangeTextColorCyan("2. 게임 불러오기");
+            TextEdit.ChangeTextColorYellow("1. 새로 시작하기");
+            TextEdit.ChangeTextColorCyan("2. 게임 불러오기");
             Console.WriteLine();
 
             int choose_job = IsValidInput(2, 1);
