@@ -521,7 +521,14 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[아이템 목록]");
-            itemList.PrintItemList(character.GetInventory.GetInventoryList);
+            try
+            {
+                itemList.PrintItemList(character.GetInventory.GetInventoryList);
+            }
+            catch (ArgumentOutOfRangeException ex) 
+            {
+                Console.WriteLine();
+            }
             Console.WriteLine();
             Console.ResetColor();
 
