@@ -15,8 +15,8 @@ namespace Text_RPG_Team
 
         Player? player;
         MonsterList? monsterList;
-        Portion HPportion = new Portion(PortionType.HP, PortionValue.Small);
-        Portion MPportion = new Portion(PortionType.MP, PortionValue.Small);
+        Portion hpPortion = new Portion(PortionType.HP, PortionValue.Small);
+        Portion mpPortion = new Portion(PortionType.MP, PortionValue.Small);
         PortionList portionList;
         ItemList itemList = new ItemList();
 
@@ -87,12 +87,12 @@ namespace Text_RPG_Team
 
             CheckName(battle_monster);
 
-            Start_phase();
+            StartPhase();
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //던전 시작
-        private void Start_phase()
+        private void StartPhase()
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -112,12 +112,12 @@ namespace Text_RPG_Team
             Console.WriteLine(">> 다음");
             Console.ReadKey();
 
-            Battle_phase();
+            BattlePhase();
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //전투 페이즈
-        private void Battle_phase()
+        private void BattlePhase()
         {
             int death_cnt = 0;
             int turn = 0;
@@ -223,9 +223,9 @@ namespace Text_RPG_Team
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {player_health} -> {player.Health}");
 
-                int currentMp = player.Mp;
+                int current_mp = player.Mp;
                 player.Mp = player.Mp + 10 > player_mp ? player_mp : player.Mp + 10;
-                Console.WriteLine($"MP {player_mp} -> {currentMp}");
+                Console.WriteLine($"MP {player_mp} -> {current_mp}");
                 Console.WriteLine($"MP 회복(10) -> {player.Mp}");
 
                 Console.WriteLine();
@@ -253,22 +253,22 @@ namespace Text_RPG_Team
         //몬스터 보상계산
         private void Rewards()
         {
-            int rewardGold = 0;
-            int rewardHpPotion = 0;
-            int rewardMpPotion = 0;
+            int reward_gold = 0;
+            int reward_hp_potion = 0;
+            int reward_mp_potion = 0;
             List<Item> reward_items = new List<Item>();
 
             foreach(Monster mon in battle_monster)
             {
                 int i = new Random().Next(1, 5);
-                rewardGold = 300 * mon.Level;
+                reward_gold = 300 * mon.Level;
                 if(i <= 1)
                 {
-                    rewardMpPotion += 1;
+                    reward_mp_potion += 1;
                 }
                 else if (1 < i && i <= 3)
                 {
-                    rewardHpPotion += 1;
+                    reward_hp_potion += 1;
                 }
 
                 string reward_item = mon.dropItem(mon);
@@ -277,23 +277,23 @@ namespace Text_RPG_Team
                     reward_items.Add(itemList.GetItemList.Find(itemnumber => itemnumber.Number == reward_item));
                 }
             }
-            player.Gold += rewardGold;
-            HPportion.SetPortion(rewardHpPotion);
-            MPportion.SetPortion(rewardMpPotion);
+            player.Gold += reward_gold;
+            hpPortion.SetPortion(reward_hp_potion);
+            mpPortion.SetPortion(reward_mp_potion);
             Console.WriteLine();
             Console.WriteLine("[획득 아이템]");
-            Console.WriteLine($"{rewardGold} Gold");
-            if(rewardHpPotion >= 1)
+            Console.WriteLine($"{reward_gold} Gold");
+            if(reward_hp_potion >= 1)
             {
-                Console.WriteLine($"체력 회복 포션 - {rewardHpPotion}");
-                portionList.AddPortion(HPportion.Type, HPportion.Value, rewardHpPotion);
-                HPportion.Count = 0;
+                Console.WriteLine($"체력 회복 포션 - {reward_hp_potion}");
+                portionList.AddPortion(hpPortion.Type, hpPortion.Value, reward_hp_potion);
+                hpPortion.Count = 0;
             }
-            if(rewardMpPotion >= 1)
+            if(reward_mp_potion >= 1)
             {
-                Console.WriteLine($"마나 회복 포션 - {rewardMpPotion}");
-                portionList.AddPortion(MPportion.Type, MPportion.Value, rewardMpPotion);
-                MPportion.Count = 0;
+                Console.WriteLine($"마나 회복 포션 - {reward_mp_potion}");
+                portionList.AddPortion(mpPortion.Type, mpPortion.Value, reward_mp_potion);
+                mpPortion.Count = 0;
             }
             foreach(Item item in reward_items)
             {
@@ -381,9 +381,9 @@ namespace Text_RPG_Team
                         PlayerTurn();
                         break;
                     case 1:
-                        int listlenght = portionList.UsePortionList(PortionType.HP);
+                        int list_lenght = portionList.UsePortionList(PortionType.HP);
 
-                        int p_target = IsValidInput(listlenght, 0);
+                        int p_target = IsValidInput(list_lenght, 0);
 
                         if (p_target == 0)
                         {
@@ -394,9 +394,9 @@ namespace Text_RPG_Team
                         portionList.UsePortion(player, portion);
                         break;
                     case 2:
-                        listlenght = portionList.UsePortionList(PortionType.MP);
+                        list_lenght = portionList.UsePortionList(PortionType.MP);
 
-                        p_target = IsValidInput(listlenght, 0);
+                        p_target = IsValidInput(list_lenght, 0);
 
                         if (p_target == 0)
                         {
@@ -792,21 +792,21 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Name} 이(가) 행동합니다.");
             Thread.Sleep(500);
 
-            int useSkill;
+            int use_skill;
             if (monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
             {
-                useSkill = new Random().Next(1, 11);
+                use_skill = new Random().Next(1, 11);
             }
             else
             {
-                useSkill = 0;
+                use_skill = 0;
             }
 
             //보스몹일 때
             if (character.Type == MonsterType.BOSS_HERAID)
             {
                 //스킬 사용 확률 40%
-                if (useSkill >= 6)
+                if (use_skill >= 6)
                 {
                     MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
@@ -819,7 +819,7 @@ namespace Text_RPG_Team
             else
             {
                 //보스몹이 아닐 땐 스킬 사용 확률 20%
-                if (useSkill >= 8)
+                if (use_skill >= 8)
                 {
                     //스킬 리스트에서 스킬 하나를 무작위로 빼옴
                     MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
@@ -840,7 +840,7 @@ namespace Text_RPG_Team
         //입력이 올바른지 확인하는 함수
         public int IsValidInput(int max, int min)
         {
-            int keyInput;
+            int key_input;
             bool result;
             int cnt = 0;
 
@@ -855,17 +855,17 @@ namespace Text_RPG_Team
                 {
                     Console.Write(">>");
                 }
-                result = int.TryParse(Console.ReadLine(), out keyInput);
+                result = int.TryParse(Console.ReadLine(), out key_input);
 
                 cnt = 1;
-            } while (result == false || IsValidInput(keyInput, min, max) == false);
+            } while (result == false || IsValidInput(key_input, min, max) == false);
 
-            return keyInput;
+            return key_input;
         }
 
-        private bool IsValidInput(int keyInput, int min, int max)
+        private bool IsValidInput(int key_input, int min, int max)
         {
-            if (min <= keyInput && keyInput <= max)
+            if (min <= key_input && key_input <= max)
             {
                 return true;
             }
@@ -875,18 +875,18 @@ namespace Text_RPG_Team
 
         //---------------------------------------------------------------------------------------------------------------
         //중복 이름 체크
-        private void CheckName(List<Monster> monsterList)
+        private void CheckName(List<Monster> monster_list)
         {
-            var list = monsterList.GroupBy(x => x.Name).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
+            var list = monster_list.GroupBy(x => x.Name).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
 
             foreach(string m in list)
             {
                 int ascii = 65;
-                for(int i = 0; i < monsterList.Count; i++)
+                for(int i = 0; i < monster_list.Count; i++)
                 {
-                    if (monsterList[i].Name == m)
+                    if (monster_list[i].Name == m)
                     {
-                        monsterList[i].Name += "_" + (char)ascii;
+                        monster_list[i].Name += "_" + (char)ascii;
                         ascii++;
                     }
                 }
