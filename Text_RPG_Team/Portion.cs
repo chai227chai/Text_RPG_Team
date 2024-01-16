@@ -22,6 +22,7 @@ namespace Text_RPG_Team
         Big = 100,
     }
 
+    [Serializable]
     internal class Portion
     {
         private PortionType portiontype;

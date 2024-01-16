@@ -11,6 +11,7 @@ namespace Text_RPG_Team
         WEAPON, ARMOR, SHOES
     }
 
+    [Serializable]
     internal class Item
     {
         private string name;
@@ -118,12 +119,6 @@ namespace Text_RPG_Team
                 return "";
             }
         }
-
-        //아이템 능력치 종류
-        //public SpecType GetSpecType
-        //{
-        //    get { return spec.getSpecType(); }
-        //}
 
         public ItemSpec Spec
         {

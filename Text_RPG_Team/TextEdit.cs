@@ -64,6 +64,13 @@ namespace Text_RPG_Team
             Console.ResetColor();
         }
 
+        public void ChangeTextColorYellow(string text) //노란색 텍스트 출력
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
         public void HighlightsTextColorYellow(string s1, string s2, string s3 = "") //스탯 보여줄 때 사용
         {
             Console.Write(s1);

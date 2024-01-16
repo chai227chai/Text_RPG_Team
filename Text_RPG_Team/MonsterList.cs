@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class MonsterList
     {
         private List<Monster> monsterList;
@@ -45,16 +46,16 @@ namespace Text_RPG_Team
             }
             if(dungeon_stage >= 5 && dungeon_stage <= 9 || dungeon_stage > 10)
             {
-                AddMonster("늑대", 7, 25, 12, 1, 3, MonsterType.ELITE_WOLF);
-                AddMonster("칼날부리", 7, 20, 15, 1, 4, MonsterType.ELITE_BIRD);
+                AddMonster("늑대", 7, 35, 15, 1, 3, MonsterType.ELITE_WOLF);
+                AddMonster("칼날부리", 7, 30, 18, 1, 4, MonsterType.ELITE_BIRD);
             }
             if(dungeon_stage >= 7 && dungeon_stage <= 9 || dungeon_stage > 10)
             {
-                AddMonster("독두꺼비", 10, 35, 12, 3, 2, MonsterType.ELITE_FROG);
+                AddMonster("독두꺼비", 10, 45, 12, 3, 2, MonsterType.ELITE_FROG);
             }
             if(dungeon_stage == 10 || dungeon_stage > 15)
             {
-                AddMonster("공허의 전령", 20, 40, 15, 5, 2, MonsterType.BOSS_HERAID);
+                AddMonster("공허의 전령", 20, 60, 30, 5, 3, MonsterType.BOSS_HERAID);
             }
         }
 

@@ -12,10 +12,9 @@ namespace Text_RPG_Team
         NIMION, ELITE_MINION, ELITE_WOLF, ELITE_BIRD, ELITE_FROG, BOSS_HERAID
     }
 
+    [Serializable]
     internal class Monster : ICharacter
     {
-        private Random random = new Random();
-
         string name;
 
         int level;
@@ -24,11 +23,14 @@ namespace Text_RPG_Team
         int defence;
         int speed;
         int drop_exp;// 몬스터가 제공하는 경험치
+        int crit_rate;
+        float crit_dmg;
+        int evasion;
 
         CHAR_TAG tag;
         MonsterType type;
 
-        bool isdead;
+        bool is_dead;
 
         public Monster(string name, int level, int health, int attack, int defence, int speed, MonsterType type) 
         {
@@ -39,11 +41,14 @@ namespace Text_RPG_Team
             this.speed = speed;
             this.defence = defence;
             this.drop_exp = this.level;//경험치 = 몬스터의 레벨 1당 1의 경험치
+            crit_rate = 15;
+            crit_dmg = 1.6f;
+            evasion = 10;
 
             tag = CHAR_TAG.MONSTER;
             this.type = type;
 
-            isdead = false;
+            is_dead = false;
         }
 
         public Monster(Monster dupplicate)
@@ -59,7 +64,7 @@ namespace Text_RPG_Team
             tag = dupplicate.tag;
             this.type = dupplicate.type;
 
-            isdead = dupplicate.isdead;
+            is_dead = dupplicate.is_dead;
         }
 
         //----------------------------------------------------------------------------------------------
@@ -86,7 +91,7 @@ namespace Text_RPG_Team
             set { health = value; }
         }
 
-        public string getHP
+        public string GetHP
         {
             get
             {
@@ -115,7 +120,7 @@ namespace Text_RPG_Team
             set { defence = value; }
         }
 
-        public int Total_Defence
+        public int TotalDefence
         {
             get { return Defence; }
         }
@@ -130,14 +135,44 @@ namespace Text_RPG_Team
         //몬스터 사망 여부
         public bool IsDead
         {
-            get { return isdead; }
-            set { isdead = false; }
+            get { return is_dead; }
+            set { is_dead = false; }
         }
 
         //몬스터가 제공하는 경험치
-        public int Drop_Exp
+        public int DropExp
         {
             get { return drop_exp; }
+        }
+
+        public int CritRate
+        {
+            get { return crit_rate; }
+        }
+
+        public int TotalCritRate
+        {
+            get { return CritRate; }
+        }
+
+        public float CritDMG
+        {
+            get { return crit_dmg; }
+        }
+
+        public float TotalCritDMG
+        {
+            get { return CritDMG; }
+        }
+
+        public int Evasion
+        {
+            get { return evasion; }
+        }
+
+        public int TotalEvasion
+        {
+            get { return Evasion; }
         }
 
         //캐릭터 태그
@@ -162,23 +197,23 @@ namespace Text_RPG_Team
             if (health <= 0)
             {
                 health = 0;
-                isdead = true;
+                is_dead = true;
             }
         }
 
         //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
-        public int Ran_Speed()
+        public int RanSpeed()
         {
             int span = (int)Math.Ceiling((float)speed * 0.2f);
-            int ran_speed = random.Next(speed - span, speed + span + 1);
+            int ran_speed = new Random().Next(speed - span, speed + span + 1);
             return ran_speed;
         }
 
         //실 적용 공격력 (공격력 오차값 10% 소수값 올림)
-        public int Ran_Attack()
+        public int RanAttack()
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1);
-            int damage = random.Next(attack - damage_range, attack + damage_range + 1);
+            int damage = new Random().Next(attack - damage_range, attack + damage_range + 1);
             return damage;
         }
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class Inventory
     {
         private List<Item> inventoryList;
@@ -60,6 +61,9 @@ namespace Text_RPG_Team
             player.PlusAttack = ExSpec(SpecType.ATTACK);
             player.PlusDefence = ExSpec(SpecType.DEFEND);
             player.PlusSpeed = ExSpec(SpecType.SPEED);
+            player.PlusCritRate = ExSpec(SpecType.CRIT_RATE);
+            player.PlusCritDMG = ExSpec(SpecType.CRIT_DMG) / 100;
+            player.PlusEvasion = ExSpec(SpecType.EVASION);
         }
 
         //인벤토리에 있는 아이템 하나 가져오기

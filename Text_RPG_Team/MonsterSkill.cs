@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Text_RPG_Team
 {
-    
+    [Serializable]
     internal class MonsterSkill : ISkill
     {
         public string Name { get; }

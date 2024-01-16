@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class Dungeon
     {
-        private Random random = new Random();
 
         Player? player;
         MonsterList? monsterList;
@@ -53,11 +54,11 @@ namespace Text_RPG_Team
             int number = 1;
             if(stage >= 1 && stage <= 4)
             {
-                number = random.Next(stage, stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
             else if(stage >= 5 && stage <= 9)
             {
-                number = random.Next(3, 7);
+                number = new Random().Next(4, 9);
             }
             else if(stage == 10)
             {
@@ -65,7 +66,7 @@ namespace Text_RPG_Team
             }
             else if(stage > 10)
             {
-                number = random.Next(stage, stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
 
             int exp = 0;
@@ -75,12 +76,12 @@ namespace Text_RPG_Team
 
             for (int i = 0; i < number; i++)
             {
-                int random_monster = random.Next(1, monsterList.getMonsterList.Count+1);
+                int random_monster = new Random().Next(1, monsterList.getMonsterList.Count+1);
                 Monster newMonster = new Monster(monsterList.getMonster(random_monster));
                 battle_monster.Add(newMonster);
 
                 allCharacter[i+1] = newMonster;
-                exp += newMonster.Drop_Exp;
+                exp += newMonster.DropExp;
             }
             stage_exp = exp;
 
@@ -130,7 +131,7 @@ namespace Text_RPG_Team
                 turn++;
 
                 //턴 시작 시 마다 스피드 별로 정렬
-                allCharacter = allCharacter.OrderByDescending(x => x.Ran_Speed()).ToArray();
+                allCharacter = allCharacter.OrderByDescending(x => x.RanSpeed()).ToArray();
 
                 Console.Clear();
                 Console.WriteLine("Battle!!");
@@ -259,7 +260,7 @@ namespace Text_RPG_Team
 
             foreach(Monster mon in battle_monster)
             {
-                int i = random.Next(1, 5);
+                int i = new Random().Next(1, 5);
                 rewardGold = 300 * mon.Level;
                 if(i <= 1)
                 {
@@ -317,7 +318,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}  ATK {mon.Attack}");
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}  ATK {mon.Attack}");
                 Console.ResetColor();
                 index++;
             }
@@ -424,7 +425,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}");
                 Console.ResetColor();
                 index++;
             }
@@ -507,7 +508,7 @@ namespace Text_RPG_Team
                 {
                     //대상을 선택했다면, 스킬 공격
                     Console.Clear();
-                    SkillAttackOne(player, battle_monster[target - 1], player.getSkillList[act - 1]);
+                    SkillAttackOne((Player)player, battle_monster[target - 1], player.getSkillList[act - 1]);
                     player.Mp -= player.getSkillList[act - 1].MP;
                 }
 
@@ -547,7 +548,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}");
                 Console.ResetColor();
                 index++;
             }
@@ -601,17 +602,17 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
 
-            int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - victim.Total_Defence;
+            int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - victim.TotalDefence;
             if (damage < 0)
             {
                 damage = 0;
             }
 
-            int critical = random.Next(1, 100);
+            int critical = new Random().Next(0, 100);
 
-            if (critical <= 15)
+            if (critical <= attacker.TotalCritRate)
             {
-                damage = (int)Math.Ceiling((float)damage * 1.6);
+                damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                 Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
             }
             else
@@ -639,7 +640,7 @@ namespace Text_RPG_Team
         //스킬 범위 무작위인 경우
         public void SkillAttackRandom(Player attacker, Skill skill)
         {
-            List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => random.Next()).Take(skill.Range).ToList();
+            List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => new Random().Next()).Take(skill.Range).ToList();
             player.Mp -= skill.MP;
 
             Console.Clear();
@@ -648,17 +649,17 @@ namespace Text_RPG_Team
 
             foreach (Monster mon in victim)
             {
-                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - mon.TotalDefence;
                 if (damage < 0)
                 {
                     damage = 0;
                 }
 
-                int critical = random.Next(1, 100);
+                int critical = new Random().Next(0, 100);
 
-                if (critical <= 15)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -695,17 +696,17 @@ namespace Text_RPG_Team
 
             foreach (Monster mon in battle_monster.FindAll(x => !x.IsDead))
             {
-                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - mon.TotalDefence;
                 if (damage < 0)
                 {
                     damage = 0;
                 }
 
-                int critical = random.Next(1, 100);
+                int critical = new Random().Next(0, 100);
 
-                if (critical <= 15)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -735,18 +736,18 @@ namespace Text_RPG_Team
         //캐릭터 일반 공격 함수
         private void Attack(ICharacter attacker, ICharacter victim)
         {
-            int miss = random.Next(0, 10);
-            int critical = random.Next(0, 100);
+            int miss = new Random().Next(0, 100);
+            int critical = new Random().Next(0, 100);
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
 
-            int damage = attacker.Ran_Attack() - victim.Total_Defence;
+            int damage = attacker.RanAttack() - victim.TotalDefence;
             if (damage < 0)
             {
                 damage = 0;
             }
 
-            if (miss == 0)
+            if (miss <= victim.TotalEvasion)
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
                 damage = 0;
@@ -754,9 +755,9 @@ namespace Text_RPG_Team
             }
             else
             {
-                if (critical <= 15)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * 1.6);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -794,7 +795,7 @@ namespace Text_RPG_Team
             int useSkill;
             if (monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
             {
-                useSkill = random.Next(1, 11);
+                useSkill = new Random().Next(1, 11);
             }
             else
             {
@@ -807,7 +808,7 @@ namespace Text_RPG_Team
                 //스킬 사용 확률 40%
                 if (useSkill >= 6)
                 {
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else
@@ -821,7 +822,7 @@ namespace Text_RPG_Team
                 if (useSkill >= 8)
                 {
                     //스킬 리스트에서 스킬 하나를 무작위로 빼옴
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => random.Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else

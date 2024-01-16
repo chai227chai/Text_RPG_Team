@@ -19,8 +19,14 @@ namespace Text_RPG_Team
         int Health { get; set; }
         int Attack { get; set; }
         int Defence { get; set; }
-        int Total_Defence { get; }
+        int TotalDefence { get; }
         int Speed { get; set; }
+        int CritRate { get; }
+        int TotalCritRate { get; }
+        float CritDMG { get; }
+        float TotalCritDMG { get; }
+        int Evasion { get; }
+        int TotalEvasion { get; }
 
         bool IsDead { get; }
 
@@ -28,8 +34,8 @@ namespace Text_RPG_Team
 
         void TakeDamage(int damage);
 
-        int Ran_Speed();
+        int RanSpeed();
 
-        int Ran_Attack();
+        int RanAttack();
     }
 }

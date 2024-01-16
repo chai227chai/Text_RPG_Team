@@ -14,11 +14,10 @@ namespace Text_RPG_Team
         WARRIOR, WIZARD, ROGUE
     }
 
+    [Serializable]
     internal class Player : ICharacter
     {
         Inventory inventory = new Inventory();
-
-        private Random random = new Random();
 
         private List<Skill> skillList;
 
@@ -27,47 +26,55 @@ namespace Text_RPG_Team
 
         int level;
         int attack;
-        int plusattack;
-        bool checkattack;
+        int plus_attack;
         int defence;
-        int plusdefence;
-        bool checkdefence;
+        int plus_defence;
         int health;
-        int maxhealth;
+        int max_health;
         int mp;
-        int maxmp;
+        int max_mp;
         int gold;
         int speed;
-        int plusSpeed;
-        int levelexp;
-        int[] levelup = new int[2];
+        int plus_speed;
+        int level_exp;
+        int[] level_up = new int[2];
+        int crit_rate;
+        int plus_crit_rate;
+        float crit_dmg;
+        float plus_crit_dmg;
+        int evasion;
+        int plus_evasion;
 
         CHAR_TAG tag;
 
-        bool isdead;
+        bool is_dead;
 
-        public Player(string name, JOB job, int maxHealth, int maxMp, int attack, int defence, int speed)
+        public Player(string name, JOB job, int max_health, int max_mp, int attack, int defence, int speed)
         {
             this.name = name;
             this.job = job;
             level = 1;
             this.attack = attack;
-            plusattack = 0;
-            checkattack = false;
+            plus_attack = 0;
             this.defence = defence;
-            plusdefence = 0;
-            checkdefence = false;
-            maxhealth = maxHealth;
-            health = maxhealth;
-            maxmp = maxMp;
-            mp = maxmp;
+            plus_defence = 0;
+            max_health = max_health;
+            health = max_health;
+            max_mp = max_mp;
+            mp = max_mp;
             this.speed = speed;
-            plusSpeed = 0;
-            levelexp = 0;
-            levelup[0] = 10;
-            levelup[1] = 25;
+            plus_speed = 0;
+            crit_rate = 15;
+            plus_crit_rate = 0;
+            crit_dmg = 1.6f;
+            plus_crit_dmg = 0;
+            evasion = 10;
+            plus_evasion = 0;
+            level_exp = 0;
+            level_up[0] = 10;
+            level_up[1] = 25;
             tag = CHAR_TAG.PLAYER;
-            isdead = false;
+            is_dead = false;
 
             skillList = new List<Skill>();
         }
@@ -126,8 +133,8 @@ namespace Text_RPG_Team
 
         public int MaxHealth
         {
-            get { return maxhealth; }
-            set { maxhealth = value; }
+            get { return max_health; }
+            set { max_health = value; }
         }
 
         //캐릭터 마나
@@ -139,8 +146,8 @@ namespace Text_RPG_Team
 
         public int MaxMp
         {
-            get { return maxmp; }
-            set { maxmp = value; }
+            get { return max_mp; }
+            set { max_mp = value; }
         }
 
         //캐릭터 공격력
@@ -157,19 +164,14 @@ namespace Text_RPG_Team
         //캐릭터 추가 공격력
         public int PlusAttack
         {
-            get { return plusattack; }
-            set { plusattack = value; }
+            get { return plus_attack; }
+            set { plus_attack = value; }
         }
 
-        public int Total_Attack
+        //캐릭터 총 공격력
+        public int TotalAttack
         {
             get { return Attack + PlusAttack; }
-        }
-
-        public bool CheckAttack
-        {
-            get { return checkattack; }
-            set { checkattack = value; }
         }
 
         //캐릭터 방어력
@@ -186,20 +188,14 @@ namespace Text_RPG_Team
         //캐릭터 추가 방어력
         public int PlusDefence
         {
-            get { return plusdefence; }
-            set { plusdefence = value; }
+            get { return plus_defence; }
+            set { plus_defence = value; }
         }
 
         //캐릭터 총 방어력
-        public int Total_Defence
+        public int TotalDefence
         {
             get { return Defence + PlusDefence; }
-        }
-
-        public bool CheckDefence
-        {
-            get { return checkdefence; }
-            set { checkdefence = value; }
         }
 
         //보유 골드
@@ -209,10 +205,67 @@ namespace Text_RPG_Team
             set { gold = value; }
         }
 
+        //캐릭터 치명타율
+        public int CritRate
+        {
+            get { return crit_rate; }
+        }
+
+        //캐릭터 추가 치명타율
+        public int PlusCritRate
+        {
+            get { return plus_crit_rate; }
+            set { plus_crit_rate = value; }
+        }
+
+        //캐릭터 총 치명타율
+        public int TotalCritRate
+        {
+            get { return CritRate + PlusCritRate; }
+        }
+
+        //캐릭터 치명타 데미지
+        public float CritDMG
+        {
+            get { return crit_dmg; }
+        }
+
+        //캐릭터 추가 치명타 데미지
+        public float PlusCritDMG
+        {
+            get { return plus_crit_dmg; }
+            set { plus_crit_dmg = value; } 
+        }
+
+        //캐릭터 총 치명타 데미지
+        public float TotalCritDMG
+        {
+            get { return CritDMG + PlusCritDMG; }
+        }
+
+        //캐릭터 회피율
+        public int Evasion
+        {
+            get { return evasion; }
+        }
+
+        //캐릭터 추가 회피율
+        public int PlusEvasion
+        {
+            get { return plus_evasion; }
+            set { plus_evasion = value; }
+        }
+
+        //캐릭터 총 회피율
+        public int TotalEvasion
+        {
+            get { return Evasion + PlusEvasion; }
+        }
+
         //캐릭터 사망 여부
         public bool IsDead
         {
-            get { return isdead; }
+            get { return is_dead; }
         }
 
         //캐릭터 태그
@@ -228,22 +281,26 @@ namespace Text_RPG_Team
             set { speed = value; }
         }
 
+        //캐릭터 추가 스피드
         public int PlusSpeed
         {
-            get { return plusSpeed; }
-            set { plusSpeed = value; }
+            get { return plus_speed; }
+            set { plus_speed = value; }
         }
 
-        public int Total_Speed
+        //캐릭터 총 스피드
+        public int TotalSpeed
         {
-            get { return speed + plusSpeed; }
+            get { return speed + plus_speed; }
         }
 
+        //스킬 리스트
         public List<Skill> getSkillList
         {
             get { return skillList; }
         }
 
+        //인벤토리
         public Inventory GetInventory
         {
             get { return inventory; }
@@ -259,7 +316,7 @@ namespace Text_RPG_Team
             if (health <= 0)
             {
                 health = 0;
-                isdead = true;
+                is_dead = true;
             }
         }
 
@@ -269,14 +326,14 @@ namespace Text_RPG_Team
             int pre_level = level;
             int pre_attack = Attack;
             int pre_defence = Defence;
-            levelexp += exp;
-            if(levelexp >= levelup[0])
+            level_exp += exp;
+            if(level_exp >= level_up[0])
             {
                 level += 1;
-                levelexp = 0;
-                int sum = levelup[0] + levelup[1];
-                levelup[0] = levelup[1];
-                levelup[1] = sum;
+                level_exp = 0;
+                int sum = level_up[0] + level_up[1];
+                level_up[0] = level_up[1];
+                level_up[1] = sum;
 
                 Console.WriteLine();
                 Console.WriteLine("Level UP");
@@ -290,18 +347,18 @@ namespace Text_RPG_Team
         }
 
         //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
-        public int Ran_Speed()
+        public int RanSpeed()
         {
-            int span = (int)Math.Ceiling((float)Total_Speed * 0.2f);
-            int ran_speed = random.Next(Total_Speed - span, Total_Speed + span + 1);
+            int span = (int)Math.Ceiling((float)TotalSpeed * 0.2f);
+            int ran_speed = new Random().Next(TotalSpeed - span, TotalSpeed + span + 1);
             return ran_speed;
         }
 
         //실 적용 공격력 (공격력 오차값 10% 소수값 올림)
-        public int Ran_Attack()
+        public int RanAttack()
         {
-            int damage_range = (int)Math.Ceiling((float)Total_Attack * 0.1);
-            int damage = random.Next(Total_Attack - damage_range, Total_Attack + damage_range + 1);
+            int damage_range = (int)Math.Ceiling((float)TotalAttack * 0.1);
+            int damage = new Random().Next(TotalAttack - damage_range, TotalAttack + damage_range + 1);
             return damage;
         }
 

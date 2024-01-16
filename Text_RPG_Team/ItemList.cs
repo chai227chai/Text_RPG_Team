@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
+    [Serializable]
     internal class ItemList
     {
         private List<Item> itemList;
@@ -42,11 +43,11 @@ namespace Text_RPG_Team
 
             AddItem("2", ItemType.ARMOR, "스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 9 } }));
 
-            AddItem("9", ItemType.ARMOR, "바위 갑옷", "전설의 바위 기사가 사용했다고 알려진 무거운 갑옷입니다. ", 3000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 15 }, { SpecType.SPEED, -2 } }));
+            AddItem("9", ItemType.ARMOR, "바위 갑옷", "전설의 바위 기사가 사용했다고 알려진 무거운 갑옷입니다. ", 3000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 15 }, { SpecType.SPEED, -2 }, {SpecType.EVASION, -5 } }));
 
-            AddItem("10", ItemType.ARMOR, "나노 강화 슈트", "신체 능력을 비약적으로 증가시키는 슈트입니다. ", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 2 }, { SpecType.ATTACK, 5 } }));
+            AddItem("10", ItemType.ARMOR, "나노 강화 슈트", "신체 능력을 비약적으로 증가시키는 슈트입니다. ", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.DEFEND, 2 }, { SpecType.ATTACK, 5 }, { SpecType.CRIT_RATE, 10 }, {SpecType.CRIT_DMG, 5 } }));
 
-            AddItem("11", ItemType.ARMOR, "산데비스탄", "기초적인 임플란트입니다. ", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 2 }, { SpecType.ATTACK, 5 } }));
+            AddItem("11", ItemType.ARMOR, "산데비스탄", "기초적인 임플란트입니다. ", 3500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 2 }, { SpecType.ATTACK, 5 }, {SpecType.EVASION, 20 } }));
 
             AddItem("3", ItemType.WEAPON, "낡은 검", "쉽게 볼 수 있는 낡은 검 입니다. ", 600, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 2 } }));
 
@@ -54,9 +55,9 @@ namespace Text_RPG_Team
 
             AddItem("5", ItemType.WEAPON, "스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다. ", 3000, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 7 } }));
 
-            AddItem("6", ItemType.WEAPON, "강철 톤파", "공방 양면으로 우수한 무기입니다. ", 1500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 3 }, { SpecType.DEFEND, 5 } }));
+            AddItem("6", ItemType.WEAPON, "강철 톤파", "공방 양면으로 우수한 무기입니다. ", 1500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 3 }, { SpecType.DEFEND, 5 }, {SpecType.EVASION, -3 } }));
 
-            AddItem("12", ItemType.WEAPON, "저주받은 검", "사용자들을 죽음으로 몰고 갔다는 불길한 검입니다. ", 2500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 10 }, { SpecType.DEFEND, -5 } }));
+            AddItem("12", ItemType.WEAPON, "저주받은 검", "사용자들을 죽음으로 몰고 갔다는 불길한 검입니다. ", 2500, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.ATTACK, 10 }, { SpecType.DEFEND, -10 }, { SpecType.CRIT_DMG, 25 } }));
 
             AddItem("7", ItemType.SHOES, "운동화", "평범한 신발입니다. ", 800, new ItemSpec(new Dictionary<SpecType, int>() { { SpecType.SPEED, 1 } }));
 
