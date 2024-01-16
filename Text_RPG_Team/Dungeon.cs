@@ -644,7 +644,7 @@ namespace Text_RPG_Team
             player.Mp -= skill.MP;
 
             Console.Clear();
-            Console.WriteLine($"{attacker.Name} 의 공격!");
+            Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
             Console.WriteLine();
 
             foreach (Monster mon in victim)
@@ -691,7 +691,7 @@ namespace Text_RPG_Team
             player.Mp -= skill.MP;
 
             Console.Clear();
-            Console.WriteLine($"{attacker.Name} 의 공격!");
+            Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
             Console.WriteLine();
 
             foreach (Monster mon in battle_monster.FindAll(x => !x.IsDead))
