@@ -76,8 +76,8 @@ namespace Text_RPG_Team
 
             for (int i = 0; i < number; i++)
             {
-                int random_monster = new Random().Next(1, monsterList.getMonsterList.Count+1);
-                Monster newMonster = new Monster(monsterList.getMonster(random_monster));
+                int random_monster = new Random().Next(1, monsterList.GetMonsterList.Count+1);
+                Monster newMonster = new Monster(monsterList.GetMonster(random_monster));
                 battle_monster.Add(newMonster);
 
                 allCharacter[i+1] = newMonster;
@@ -297,7 +297,7 @@ namespace Text_RPG_Team
             }
             foreach(Item item in reward_items)
             {
-                player.GetInventory.addInventroy(item);
+                player.GetInventory.AddInventroy(item);
                 Console.WriteLine($"{item.Name}");
             }
         }
@@ -793,7 +793,8 @@ namespace Text_RPG_Team
             Thread.Sleep(500);
 
             int use_skill;
-            if (monsterList.getSkillList.FindAll(x => x.Type == character.Type).Count > 0)
+
+            if (monsterList.GetSkillList.FindAll(x => x.Type == character.Type).Count > 0)
             {
                 use_skill = new Random().Next(1, 11);
             }
@@ -808,7 +809,7 @@ namespace Text_RPG_Team
                 //스킬 사용 확률 40%
                 if (use_skill >= 6)
                 {
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.GetSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else
@@ -822,7 +823,7 @@ namespace Text_RPG_Team
                 if (use_skill >= 8)
                 {
                     //스킬 리스트에서 스킬 하나를 무작위로 빼옴
-                    MonsterSkill skill = monsterList.getSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
+                    MonsterSkill skill = monsterList.GetSkillList.FindAll(x => x.Type == character.Type).OrderBy(_ => new Random().Next()).ToList()[0];
                     SkillAttackOne(character, player, skill);
                 }
                 else

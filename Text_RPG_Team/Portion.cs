@@ -25,17 +25,17 @@ namespace Text_RPG_Team
     [Serializable]
     internal class Portion
     {
-        private PortionType portiontype;
-        private int portioncount;
-        private PortionValue portionvalue;
-        
+        private PortionType portionType;
+        private PortionValue portionValue;
+
+        private int portion_count;
 
         //생성자
         public Portion(PortionType type, PortionValue value)
         {
-            portiontype = type;
-            portionvalue = value;
-            portioncount = 0;
+            portionType = type;
+            portionValue = value;
+            portion_count = 0;
         }
 
         //----------------------------------------------------------------------------------------------
@@ -43,19 +43,19 @@ namespace Text_RPG_Team
 
         public PortionType Type 
         {
-            get { return portiontype; }
-            set { portiontype = value; }
+            get { return portionType; }
+            set { portionType = value; }
         }
 
         public int Count
         {
-            get { return portioncount; }
-            set { portioncount = value; }
+            get { return portion_count; }
+            set { portion_count = value; }
         }
 
         public PortionValue Value
         {
-            get { return portionvalue; }
+            get { return portionValue; }
         }
 
         //----------------------------------------------------------------------------------------------

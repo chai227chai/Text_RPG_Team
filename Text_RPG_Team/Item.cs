@@ -23,8 +23,8 @@ namespace Text_RPG_Team
         private ItemSpec spec;
         private ItemType itemType;
 
-        private bool isSale = true;
-        private bool isEquiped = false;
+        private bool is_sale = true;
+        private bool is_equiped = false;
 
         public Item(string number, ItemType itemType, string name, string detail, int price, ItemSpec spec)
         {
@@ -78,10 +78,10 @@ namespace Text_RPG_Team
         {
             get
             {
-                if (isSale)
+                if (is_sale)
                 {
-                    string _saleprice = price.ToString() + " G";
-                    return _saleprice;
+                    string sale_price = price.ToString() + " G";
+                    return sale_price;
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace Text_RPG_Team
         //아이템 판매 여부
         public bool GetSale()
         {
-            return isSale;
+            return is_sale;
         }
 
         //아이템 타입
@@ -134,14 +134,14 @@ namespace Text_RPG_Team
         //아이템 능력치 종류 출력
         public void GetSpecName()
         {
-            spec.getSpecList();
+            spec.GetSpecList();
         }
 
         //아이템 장착 여부
         public bool IsEquip
         {
-            get { return isEquiped; }
-            set { isEquiped = value; }
+            get { return is_equiped; }
+            set { is_equiped = value; }
         }
 
         //아이템 장착 여부 출력
@@ -149,7 +149,7 @@ namespace Text_RPG_Team
         {
             get
             {
-                if (isEquiped)
+                if (is_equiped)
                 {
                     return "[E]";
                 }
@@ -165,26 +165,26 @@ namespace Text_RPG_Team
         //아이템 구매 시
         public void SetSale()
         {
-            if (this.isSale)
+            if (this.is_sale)
             {
-                this.isSale = false;
+                this.is_sale = false;
             }
             else
             {
-                this.isSale = true;
+                this.is_sale = true;
             }
         }
 
         //아이템 장착 시
         public void SetEquip()
         {
-            if (isEquiped)
+            if (is_equiped)
             {
-                isEquiped = false;
+                is_equiped = false;
             }
             else
             {
-                isEquiped = true;
+                is_equiped = true;
             }
         }
     }

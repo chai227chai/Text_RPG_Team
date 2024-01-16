@@ -11,7 +11,7 @@ namespace Text_RPG_Team
     {
         public Player character;
         public ItemList itemList;
-        public PortionList portionlist;
+        public PortionList portionList;
         public Dungeon dungeon;
     }
 }

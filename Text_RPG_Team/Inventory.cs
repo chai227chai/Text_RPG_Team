@@ -23,10 +23,10 @@ namespace Text_RPG_Team
         }
 
         //인벤토리에 아이템 추가
-        public void addInventroy(Item item)
+        public void AddInventroy(Item item)
         {
-            Item Inventory_item = new Item(item);
-            inventoryList.Add(Inventory_item);
+            Item inventoryItem = new Item(item);
+            inventoryList.Add(inventoryItem);
         }
 
 
@@ -81,13 +81,13 @@ namespace Text_RPG_Team
         //장착한 아이템의 특정 능력치 가져오기
         public int ExSpec(SpecType specType)
         {
-            int exSpec = 0;
+            int ex_spec = 0;
             foreach (Item item in inventoryList.FindAll(isequip => isequip.IsEquip == true && isequip.Spec.SpecMap.ContainsKey(specType)))
             {
-                exSpec += item.Spec.GetSpec(specType); ;
+                ex_spec += item.Spec.GetSpec(specType); ;
             }
 
-            return exSpec;
+            return ex_spec;
         }
 
         //인벤토리 리스트 가져오기
