@@ -80,6 +80,7 @@ namespace Text_RPG_Team
         //아이템 리스트 보여주기
         public void PrintItemList(List<Item> itemlist, bool checknumber = false, bool checkgold = false)
         {
+            int padding = 15;
             for (int i = 0; i < itemlist.Count; i++)
             {
                 Console.Write("- ");
@@ -87,19 +88,30 @@ namespace Text_RPG_Team
                 {
                     int n = i + 1;
                     Console.Write($"{n}. ");
+                    if (i >= 9)
+                    {
+                        padding = 14;
+                    }
                 }
-                Console.Write($"{itemlist[i].NowEquip}{itemlist[i].Name}");
+                if (itemlist[i].IsEquip)
+                {
+                    Console.Write($"{itemlist[i].NowEquip}");
+                    TextEdit.PadRightForMixedText(itemlist[i].Name, padding - 3);
+                }
+                else Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Name, padding));
                 Console.Write(" | ");
                 Console.Write($"{itemlist[i].GetType}");
                 Console.Write(" | ");
-                itemlist[i].GetSpecName();
+                Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Detail, 60));
                 Console.Write(" | ");
                 if (checkgold)
                 {
-                    Console.Write($"{itemlist[i].SalePrice}");
+                    Console.Write(TextEdit.PadRightForMixedText(itemlist[i].SalePrice, 6));
                     Console.Write(" | ");
                 }
-                Console.WriteLine(itemlist[i].Detail);
+
+                itemlist[i].GetSpecName();
+                Console.WriteLine();
             }
         }
     }
