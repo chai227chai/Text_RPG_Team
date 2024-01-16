@@ -30,7 +30,7 @@ namespace Text_RPG_Team
         CHAR_TAG tag;
         MonsterType type;
 
-        bool isdead;
+        bool is_dead;
 
         public Monster(string name, int level, int health, int attack, int defence, int speed, MonsterType type) 
         {
@@ -48,7 +48,7 @@ namespace Text_RPG_Team
             tag = CHAR_TAG.MONSTER;
             this.type = type;
 
-            isdead = false;
+            is_dead = false;
         }
 
         public Monster(Monster dupplicate)
@@ -64,7 +64,7 @@ namespace Text_RPG_Team
             tag = dupplicate.tag;
             this.type = dupplicate.type;
 
-            isdead = dupplicate.isdead;
+            is_dead = dupplicate.is_dead;
         }
 
         //----------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Text_RPG_Team
             set { health = value; }
         }
 
-        public string getHP
+        public string GetHP
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Text_RPG_Team
             set { defence = value; }
         }
 
-        public int Total_Defence
+        public int TotalDefence
         {
             get { return Defence; }
         }
@@ -135,34 +135,34 @@ namespace Text_RPG_Team
         //몬스터 사망 여부
         public bool IsDead
         {
-            get { return isdead; }
-            set { isdead = false; }
+            get { return is_dead; }
+            set { is_dead = false; }
         }
 
         //몬스터가 제공하는 경험치
-        public int Drop_Exp
+        public int DropExp
         {
             get { return drop_exp; }
         }
 
-        public int Crit_Rate
+        public int CritRate
         {
             get { return crit_rate; }
         }
 
-        public int Total_Crit_Rate
+        public int TotalCritRate
         {
-            get { return Crit_Rate; }
+            get { return CritRate; }
         }
 
-        public float Crit_DMG
+        public float CritDMG
         {
             get { return crit_dmg; }
         }
 
-        public float Total_Crit_DMG
+        public float TotalCritDMG
         {
-            get { return Crit_DMG; }
+            get { return CritDMG; }
         }
 
         public int Evasion
@@ -170,7 +170,7 @@ namespace Text_RPG_Team
             get { return evasion; }
         }
 
-        public int Total_Evasion
+        public int TotalEvasion
         {
             get { return Evasion; }
         }
@@ -197,12 +197,12 @@ namespace Text_RPG_Team
             if (health <= 0)
             {
                 health = 0;
-                isdead = true;
+                is_dead = true;
             }
         }
 
         //실 적용 스피드 (스피드 오차값 20% 소수값 올림)
-        public int Ran_Speed()
+        public int RanSpeed()
         {
             int span = (int)Math.Ceiling((float)speed * 0.2f);
             int ran_speed = new Random().Next(speed - span, speed + span + 1);
@@ -210,7 +210,7 @@ namespace Text_RPG_Team
         }
 
         //실 적용 공격력 (공격력 오차값 10% 소수값 올림)
-        public int Ran_Attack()
+        public int RanAttack()
         {
             int damage_range = (int)Math.Ceiling((float)attack * 0.1);
             int damage = new Random().Next(attack - damage_range, attack + damage_range + 1);

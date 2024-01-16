@@ -15,10 +15,6 @@ namespace Text_RPG_Team
         public float Coefficient { get; }
         public int Range { get; }
 
-        public static int SkillNum;
-
-        public static int SkillCnt = 0;
-
         public Skill(string name, string description, int mp, float coefficient, int range)
         {
             Name = name;

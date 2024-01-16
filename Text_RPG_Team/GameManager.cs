@@ -294,30 +294,30 @@ namespace Text_RPG_Team
             Console.Write($"{character.GetJob}");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(" )");
-            Console.Write($"공격력 : {character.Total_Attack}");
+            Console.Write($"공격력 : {character.TotalAttack}");
             Console.WriteLine((character.PlusAttack != 0) ? $" ({(character.PlusAttack > 0 ? "+" : "")}{character.PlusAttack})" : "");
-            Console.Write($"방어력 : {character.Total_Defence}");
+            Console.Write($"방어력 : {character.TotalDefence}");
             Console.WriteLine((character.PlusDefence != 0) ? $" ({(character.PlusDefence > 0 ? "+" : "")}{character.PlusDefence})" : "");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
-            Console.Write($"속  도 : {character.Total_Speed}");
+            Console.Write($"속  도 : {character.TotalSpeed}");
             Console.WriteLine((character.PlusSpeed != 0) ? $" ({(character.PlusSpeed > 0 ? "+" : "")}{character.PlusSpeed})" : "");
-            if (character.Plus_Crit_Rate != 0)
+            if (character.PlusCritRate != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"치명타율 : {character.Total_Crit_Rate} ({(character.Plus_Crit_Rate > 0 ? "+" : "")}{character.Plus_Crit_Rate})");
+                Console.WriteLine($"치명타율 : {character.TotalCritRate} ({(character.PlusCritRate > 0 ? "+" : "")}{character.PlusCritRate})");
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
-            if (character.Plus_Crit_DMG != 0)
+            if (character.PlusCritDMG != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"치명타피해 : {character.Total_Crit_DMG} ({(character.Plus_Crit_DMG > 0 ? "+" : "")}{character.Plus_Crit_DMG})");
+                Console.WriteLine($"치명타피해 : {character.TotalCritDMG} ({(character.PlusCritDMG > 0 ? "+" : "")}{character.PlusCritDMG})");
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
-            if (character.Plus_Evasion != 0)
+            if (character.PlusEvasion != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"회피율 : {character.Total_Evasion} ({(character.Plus_Evasion > 0 ? "+" : "")}{character.Plus_Evasion})");
+                Console.WriteLine($"회피율 : {character.TotalEvasion} ({(character.PlusEvasion > 0 ? "+" : "")}{character.PlusEvasion})");
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
             Console.WriteLine($"Gold : {character.Gold}G");
@@ -352,11 +352,11 @@ namespace Text_RPG_Team
             Console.WriteLine("[상태]");
             Console.WriteLine($"LV. {character.Level}");
             Console.WriteLine($"Chad ({character.Name})");
-            Console.WriteLine($"공격력 : {character.Total_Attack}");
-            Console.WriteLine($"방어력 : {character.Total_Defence}");
+            Console.WriteLine($"공격력 : {character.TotalAttack}");
+            Console.WriteLine($"방어력 : {character.TotalDefence}");
             Console.WriteLine($"체  력 : {character.Health}");
             Console.WriteLine($"마  나 : {character.Mp}");
-            Console.WriteLine($"속  도 : {character.Total_Speed}");
+            Console.WriteLine($"속  도 : {character.TotalSpeed}");
             Console.ResetColor();
             Console.WriteLine();
 

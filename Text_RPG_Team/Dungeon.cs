@@ -81,7 +81,7 @@ namespace Text_RPG_Team
                 battle_monster.Add(newMonster);
 
                 allCharacter[i+1] = newMonster;
-                exp += newMonster.Drop_Exp;
+                exp += newMonster.DropExp;
             }
             stage_exp = exp;
 
@@ -131,7 +131,7 @@ namespace Text_RPG_Team
                 turn++;
 
                 //턴 시작 시 마다 스피드 별로 정렬
-                allCharacter = allCharacter.OrderByDescending(x => x.Ran_Speed()).ToArray();
+                allCharacter = allCharacter.OrderByDescending(x => x.RanSpeed()).ToArray();
 
                 Console.Clear();
                 Console.WriteLine("Battle!!");
@@ -318,7 +318,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}  ATK {mon.Attack}");
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}  ATK {mon.Attack}");
                 Console.ResetColor();
                 index++;
             }
@@ -425,7 +425,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.WriteLine($"Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}");
                 Console.ResetColor();
                 index++;
             }
@@ -548,7 +548,7 @@ namespace Text_RPG_Team
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.getHP}");
+                Console.WriteLine($"{index} Lv.{mon.Level} {mon.Name}   HP {mon.GetHP}");
                 Console.ResetColor();
                 index++;
             }
@@ -602,7 +602,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
 
-            int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - victim.Total_Defence;
+            int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - victim.TotalDefence;
             if (damage < 0)
             {
                 damage = 0;
@@ -610,9 +610,9 @@ namespace Text_RPG_Team
 
             int critical = new Random().Next(0, 100);
 
-            if (critical <= attacker.Total_Crit_Rate)
+            if (critical <= attacker.TotalCritRate)
             {
-                damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
+                damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                 Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
             }
             else
@@ -649,7 +649,7 @@ namespace Text_RPG_Team
 
             foreach (Monster mon in victim)
             {
-                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - mon.TotalDefence;
                 if (damage < 0)
                 {
                     damage = 0;
@@ -657,9 +657,9 @@ namespace Text_RPG_Team
 
                 int critical = new Random().Next(0, 100);
 
-                if (critical <= attacker.Total_Crit_Rate)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -696,7 +696,7 @@ namespace Text_RPG_Team
 
             foreach (Monster mon in battle_monster.FindAll(x => !x.IsDead))
             {
-                int damage = (int)((float)attacker.Ran_Attack() * skill.Coefficient) - mon.Total_Defence;
+                int damage = (int)((float)attacker.RanAttack() * skill.Coefficient) - mon.TotalDefence;
                 if (damage < 0)
                 {
                     damage = 0;
@@ -704,9 +704,9 @@ namespace Text_RPG_Team
 
                 int critical = new Random().Next(0, 100);
 
-                if (critical <= attacker.Total_Crit_Rate)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{mon.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else
@@ -741,13 +741,13 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 공격!");
 
-            int damage = attacker.Ran_Attack() - victim.Total_Defence;
+            int damage = attacker.RanAttack() - victim.TotalDefence;
             if (damage < 0)
             {
                 damage = 0;
             }
 
-            if (miss <= victim.Total_Evasion)
+            if (miss <= victim.TotalEvasion)
             {
                 Console.WriteLine($"{victim.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
                 damage = 0;
@@ -755,9 +755,9 @@ namespace Text_RPG_Team
             }
             else
             {
-                if (critical <= attacker.Total_Crit_Rate)
+                if (critical <= attacker.TotalCritRate)
                 {
-                    damage = (int)Math.Ceiling((float)damage * attacker.Total_Crit_DMG);
+                    damage = (int)Math.Ceiling((float)damage * attacker.TotalCritDMG);
                     Console.WriteLine($"{victim.Name} 을(를) 맞췄습니다. [데미지 : {damage}] - 치명타 공격!!");
                 }
                 else

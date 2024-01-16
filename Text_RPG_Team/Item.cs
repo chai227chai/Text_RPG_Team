@@ -120,12 +120,6 @@ namespace Text_RPG_Team
             }
         }
 
-        //아이템 능력치 종류
-        //public SpecType GetSpecType
-        //{
-        //    get { return spec.getSpecType(); }
-        //}
-
         public ItemSpec Spec
         {
             get { return spec; }

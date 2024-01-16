@@ -61,9 +61,9 @@ namespace Text_RPG_Team
             player.PlusAttack = ExSpec(SpecType.ATTACK);
             player.PlusDefence = ExSpec(SpecType.DEFEND);
             player.PlusSpeed = ExSpec(SpecType.SPEED);
-            player.Plus_Crit_Rate = ExSpec(SpecType.CRIT_RATE);
-            player.Plus_Crit_DMG = ExSpec(SpecType.CRIT_DMG) / 100;
-            player.Plus_Evasion = ExSpec(SpecType.EVASION);
+            player.PlusCritRate = ExSpec(SpecType.CRIT_RATE);
+            player.PlusCritDMG = ExSpec(SpecType.CRIT_DMG) / 100;
+            player.PlusEvasion = ExSpec(SpecType.EVASION);
         }
 
         //인벤토리에 있는 아이템 하나 가져오기
