@@ -23,20 +23,20 @@ namespace Text_RPG_Team
         List<Monster>? BattleMonster;
         ICharacter[]? AllCharacter;
 
-        int PlayerHealth;
-        int PlayerMp;
-        int StageExp;
-        int Stage;
+        int playerHealth;
+        int playerMp;
+        int stageExp;
+        int stage;
 
 
         public dungeon()
         {
-            Stage = 1;
+            stage = 1;
         }
 
-        public int Now_Stage
+        public int Now_stage
         {
-            get { return Stage; }
+            get { return stage; }
         }
 
         //던전 생성
@@ -44,29 +44,29 @@ namespace Text_RPG_Team
         {
             this.Player = player;
             this.PortionList = portionList;
-            this.MonsterList = new MonsterList(Stage);
+            this.MonsterList = new MonsterList(stage);
 
             this.BattleMonster = new List<Monster>();
 
-            PlayerHealth = player.Health;
-            PlayerMp = player.Mp;
+            playerHealth = player.Health;
+            playerMp = player.Mp;
 
             int number = 1;
-            if(Stage >= 1 && Stage <= 4)
+            if(stage >= 1 && stage <= 4)
             {
-                number = new Random().Next(Stage, Stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
-            else if(Stage >= 5 && Stage <= 9)
+            else if(stage >= 5 && stage <= 9)
             {
                 number = new Random().Next(4, 9);
             }
-            else if(Stage == 10)
+            else if(stage == 10)
             {
                 number = 1;
             }
-            else if(Stage > 10)
+            else if(stage > 10)
             {
-                number = new Random().Next(Stage, Stage + 1);
+                number = new Random().Next(stage, stage + 1);
             }
 
             int exp = 0;
@@ -83,7 +83,7 @@ namespace Text_RPG_Team
                 AllCharacter[i+1] = newMonster;
                 exp += newMonster.DropExp;
             }
-            StageExp = exp;
+            stageExp = exp;
 
             checkName(BattleMonster);
 
@@ -98,7 +98,7 @@ namespace Text_RPG_Team
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
-            Console.WriteLine($"{Stage}층에 입장합니다.");
+            Console.WriteLine($"{stage}층에 입장합니다.");
             Console.WriteLine();
             Thread.Sleep(500);
             
@@ -194,11 +194,11 @@ namespace Text_RPG_Team
                 Console.WriteLine();
 
                 Console.WriteLine($"Lv.{Player.Level} {Player.Name}");
-                Console.WriteLine($"HP {PlayerHealth} -> {Player.Health}");
+                Console.WriteLine($"HP {playerHealth} -> {Player.Health}");
 
                 Console.WriteLine();
                 Console.WriteLine("당신은 던전에서 도망쳤습니다.");
-                Stage = 1;
+                stage = 1;
 
                 Console.WriteLine();
                 Console.WriteLine("0. 다음");
@@ -221,22 +221,22 @@ namespace Text_RPG_Team
                 Console.WriteLine();
                 Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"Lv.{Player.Level} {Player.Name}");
-                Console.WriteLine($"HP {PlayerHealth} -> {Player.Health}");
+                Console.WriteLine($"HP {playerHealth} -> {Player.Health}");
 
                 int currentMp = Player.Mp;
-                Player.Mp = Player.Mp + 10 > PlayerMp ? PlayerMp : Player.Mp + 10;
-                Console.WriteLine($"MP {PlayerMp} -> {currentMp}");
+                Player.Mp = Player.Mp + 10 > playerMp ? playerMp : Player.Mp + 10;
+                Console.WriteLine($"MP {playerMp} -> {currentMp}");
                 Console.WriteLine($"MP 회복(10) -> {Player.Mp}");
 
                 Console.WriteLine();
                 rewards();
 
                 Console.WriteLine();
-                Player.LevelUp(StageExp);
+                Player.LevelUp(stageExp);
 
                 Console.WriteLine();
                 Console.WriteLine("다음 층으로 올라갑니다.");
-                Stage++;
+                stage++;
 
                 Console.WriteLine();
                 Console.WriteLine("0. 다음");
@@ -897,7 +897,7 @@ namespace Text_RPG_Team
         //던전 초기화
         public void resetDungeon()
         {
-            Stage = 1;
+            stage = 1;
         }
 
     }
