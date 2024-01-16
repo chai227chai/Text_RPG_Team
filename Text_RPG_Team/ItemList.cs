@@ -92,7 +92,7 @@ namespace Text_RPG_Team
                 if (itemList[i].IsEquip)
                 {
                     Console.Write($"{itemList[i].NowEquip}");
-                    TextEdit.PadRightForMixedText(itemList[i].Name, paddingName - 3);
+                    Console.Write(TextEdit.PadRightForMixedText(itemList[i].Name, paddingName - 3));
                 }
                 else Console.Write(TextEdit.PadRightForMixedText(itemList[i].Name, paddingName));
                 Console.Write(" | ");
