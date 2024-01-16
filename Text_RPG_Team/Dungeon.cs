@@ -58,7 +58,7 @@ namespace Text_RPG_Team
             }
             else if(stage >= 5 && stage <= 9)
             {
-                number = new Random().Next(3, 7);
+                number = new Random().Next(4, 9);
             }
             else if(stage == 10)
             {
