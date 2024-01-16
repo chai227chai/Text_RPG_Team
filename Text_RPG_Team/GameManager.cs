@@ -58,16 +58,17 @@ namespace Text_RPG_Team
                 textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
                 
                 if (Console.KeyAvailable)
                 {
                     Console.ReadKey();
                     Console.ResetColor();
-                    exitLoop = true;                    
+                    exitLoop = true;
+                    break;
                 }
 
+                Thread.Sleep(500);
+                Console.Clear();
                 cnt++;
             }
         }
