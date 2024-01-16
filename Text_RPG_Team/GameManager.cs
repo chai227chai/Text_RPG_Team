@@ -15,11 +15,10 @@ namespace Text_RPG_Team
 {
     internal class GameManager
     {
-        TextEdit textedit = new TextEdit();
         Player character;
         Dungeon dungeon = new Dungeon();
-        PortionList portionlist = new PortionList();
-        ItemList itemlist = new ItemList();
+        PortionList portionList = new PortionList();
+        ItemList itemList = new ItemList();
         Store store = new Store();
 
         string name;
@@ -38,11 +37,11 @@ namespace Text_RPG_Team
         //게임 시작 초기 화면 함수
         private void FirstScreen()
         {       
-            bool exitLoop = false;
+            bool exit_loop = false;
             ConsoleColor[] colors = new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Yellow, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Magenta };
             int cnt = 0;
 
-            while (!exitLoop)
+            while (!exit_loop)
             {
                 Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
@@ -58,12 +57,11 @@ namespace Text_RPG_Team
                 textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
-                
                 if (Console.KeyAvailable)
                 {
                     Console.ReadKey();
                     Console.ResetColor();
-                    exitLoop = true;
+                    exit_loop = true; 
                     break;
                 }
 
@@ -87,12 +85,12 @@ namespace Text_RPG_Team
             Console.WriteLine("...................................................................................................................");
             Console.WriteLine();
 
-            textedit.ChangeTextColorYellow("1. 새로 시작하기");
-            textedit.ChangeTextColorCyan("2. 게임 불러오기");
+            TextEdit.ChangeTextColorYellow("1. 새로 시작하기");
+            TextEdit.ChangeTextColorCyan("2. 게임 불러오기");
             Console.WriteLine();
 
-            int chooseJob = IsValidInput(2, 1);
-            switch (chooseJob)
+            int choose_job = IsValidInput(2, 1);
+            switch (choose_job)
             {
                 case 1:
                     name = SetCharacter();
@@ -134,8 +132,8 @@ namespace Text_RPG_Team
 
             Console.WriteLine();
           
-            int chooseJob = IsValidInput(3, 1);
-            switch(chooseJob)
+            int choose_job = IsValidInput(3, 1);
+            switch(choose_job)
             {
                 case 1:
                     character = new Player(name, JOB.WARRIOR, 200, 50, 5, 10, 3);
@@ -179,8 +177,8 @@ namespace Text_RPG_Team
                 case 1:
                     character.Gold = 1500;
                     character.UseSkill();
-                    portionlist.AddPortion(PortionType.HP, PortionValue.Small, 3);
-                    portionlist.AddPortion(PortionType.MP, PortionValue.Small, 3);
+                    portionList.AddPortion(PortionType.HP, PortionValue.Small, 3);
+                    portionList.AddPortion(PortionType.MP, PortionValue.Small, 3);
                     break;
                 case 2:
                     SetJob();
@@ -248,7 +246,7 @@ namespace Text_RPG_Team
         //입력이 올바른지 확인하는 함수
         public int IsValidInput(int max, int min)
         {
-            int keyInput;
+            int key_input;
             bool result;
             int cnt = 0;
 
@@ -264,12 +262,12 @@ namespace Text_RPG_Team
                     Console.WriteLine("다시 입력해 주세요.");
                 }
                 Console.Write(">> ");
-                result = int.TryParse(Console.ReadLine(), out keyInput);
+                result = int.TryParse(Console.ReadLine(), out key_input);
 
                 cnt = 1;
-            } while (result == false || IsValidInput(keyInput, min, max) == false);
+            } while (result == false || IsValidInput(key_input, min, max) == false);
 
-            return keyInput;
+            return key_input;
         }
 
         private bool IsValidInput(int keyInput, int min, int max)
@@ -392,7 +390,7 @@ namespace Text_RPG_Team
             switch (act)
             {
                 case 1:
-                    dungeon.GoDungeon(character,portionlist);
+                    dungeon.GoDungeon(character,portionList);
                     break;
                 case 2:
                     ResetDungeon();
@@ -445,7 +443,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"포션을 사용하면 체력 또는 마나를 회복할 수 있습니다");
             Console.WriteLine();
             Console.WriteLine("[포션 목록]");
-            portionlist.PrintPortionList();
+            portionList.PrintPortionList();
           
             Console.WriteLine();
             Console.ResetColor();
@@ -459,7 +457,7 @@ namespace Text_RPG_Team
                 case 0:
                     break;
                 case 1:
-                    if (portionlist.CheckPortion(PortionType.HP)) UsePortion(PortionType.HP);
+                    if (portionList.CheckPortion(PortionType.HP)) UsePortion(PortionType.HP);
                     else
                     {
                         Console.WriteLine("보유 중인 포션이 없습니다.");
@@ -468,7 +466,7 @@ namespace Text_RPG_Team
                     }
                     break;
                 case 2:
-                    if (portionlist.CheckPortion(PortionType.MP)) UsePortion(PortionType.MP);
+                    if (portionList.CheckPortion(PortionType.MP)) UsePortion(PortionType.MP);
                     else
                     {
                         Console.WriteLine("보유 중인 포션이 없습니다.");
@@ -493,10 +491,10 @@ namespace Text_RPG_Team
             Console.WriteLine((portionType == PortionType.HP) ? $"현재 체력 : {character.Health}" : $"현재 마나 : {character.Mp}");
             Console.WriteLine();
             Console.WriteLine("[포션 목록]");
-            int listlenght = portionlist.UsePortionList(portionType);
+            int list_lenght = portionList.UsePortionList(portionType);
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
-            int act = IsValidInput(listlenght, 0);
+            int act = IsValidInput(list_lenght, 0);
 
             if (act == 0)
             {
@@ -505,8 +503,8 @@ namespace Text_RPG_Team
             }
             else
             {
-                Portion portion = portionlist.GetPortion(portionType, act);
-                portionlist.UsePortion(character, portion);
+                Portion portion = portionList.GetPortion(portionType, act);
+                portionList.UsePortion(character, portion);
                 ViewPortion();
             }
         }
@@ -523,7 +521,7 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(character.GetInventory.GetInventoryList);
+            itemList.PrintItemList(character.GetInventory.GetInventoryList);
             Console.WriteLine();
             Console.ResetColor();
 
@@ -552,7 +550,7 @@ namespace Text_RPG_Team
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(character.GetInventory.GetInventoryList, true);
+            itemList.PrintItemList(character.GetInventory.GetInventoryList, true);
             Console.WriteLine("");
             Console.ResetColor();
             Console.WriteLine("0. 나가기");
@@ -587,7 +585,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Gold}G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(itemlist.GetItemList, false ,true);
+            itemList.PrintItemList(itemList.GetItemList, false ,true);
             Console.WriteLine();
             Console.ResetColor();
             Console.WriteLine("1. 아이템 구매");
@@ -619,7 +617,7 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Gold}G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
-            itemlist.PrintItemList(itemlist.GetItemList, true, true);
+            itemList.PrintItemList(itemList.GetItemList, true, true);
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -633,7 +631,7 @@ namespace Text_RPG_Team
             }
             else
             {
-                Item solditem = store.BuyItem(act, itemlist, character.Gold);
+                Item solditem = store.BuyItem(act, itemList, character.Gold);
                 if(solditem != null)
                 {
                     character.Gold -= solditem.Price;
