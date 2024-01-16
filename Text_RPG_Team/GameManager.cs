@@ -288,7 +288,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("[상태]");
             Console.WriteLine($"LV. {character.Level}");
-            Console.WriteLine($"Chad ({character.Name})");
+            Console.WriteLine($"{character.Name} ({character.GetJob})");
             Console.WriteLine($"공격력 : {character.Total_Attack}");
             Console.WriteLine($"방어력 : {character.Total_Defence}");
             Console.WriteLine($"체  력 : {character.Health}");
