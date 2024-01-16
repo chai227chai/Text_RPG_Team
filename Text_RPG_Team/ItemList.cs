@@ -73,40 +73,40 @@ namespace Text_RPG_Team
 
 
         //아이템 리스트 보여주기
-        public void PrintItemList(List<Item> itemlist, bool checknumber = false, bool checkgold = false)
+        public void PrintItemList(List<Item> itemList, bool check_number = false, bool check_gold = false)
         {
-            int paddingName = SetNameTotalLength(itemlist);
-            int paddingDetail = SetDetailTotalLength(itemlist);
-            for (int i = 0; i < itemlist.Count; i++)
+            int paddingName = SetNameTotalLength(itemList);
+            int paddingDetail = SetDetailTotalLength(itemList);
+            for (int i = 0; i < itemList.Count; i++)
             {
                 Console.Write("- ");
-                if (checknumber)
+                if (check_number)
                 {
                     int n = i + 1;
                     Console.Write($"{n}. ");
                     if (i >= 9)
                     {
-                        paddingName = SetNameTotalLength(itemlist) - 1;
+                        paddingName = SetNameTotalLength(itemList) - 1;
                     }
                 }
-                if (itemlist[i].IsEquip)
+                if (itemList[i].IsEquip)
                 {
-                    Console.Write($"{itemlist[i].NowEquip}");
-                    TextEdit.PadRightForMixedText(itemlist[i].Name, paddingName - 3);
+                    Console.Write($"{itemList[i].NowEquip}");
+                    TextEdit.PadRightForMixedText(itemList[i].Name, paddingName - 3);
                 }
-                else Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Name, paddingName));
+                else Console.Write(TextEdit.PadRightForMixedText(itemList[i].Name, paddingName));
                 Console.Write(" | ");
-                Console.Write($"{itemlist[i].GetType}");
+                Console.Write($"{itemList[i].GetType}");
                 Console.Write(" | ");
-                Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Detail, paddingDetail));
+                Console.Write(TextEdit.PadRightForMixedText(itemList[i].Detail, paddingDetail));
                 Console.Write(" | ");
-                if (checkgold)
+                if (check_gold)
                 {
-                    Console.Write(TextEdit.PadRightForMixedText(itemlist[i].SalePrice, 6));
+                    Console.Write(TextEdit.PadRightForMixedText(itemList[i].SalePrice, 6));
                     Console.Write(" | ");
                 }
 
-                itemlist[i].GetSpecName();
+                itemList[i].GetSpecName();
                 Console.WriteLine();
             }
         }
