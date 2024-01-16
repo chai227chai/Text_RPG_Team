@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Text_RPG_Team
 {
-    internal class TextEdit
+    public class TextEdit
     {
         //---------------------------------------------------------------------------------------------------------------
         //출력 정렬하는 함수
-        private int GetPrintableLength(string str)
+        private static int GetPrintableLength(string str)
         {
             int length = 0;
             foreach (char c in str)
@@ -27,51 +27,51 @@ namespace Text_RPG_Team
             return length;
         }
 
-        public string PadLeftForMixedText(string str, int totalLength)
+        public static string PadLeftForMixedText(string str, int totalLength)
         {
             int currentLength = GetPrintableLength(str);
             int padding = (totalLength - currentLength) / 2;
             return str.PadLeft(str.Length + padding);
         }
 
-        public string PadRightForMixedText(string str, int totalLength)
+        public static string PadRightForMixedText(string str, int totalLength)
         {
             int currentLength = GetPrintableLength(str);
-            int padding = (totalLength - currentLength) / 2;
+            int padding = (totalLength - currentLength);
             return str.PadRight(str.Length + padding);
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //text 색 바꿔주는 함수
-        public void ChangeTextColorMagenta(string text) //화면 제목에 사용
+        public static void ChangeTextColorMagenta(string text) //화면 제목에 사용
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(text);
             Console.ResetColor();
         }
 
-        public void ChangeTextColorDarkMagenta(string text) //아이템 선택 가능할 때 사용
+        public static void ChangeTextColorDarkMagenta(string text) //아이템 선택 가능할 때 사용
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.Write(text);
             Console.ResetColor();
         }
 
-        public void ChangeTextColorCyan(string text) //아이템 선택 가능할 때 사용
+        public static void ChangeTextColorCyan(string text) //아이템 선택 가능할 때 사용
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(text);
             Console.ResetColor();
         }
 
-        public void ChangeTextColorYellow(string text) //노란색 텍스트 출력
+        public static void ChangeTextColorYellow(string text) //노란색 텍스트 출력
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(text);
             Console.ResetColor();
         }
 
-        public void HighlightsTextColorYellow(string s1, string s2, string s3 = "") //스탯 보여줄 때 사용
+        public static void HighlightsTextColorYellow(string s1, string s2, string s3 = "") //스탯 보여줄 때 사용
         {
             Console.Write(s1);
             Console.ForegroundColor = ConsoleColor.Yellow;
