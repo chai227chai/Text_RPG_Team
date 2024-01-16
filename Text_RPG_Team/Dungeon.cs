@@ -792,7 +792,8 @@ namespace Text_RPG_Team
             Console.WriteLine($"{character.Name} 이(가) 행동합니다.");
             Thread.Sleep(500);
 
-            int useSkill;
+            int use_skill;
+
             if (monsterList.GetSkillList.FindAll(x => x.Type == character.Type).Count > 0)
             {
                 use_skill = new Random().Next(1, 11);

@@ -54,7 +54,7 @@ namespace Text_RPG_Team
                 Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
+                TextEdit.ChangeTextColorCyan(TextEdit.PadLeftForMixedText("Press Any Key to Play", 93));
                 Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
                 if (Console.KeyAvailable)
@@ -622,7 +622,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-            int act = IsValidInput(itemlist.ItemNumber, 0);
+            int act = IsValidInput(itemList.ItemNumber, 0);
 
             if (act == 0)
             {
@@ -658,8 +658,8 @@ namespace Text_RPG_Team
             SaveField dataSave = new SaveField();
 
             dataSave.character = this.character;
-            dataSave.itemList = this.itemlist;
-            dataSave.portionList = this.portionlist;
+            dataSave.itemList = this.itemList;
+            dataSave.portionList = this.portionList;
             dataSave.dungeon = this.dungeon;
 
             bf.Serialize(fs, dataSave);
@@ -748,8 +748,8 @@ namespace Text_RPG_Team
                 {
                     case 1:
                         this.character = dataSave.character;
-                        this.itemlist = dataSave.itemList;
-                        this.portionlist = dataSave.portionList;
+                        this.itemList = dataSave.itemList;
+                        this.portionList = dataSave.portionList;
                         this.dungeon = dataSave.dungeon;
                         fs.Close();
                         break;
