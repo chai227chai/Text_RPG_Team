@@ -219,25 +219,25 @@ namespace Text_RPG_Team
 
         public string[] DropTable(Monster monster)
         {
-            string[] dropTable = new string[] {};
+            string[] drop_table = new string[] {};
 
             switch (monster.Type)
             {
                 case MonsterType.NIMION:
-                    dropTable = new string[] { "0", "3" };
+                    drop_table = new string[] { "0", "3" };
                     break;
                 case MonsterType.ELITE_MINION:
-                    dropTable = new string[] { "0", "3", "1" };
+                    drop_table = new string[] { "0", "3", "1" };
                     break;
                 case MonsterType.ELITE_WOLF: case MonsterType.ELITE_BIRD:
-                    dropTable = new string[] { "0", "3", "1", "4" };
+                    drop_table = new string[] { "0", "3", "1", "4" };
                     break;
                 case MonsterType.ELITE_FROG:
-                    dropTable = new string[] { "6", "9", "12" };
+                    drop_table = new string[] { "6", "9", "12" };
                     break;
             }
 
-            return dropTable;
+            return drop_table;
         }
 
         public string dropItem(Monster monster)

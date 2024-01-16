@@ -19,7 +19,7 @@ namespace Text_RPG_Team
             dungeon_stage = stage;
             monsterList = new List<Monster>();
             skillList = new List<MonsterSkill>();
-            addSkill();
+            AddSkill();
             Initialize();
         }
 
@@ -59,23 +59,23 @@ namespace Text_RPG_Team
             }
         }
 
-        public Monster getMonster(int n)
+        public Monster GetMonster(int n)
         {
             return this.monsterList[n - 1];
         }
 
         //리스트 참조
-        public List<Monster> getMonsterList
+        public List<Monster> GetMonsterList
         {
             get { return monsterList; }
         }
 
-        public List<MonsterSkill> getSkillList
+        public List<MonsterSkill> GetSkillList
         {
             get { return skillList; }
         }
 
-        void addSkill()
+        void AddSkill()
         {
             skillList.Add(new MonsterSkill("대포 발사!!", 1.5f, MonsterType.ELITE_MINION));
             skillList.Add(new MonsterSkill("물어뜯기", 1.5f, MonsterType.ELITE_WOLF));

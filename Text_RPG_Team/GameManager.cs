@@ -39,10 +39,12 @@ namespace Text_RPG_Team
         private void FirstScreen()
         {       
             bool exitLoop = false;
+            ConsoleColor[] colors = new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Yellow, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Magenta };
+            int cnt = 0;
 
             while (!exitLoop)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
                 Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
                 Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
@@ -54,96 +56,19 @@ namespace Text_RPG_Team
                 Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
                 Console.WriteLine("=============================================================================================");
                 textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = colors[cnt % colors.Length];
                 Console.WriteLine("=============================================================================================");
                 Thread.Sleep(100);
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("=============================================================================================");
-                Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
-                Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
-                Console.WriteLine("   | $$  | $$      |  $$/ $$/   | $$         | $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$    \\  $$$$/    | $$         | $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$   ");
-                Console.WriteLine("   | $$  | $$__/     >$$  $$    | $$         | $$|_  $$| $$__  $$| $$  $$$| $$| $$__/   ");
-                Console.WriteLine("   | $$  | $$       /$$/\\  $$   | $$         | $$  \\ $$| $$  | $$| $$\\  $ | $$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
-                Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
-                Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("=============================================================================================");
-                Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
-                Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
-                Console.WriteLine("   | $$  | $$      |  $$/ $$/   | $$         | $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$    \\  $$$$/    | $$         | $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$   ");
-                Console.WriteLine("   | $$  | $$__/     >$$  $$    | $$         | $$|_  $$| $$__  $$| $$  $$$| $$| $$__/   ");
-                Console.WriteLine("   | $$  | $$       /$$/\\  $$   | $$         | $$  \\ $$| $$  | $$| $$\\  $ | $$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
-                Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
-                Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=============================================================================================");
-                Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
-                Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
-                Console.WriteLine("   | $$  | $$      |  $$/ $$/   | $$         | $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$    \\  $$$$/    | $$         | $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$   ");
-                Console.WriteLine("   | $$  | $$__/     >$$  $$    | $$         | $$|_  $$| $$__  $$| $$  $$$| $$| $$__/   ");
-                Console.WriteLine("   | $$  | $$       /$$/\\  $$   | $$         | $$  \\ $$| $$  | $$| $$\\  $ | $$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
-                Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
-                Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("=============================================================================================");
-                Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
-                Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
-                Console.WriteLine("   | $$  | $$      |  $$/ $$/   | $$         | $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$    \\  $$$$/    | $$         | $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$   ");
-                Console.WriteLine("   | $$  | $$__/     >$$  $$    | $$         | $$|_  $$| $$__  $$| $$  $$$| $$| $$__/   ");
-                Console.WriteLine("   | $$  | $$       /$$/\\  $$   | $$         | $$  \\ $$| $$  | $$| $$\\  $ | $$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
-                Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
-                Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("=============================================================================================");
-                Console.WriteLine(" /$$$$$$$$/$$$$$$$$ /$$   /$$ /$$$$$$$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$");
-                Console.WriteLine("|__  $$__/ $$_____/| $$  / $$|__  $$__/       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/");
-                Console.WriteLine("   | $$  | $$      |  $$/ $$/   | $$         | $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$    \\  $$$$/    | $$         | $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$   ");
-                Console.WriteLine("   | $$  | $$__/     >$$  $$    | $$         | $$|_  $$| $$__  $$| $$  $$$| $$| $$__/   ");
-                Console.WriteLine("   | $$  | $$       /$$/\\  $$   | $$         | $$  \\ $$| $$  | $$| $$\\  $ | $$| $$      ");
-                Console.WriteLine("   | $$  | $$$$$$$$| $$  \\ $$   | $$         |  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$");
-                Console.WriteLine("   |__/  |________/|__/  |__/   |__/          \\______/ |__/  |__/|__/     |__/|________/");
-                Console.WriteLine("=============================================================================================");
-                textedit.ChangeTextColorCyan(textedit.PadLeftForMixedText("Press Any Key to Play", 93));
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("=============================================================================================");
-                Thread.Sleep(100);
-                Console.Clear();
+                
                 if (Console.KeyAvailable)
                 {
                     Console.ReadKey();
                     Console.ResetColor();
                     exitLoop = true;                    
                 }
+
+                cnt++;
             }
         }
 
@@ -698,7 +623,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
-            int act = IsValidInput(itemlist.itemnumber, 0);
+            int act = IsValidInput(itemlist.ItemNumber, 0);
 
             if (act == 0)
             {
@@ -711,7 +636,7 @@ namespace Text_RPG_Team
                 if(solditem != null)
                 {
                     character.Gold -= solditem.Price;
-                    character.GetInventory.addInventroy(solditem);
+                    character.GetInventory.AddInventroy(solditem);
                     StoreBuy();
                 }
                 else
@@ -735,7 +660,7 @@ namespace Text_RPG_Team
 
             dataSave.character = this.character;
             dataSave.itemList = this.itemlist;
-            dataSave.portionlist = this.portionlist;
+            dataSave.portionList = this.portionlist;
             dataSave.dungeon = this.dungeon;
 
             bf.Serialize(fs, dataSave);
@@ -825,7 +750,7 @@ namespace Text_RPG_Team
                     case 1:
                         this.character = dataSave.character;
                         this.itemlist = dataSave.itemList;
-                        this.portionlist = dataSave.portionlist;
+                        this.portionlist = dataSave.portionList;
                         this.dungeon = dataSave.dungeon;
                         fs.Close();
                         break;
