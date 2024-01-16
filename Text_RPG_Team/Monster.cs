@@ -60,6 +60,9 @@ namespace Text_RPG_Team
             this.defence = dupplicate.defence;
             this.speed = dupplicate.speed;
             this.drop_exp = dupplicate.drop_exp;
+            crit_rate = dupplicate.crit_rate;
+            crit_dmg = dupplicate.crit_dmg;
+            evasion = dupplicate.evasion;
 
             tag = dupplicate.tag;
             this.type = dupplicate.type;
