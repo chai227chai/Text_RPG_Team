@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Text_RPG_Team
 {
@@ -80,7 +75,8 @@ namespace Text_RPG_Team
         //아이템 리스트 보여주기
         public void PrintItemList(List<Item> itemlist, bool checknumber = false, bool checkgold = false)
         {
-            int padding = 15;
+            int paddingName = SetNameTotalLength(itemlist);
+            int paddingDetail = SetDetailTotalLength(itemlist);
             for (int i = 0; i < itemlist.Count; i++)
             {
                 Console.Write("- ");
@@ -90,19 +86,19 @@ namespace Text_RPG_Team
                     Console.Write($"{n}. ");
                     if (i >= 9)
                     {
-                        padding = 14;
+                        paddingName = SetNameTotalLength(itemlist) - 1;
                     }
                 }
                 if (itemlist[i].IsEquip)
                 {
                     Console.Write($"{itemlist[i].NowEquip}");
-                    TextEdit.PadRightForMixedText(itemlist[i].Name, padding - 3);
+                    TextEdit.PadRightForMixedText(itemlist[i].Name, paddingName - 3);
                 }
-                else Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Name, padding));
+                else Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Name, paddingName));
                 Console.Write(" | ");
                 Console.Write($"{itemlist[i].GetType}");
                 Console.Write(" | ");
-                Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Detail, 60));
+                Console.Write(TextEdit.PadRightForMixedText(itemlist[i].Detail, paddingDetail));
                 Console.Write(" | ");
                 if (checkgold)
                 {
@@ -113,6 +109,48 @@ namespace Text_RPG_Team
                 itemlist[i].GetSpecName();
                 Console.WriteLine();
             }
+        }
+
+        //아이템 이름 길이 확인
+        private int SetNameTotalLength(List<Item> items)
+        {
+            int total = 0;
+            int num1 = TextEdit.GetPrintableLength(items[0].Name);
+            for (int i = 0; i < items.Count; i++)
+            {
+                int num2 = TextEdit.GetPrintableLength(items[i].Name);
+                if (num1 > num2)
+                {
+                    total = num1;
+                }
+                else
+                {
+                    total = num2;
+                    num1 = num2;
+                }
+            }
+            return total;
+        }
+
+        //아이템 설명 길이 확인
+        private int SetDetailTotalLength(List<Item> items)
+        {
+            int total = 0;
+            int num1 = TextEdit.GetPrintableLength(items[0].Detail);
+            for (int i = 0; i < items.Count; i++)
+            {
+                int num2 = TextEdit.GetPrintableLength(items[i].Detail);
+                if (num1 > num2)
+                {
+                    total = num1;
+                }
+                else
+                {
+                    total = num2;
+                    num1 = num2;
+                }
+            }
+            return total;
         }
     }
 }

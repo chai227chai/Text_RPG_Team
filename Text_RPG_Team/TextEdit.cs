@@ -10,7 +10,7 @@ namespace Text_RPG_Team
     {
         //---------------------------------------------------------------------------------------------------------------
         //출력 정렬하는 함수
-        private static int GetPrintableLength(string str)
+        public static int GetPrintableLength(string str)
         {
             int length = 0;
             foreach (char c in str)
