@@ -171,7 +171,15 @@ namespace Text_RPG_Team
         //캐릭터 총 공격력
         public int TotalAttack
         {
-            get { return Attack + PlusAttack; }
+            get 
+            {
+                int total_attack = Attack + PlusAttack;
+                if(total_attack < 0)
+                {
+                    total_attack = 0;
+                }
+                return total_attack;
+            }
         }
 
         //캐릭터 방어력
@@ -195,7 +203,15 @@ namespace Text_RPG_Team
         //캐릭터 총 방어력
         public int TotalDefence
         {
-            get { return Defence + PlusDefence; }
+            get 
+            {
+                int total_defend = Defence + PlusDefence;
+                if(total_defend < 0)
+                {
+                    total_defend = 0;
+                }
+                return total_defend;
+            }
         }
 
         //보유 골드
