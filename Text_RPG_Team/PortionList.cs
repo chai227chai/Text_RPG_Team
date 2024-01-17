@@ -71,7 +71,7 @@ namespace Text_RPG_Team
                     number++;
                 }
             }
-            return number;
+            return number - 1;
         }
 
         //포션 유무 확인
