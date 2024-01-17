@@ -67,7 +67,7 @@ namespace Text_RPG_Team
             crit_rate = 15;
             plus_crit_rate = 0;
             crit_dmg = 1.6f;
-            plus_crit_dmg = 0;
+            plus_crit_dmg = 0f;
             evasion = 10;
             plus_evasion = 0;
             level_exp = 0;

@@ -62,7 +62,7 @@ namespace Text_RPG_Team
             player.PlusDefence = ExSpec(SpecType.DEFEND);
             player.PlusSpeed = ExSpec(SpecType.SPEED);
             player.PlusCritRate = ExSpec(SpecType.CRIT_RATE);
-            player.PlusCritDMG = ExSpec(SpecType.CRIT_DMG) / 100;
+            player.PlusCritDMG = ExSpec(SpecType.CRIT_DMG) / 100f;
             player.PlusEvasion = ExSpec(SpecType.EVASION);
         }
 
