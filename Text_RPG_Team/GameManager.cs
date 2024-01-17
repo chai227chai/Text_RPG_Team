@@ -142,7 +142,7 @@ namespace Text_RPG_Team
                     character = new Player(name, JOB.WIZARD, 100, 200, 10, 5, 2);
                     break;
                 case 3:
-                    character = new Player(name, JOB.ROGUE, 150, 100, 8, 8, 5);
+                    character = new Player(name, JOB.ROGUE, 150, 100, 8, 5, 5);
                     break;
             }
             Console.Clear();

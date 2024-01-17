@@ -18,6 +18,7 @@ namespace Text_RPG_Team
         string name;
 
         int level;
+        int max_health;
         int health;
         int attack;
         int defence;
@@ -36,7 +37,8 @@ namespace Text_RPG_Team
         {
             this.name = name;
             this.level = level;
-            this.health = health;
+            max_health = health;
+            this.health = max_health;
             this.attack = attack;
             this.speed = speed;
             this.defence = defence;
@@ -92,6 +94,11 @@ namespace Text_RPG_Team
         {
             get { return health; }
             set { health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return max_health; }
         }
 
         public string GetHP

@@ -13,12 +13,14 @@ namespace Text_RPG_Team
         public string Name { get; }
         public float Coefficient { get; }
         public MonsterType Type { get; }
+        public SkillAbility SkillAbility { get; }
 
-        public MonsterSkill(string name, float coefficient, MonsterType type)
+        public MonsterSkill(string name, float coefficient, MonsterType type, SkillAbility skillAbility)
         {
             Name = name;
             Coefficient = coefficient;
             Type = type;
+            SkillAbility = skillAbility;
         }
     }
 }

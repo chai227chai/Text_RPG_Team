@@ -77,14 +77,14 @@ namespace Text_RPG_Team
 
         void AddSkill()
         {
-            skillList.Add(new MonsterSkill("대포 발사!!", 1.5f, MonsterType.ELITE_MINION));
-            skillList.Add(new MonsterSkill("물어뜯기", 1.5f, MonsterType.ELITE_WOLF));
-            skillList.Add(new MonsterSkill("울부짖기", 1.2f, MonsterType.ELITE_WOLF));
-            skillList.Add(new MonsterSkill("쪼기", 1.3f, MonsterType.ELITE_BIRD));
-            skillList.Add(new MonsterSkill("회전드릴", 2f, MonsterType.ELITE_BIRD));
-            skillList.Add(new MonsterSkill("독 내뱉기", 2f, MonsterType.ELITE_FROG));
-            skillList.Add(new MonsterSkill("누르기", 1.3f, MonsterType.ELITE_FROG));
-            skillList.Add(new MonsterSkill("돌진", 2f, MonsterType.BOSS_HERAID));
+            skillList.Add(new MonsterSkill("대포 발사!!", 1.5f, MonsterType.ELITE_MINION, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("물어뜯기", 1.5f, MonsterType.ELITE_WOLF, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("울부짖기", 1.2f, MonsterType.ELITE_WOLF, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("쪼기", 1.3f, MonsterType.ELITE_BIRD, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("회전드릴", 2f, MonsterType.ELITE_BIRD, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("독 내뱉기", 2f, MonsterType.ELITE_FROG, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("누르기", 1.3f, MonsterType.ELITE_FROG, new SkillAbility_Nothing()));
+            skillList.Add(new MonsterSkill("돌진", 2f, MonsterType.BOSS_HERAID, new SkillAbility_Nothing()));
         }
     }
 }

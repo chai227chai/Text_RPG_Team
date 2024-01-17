@@ -17,6 +17,7 @@ namespace Text_RPG_Team
 
         int Level { get; set; }
         int Health { get; set; }
+        int MaxHealth { get; }
         int Attack { get; set; }
         int Defence { get; set; }
         int TotalDefence { get; }

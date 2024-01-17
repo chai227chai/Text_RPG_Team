@@ -386,19 +386,19 @@ namespace Text_RPG_Team
             switch (this.job)
             {
                 case JOB.WARRIOR:
-                    skillList.Add(new Skill("파워 스트라이크", "한 명의 적에게 공격력 * 3 의 강한 데미지를 가합니다.", 5, 3, 1));
-                    skillList.Add(new Skill("슬래시 블러스트", "모든 적에게 공격력 * 2 의 데미지를 가합니다.", 10, 2, 0));
-                    skillList.Add(new Skill("더블 스트라이크", "무작위 적 2명에게 공격력 * 1.5 의 데미지를 가합니다.", 5, 2, 2));
+                    skillList.Add(new Skill("파워 스트라이크", "한 명의 적에게 공격력 * 3 의 강한 데미지를 가합니다.", 5, 3, 1, new SkillAbility_Nothing()));
+                    skillList.Add(new Skill("슬래시 블러스트", "모든 적에게 공격력 * 2 의 데미지를 가합니다.", 10, 2, 0, new SkillAbility_Nothing()));
+                    skillList.Add(new Skill("더블 스트라이크", "무작위 적 2명에게 공격력 * 1.5 의 데미지를 가합니다.", 5, 2, 2, new SkillAbility_Nothing()));
                     break;
                 case JOB.WIZARD:
-                    skillList.Add(new Skill("에너지 볼트", "한 명의 적에게 공격력 * 2 의 데미지를 입힙니다.", 20, 2, 1));
-                    skillList.Add(new Skill("메테오 스트라이크", "모든 적에게 공격력 * 5 의 강력한 데미지를 입힙니다.", 100, 5, 0));
-                    skillList.Add(new Skill("체인 라이트닝", "무작위 적 3명에게 공격력 * 2.5 의 데미지를 입힙니다.", 50, 2.5f, 3));
+                    skillList.Add(new Skill("에너지 볼트", "한 명의 적에게 공격력 * 2 의 데미지를 입힙니다.", 20, 2, 1, new SkillAbility_Nothing()));
+                    skillList.Add(new Skill("메테오 스트라이크", "모든 적에게 공격력 * 5 의 강력한 데미지를 입힙니다.", 100, 5, 0, new SkillAbility_Nothing()));
+                    skillList.Add(new Skill("체인 라이트닝", "무작위 적 3명에게 공격력 * 2.5 의 데미지를 입힙니다.", 50, 2.5f, 3, new SkillAbility_Nothing()));
                     break;
                 case JOB.ROGUE:
-                    skillList.Add(new Skill("부식", "한 명의 적에게 공격력 * 2 의 데미지를 줍니다.", 10, 2, 1));
-                    skillList.Add(new Skill("기습", "무작위 적 2명에게 공격력 * 6 의 강력한 데미지를 줍니다.", 100, 6, 2));
-                    skillList.Add(new Skill("암살", "한 명의 적에게 공격력 * 10 의 치명적인 데미지를 줍니다.", 100, 10, 1));
+                    skillList.Add(new Skill("부식", "한 명의 적에게 공격력 * 2 의 데미지를 줍니다.", 10, 2, 1, new SkillAbility_LifeSteal()));
+                    skillList.Add(new Skill("기습", "무작위 적 2명에게 공격력 * 6 의 강력한 데미지를 줍니다.", 100, 6, 2, new SkillAbility_Nothing()));
+                    skillList.Add(new Skill("암살", "한 명의 적에게 공격력 * 10 의 치명적인 데미지를 줍니다.", 100, 10, 1, new SkillAbility_Nothing()));
                     break;
             }
         }

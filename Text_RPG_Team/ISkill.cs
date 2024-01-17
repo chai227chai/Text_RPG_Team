@@ -10,5 +10,7 @@ namespace Text_RPG_Team
     {
         string Name { get; }
         float Coefficient { get; }
+
+        SkillAbility SkillAbility { get; }
     }
 }

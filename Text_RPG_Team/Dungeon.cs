@@ -599,6 +599,9 @@ namespace Text_RPG_Team
         //스킬 범위 1인 경우
         private void SkillAttackOne(ICharacter attacker, ICharacter victim, ISkill skill)
         {
+            skill.SkillAbility.Attacker = attacker;
+            skill.SkillAbility.OnAttackStart();
+
             Console.WriteLine();
             Console.WriteLine($"{attacker.Name} 의 {skill.Name}!");
 
@@ -623,6 +626,7 @@ namespace Text_RPG_Team
             Console.WriteLine();
 
             int health = victim.Health;
+            skill.SkillAbility.OnAttack(victim, damage);
             victim.TakeDamage(damage);
 
             Console.WriteLine($"Lv.{victim.Level} {victim.Name}");
@@ -634,12 +638,17 @@ namespace Text_RPG_Team
             {
                 Console.WriteLine($"HP {health} -> {victim.Health}");
             }
+
+            skill.SkillAbility.OnAttackEnd();
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //스킬 범위 무작위인 경우
         public void SkillAttackRandom(Player attacker, Skill skill)
         {
+            skill.SkillAbility.Attacker = attacker;
+            skill.SkillAbility.OnAttackStart();
+
             List<Monster> victim = battle_monster.FindAll(x => !x.IsDead).OrderBy(_ => new Random().Next()).Take(skill.Range).ToList();
             player.Mp -= skill.MP;
 
@@ -669,6 +678,7 @@ namespace Text_RPG_Team
 
 
                 int health = mon.Health;
+                skill.SkillAbility.OnAttack(mon, damage);
                 mon.TakeDamage(damage);
 
                 Console.WriteLine($"Lv.{mon.Level} {mon.Name}");
@@ -682,12 +692,17 @@ namespace Text_RPG_Team
                 }
                 Console.WriteLine();
             }
+
+            skill.SkillAbility.OnAttackEnd();
         }
 
         //---------------------------------------------------------------------------------------------------------------
         //스킬 범위 전체인 경우
         public void SkillAttackAll(Player attacker, Skill skill)
         {
+            skill.SkillAbility.Attacker = attacker;
+            skill.SkillAbility.OnAttackStart();
+
             player.Mp -= skill.MP;
 
             Console.Clear();
@@ -716,6 +731,7 @@ namespace Text_RPG_Team
 
 
                 int health = mon.Health;
+                skill.SkillAbility.OnAttack(mon, damage);
                 mon.TakeDamage(damage);
 
                 Console.WriteLine($"Lv.{mon.Level} {mon.Name}");
@@ -729,6 +745,8 @@ namespace Text_RPG_Team
                 }
                 Console.WriteLine();
             }
+
+            skill.SkillAbility.OnAttackEnd();
         }
 
 
