@@ -329,7 +329,7 @@ namespace Text_RPG_Team
             if (character.PlusCritDMG != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"치명타피해 : {character.TotalCritDMG} ({(character.PlusCritDMG > 0 ? "+" : "")}{character.PlusCritDMG})");
+                Console.WriteLine($"치명타피해 : {character.TotalCritDMG.ToString("N2")} ({(character.PlusCritDMG > 0 ? "+" : "")}{character.PlusCritDMG})");
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
             if (character.PlusEvasion != 0)
